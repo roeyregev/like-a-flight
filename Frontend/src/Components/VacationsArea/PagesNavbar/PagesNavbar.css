@@ -1,0 +1,21 @@
+.PagesNavbar {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px auto;
+}
+
+.PagesNavbar button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.PagesNavbar .smallBtn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+

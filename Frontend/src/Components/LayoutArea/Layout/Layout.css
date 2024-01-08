@@ -1,0 +1,7 @@
+
+.Layout,
+.Layout>* {
+    border: 0.5px solid rgb(255, 229, 190);
+    margin: 0;
+    padding: 0;
+}

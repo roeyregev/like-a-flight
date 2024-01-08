@@ -1,0 +1,33 @@
+.AddVacation form {
+	display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+
+}
+
+.AddVacation input {
+    height: 40px;
+    
+}
+.AddVacation .dates-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width:max-content;
+}
+
+.AddVacation textarea {
+    height: 200px;
+
+}
+
+.AddVacation button {
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #88C8BC;
+    color: #FFFCE4;
+    font-size: 1rem;
+    font-weight: 900;
+}

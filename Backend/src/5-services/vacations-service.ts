@@ -66,31 +66,6 @@ class VacationsService {
         }
     }
 
-    // const sql = `
-    // SELECT DISTINCT
-    //     V.vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl,
-    //     EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
-    //     COUNT(F.userId) AS likes
-    // FROM vacations as V LEFT JOIN followers as F
-    // ON V.vacationId = F.vacationId
-    // GROUP BY vacationId
-    // ORDER BY startDate
-    // LIMIT ?,?
-    // `
-
-
-
-    // const sql = `
-    // SELECT DISTINCT
-    //     V.*,
-    //     EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
-    //     COUNT(F.userId) AS likes
-    // FROM vacations as V LEFT JOIN followers as F
-    // ON V.vacationId = F.vacationId
-    // GROUP BY vacationId
-    // ORDER BY startDate
-    // `
-
 
 
     //GET one vacation
@@ -105,7 +80,7 @@ class VacationsService {
         return vacation;
     }
 
-
+    //POST vacation:
     public async addVacation(vacation: VacationModel): Promise<VacationModel> {
 
         // Validate: 
@@ -184,6 +159,18 @@ class VacationsService {
         const vacations = await dal.execute(sql);
         const vacation = vacations[0];
         return vacation.imageName;;
+    }
+
+    
+    public async likeVacation(userId: number, vacationId: number): Promise<void> {
+        const sql = `INSERT INTO followers VALUES(?,?)`
+        await dal.execute(sql, [userId, vacationId])
+    }
+
+
+    public async unLikeVacation(userId: number, vacationId: number): Promise<void> {
+        const sql = `DELETE FROM followers WHERE userId=? AND vacationId=?`
+        await dal.execute(sql, [userId, vacationId])
     }
 }
 

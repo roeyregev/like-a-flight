@@ -57,6 +57,33 @@ router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, resp
 // });
 
 
+//POST like a vacations
+router.post("/vacations/:vacationId/:userId", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const vacationId = +request.params.vacationId;
+        const userId = +request.params.userId;
+        await vacationsService.likeVacation(userId, vacationId);
+        response.status(StatusCode.Created).sendStatus(StatusCode.Created);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
+//DELETE-  unlike a vacations
+router.delete("/vacations/:vacationId/:userId", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const vacationId = +request.params.vacationId;
+        const userId = +request.params.userId;
+        await vacationsService.unLikeVacation(userId, vacationId);
+        response.status(StatusCode.NoContent).sendStatus(StatusCode.NoContent);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
+
 
 
 

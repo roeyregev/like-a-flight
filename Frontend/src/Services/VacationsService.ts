@@ -33,6 +33,14 @@ class VacationsService {
         const vacationsData = response.data;
         return vacationsData;
     }
+
+    public async likeVacation(vacationId: number, userId: number): Promise<void> {
+        await axios.post(appConfig.vacationsUrl + vacationId + "/" + userId);
+    }
+
+    public async unLikeVacation(vacationId: number, userId: number): Promise<void> {
+        await axios.delete(appConfig.vacationsUrl + vacationId + "/" + userId);
+    }
 }
 
 const vacationsService = new VacationsService();

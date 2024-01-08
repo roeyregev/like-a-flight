@@ -25,13 +25,19 @@
     width: 3.75rem;
     height: 3.75rem;
     background-color: #FFFEF5;
-    border: 4px solid #d6d6d6;
-    /* border: 4px solid #FD676A; */
     border-radius: 50%;
     text-align: center;
     font-weight: 900;
+}
+
+.VacationCard .like-off {
+    border: 4px solid #d6d6d6;
     color: #d6d6d6;
-    /* color: #FD676A; */
+}
+
+.VacationCard .like-on {
+    border: 4px solid #FD676A;
+    color: #FD676A;
 }
 
 .VacationCard .likes-number {

@@ -36,9 +36,10 @@ function VacationsList(): JSX.Element {
         vacationsService.getNineVacations(currentPage, user.userId)
             .then(dbVacations => {
                 setVacations(dbVacations);
+                // console.log(dbVacations);
             })
             .catch(err => notificationService.error(err))
-    }, [currentPage, user])
+    }, [currentPage, user, vacations])
 
 
     useEffect(() => {
@@ -81,7 +82,7 @@ function VacationsList(): JSX.Element {
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
                 <div className="cards-list">
-                    {vacations.map(v => <VacationCard key={v.vacationId} vacation={v} />)}
+                    {vacations.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} />)}
                 </div>
             </div>
         );

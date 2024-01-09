@@ -8,8 +8,8 @@ interface VacationData {
 
 class VacationsService {
 
-    public async getAllVacations(): Promise<VacationModel[]> {
-        const response = await axios.get(appConfig.vacationsUrl);
+    public async getAllVacations(userId: number): Promise<VacationModel[]> {
+        const response = await axios.get(appConfig.vacationsUrl + "user/" + userId);
         const vacations = response.data;
         return vacations;
     }

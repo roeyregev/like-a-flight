@@ -9,7 +9,8 @@ type PagesNavbarProps = {
 function PagesNavbar(props: PagesNavbarProps): JSX.Element {
 
     function next(pageNumber: number) {
-        props.setCurrentPage(pageNumber + 1)
+        props.setCurrentPage(pageNumber + 1);
+        console.log(props.currentPage);
     }
 
     function prev(pageNumber: number) {

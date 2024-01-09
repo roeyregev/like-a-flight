@@ -6,7 +6,7 @@ import { fileSaver } from "uploaded-file-saver";
 
 const router = express.Router();
 
-
+//GET vacations meta-data:
 router.get("/vacations/data", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const vacationsData = await vacationsService.getVacationsData();
@@ -19,9 +19,10 @@ router.get("/vacations/data", async (request: Request, response: Response, next:
 
 
 //GET all vacations
-router.get("/vacations", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/vacations/user/:userId", async (request: Request, response: Response, next: NextFunction) => {
     try {
-        const vacations = await vacationsService.getAllVacations();
+        const userId = +request.params.userId;
+        const vacations = await vacationsService.getAllVacations(userId);
         response.json(vacations);
     }
     catch (err: any) {
@@ -32,7 +33,6 @@ router.get("/vacations", async (request: Request, response: Response, next: Next
 //GET nine vacations
 router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, response: Response, next: NextFunction) => {
     try {
-        // const pageNumber = +request.query.pageNumber;
         const pageNumber = +request.params.pageNumber;
         const userId = +request.params.userId;
         const vacations = await vacationsService.getNineVacations(pageNumber, userId);

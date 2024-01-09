@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
@@ -19,40 +19,55 @@ function VacationsList(): JSX.Element {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numOfPages, setNumOfPages] = useState<number>(1);
     const [user, setUser] = useState<UserModel>()
+    const vacationsPerPage = 4;
 
-
+    //Get user state
     useEffect(() => {
         setUser(authStore.getState().user);
-
         const unsubscribe = authStore.subscribe(() => {
             setUser(authStore.getState().user);
-            console.log(user);
         });
-
         return unsubscribe;
     }, [])
 
 
+    // // Get nine vacations each time:
+    // useEffect(() => {
+    //     if (!user) return;
+
+    //     vacationsService.getNineVacations(currentPage, user.userId)
+    //         .then(dbVacations => {
+    //             setVacations(dbVacations);
+    //         })
+    //         .catch(err => notificationService.error(err))
+    // }, [currentPage, user, vacations])
+
+
+    // Get all vacations:
     useEffect(() => {
         if (!user) return;
+        console.log(user);
 
-        vacationsService.getNineVacations(currentPage, user.userId)
+        vacationsService.getAllVacations(user.userId)
             .then(dbVacations => {
                 setVacations(dbVacations);
-                // console.log(dbVacations);
+                setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
+                setCurrentPage(1);
+                console.log(dbVacations);
             })
             .catch(err => notificationService.error(err))
-    }, [currentPage, user, vacations])
+    }, [currentPage, user])
 
 
-    useEffect(() => {
-        vacationsService.getVacationsData()
-            .then(data => {
-                setNumOfPages(Math.ceil(data.count / 4));
-            })
-            .catch(err => notificationService.error(err))
-    }, [])
+    // useEffect(() => {
+    //     vacationsService.getVacationsData()
+    //         .then(data => {
+    //             setNumOfPages(Math.ceil(data.count / 4));
+    //         })
+    //         .catch(err => notificationService.error(err))
+    // }, [])
 
+   
 
     if (!user)
         return (
@@ -72,6 +87,7 @@ function VacationsList(): JSX.Element {
 
                 <div className="cards-list">
                     {vacations.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)}
+                    {/* {vacations.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)} */}
                 </div>
             </div>
         );

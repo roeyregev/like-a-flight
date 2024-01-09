@@ -21,9 +21,18 @@ class VacationsService {
     }
 
 
-    public async getAllVacations(): Promise<VacationModel[]> {
-        const sql = `SELECT vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl FROM vacations`;
-        const vacations = await dal.execute(sql);
+    public async getAllVacations(userId: number): Promise<VacationModel[]> {
+        const sql = `
+                SELECT DISTINCT
+                V.vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl,
+                EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
+                COUNT(F.userId) AS likes
+                FROM vacations as V LEFT JOIN followers as F
+                ON V.vacationId = F.vacationId
+                GROUP BY vacationId
+                ORDER BY startDate
+                `
+        const vacations = await dal.execute(sql,[userId ]);
         return vacations;
     }
 
@@ -161,7 +170,7 @@ class VacationsService {
         return vacation.imageName;;
     }
 
-    
+
     public async likeVacation(userId: number, vacationId: number): Promise<void> {
         const sql = `INSERT INTO followers VALUES(?,?)`
         await dal.execute(sql, [userId, vacationId])

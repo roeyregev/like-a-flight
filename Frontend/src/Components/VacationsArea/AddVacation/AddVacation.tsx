@@ -25,7 +25,7 @@ function AddVacation(): JSX.Element {
     async function send(vacation: VacationModel) {
         try {
             console.log(vacation);
-
+             
             //extract and assign image file to vacation object:
             vacation.image = (vacation.image as unknown as FileList)[0];
 

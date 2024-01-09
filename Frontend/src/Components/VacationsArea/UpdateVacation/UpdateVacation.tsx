@@ -6,6 +6,7 @@ import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./UpdateVacation.css";
+import { start } from "repl";
 
 function UpdateVacation(): JSX.Element {
 
@@ -21,10 +22,16 @@ function UpdateVacation(): JSX.Element {
     useEffect(() => {
         vacationsService.getOneVacation(id)
             .then(vacation => {
+
                 console.log(vacation);
+
+                const startDate = vacation.startDate.toString().slice(0, 10);
+                const endDate = vacation.startDate.toString().slice(0, 10);
+                console.log(startDate);
+
                 setValue("destination", vacation.destination);
-                setValue("startDate", vacation.startDate);
-                setValue("endDate", vacation.endDate);
+                setValue("startDate", startDate);
+                setValue("endDate", endDate);
                 setValue("price", vacation.price);
                 setValue("description", vacation.description);
                 setValue("imageUrl", vacation.imageUrl);
@@ -70,8 +77,8 @@ function UpdateVacation(): JSX.Element {
             <form onSubmit={handleSubmit(update)}>
                 <input placeholder="Destination" {...register("destination")} />
                 <div className="dates-inputs">
-                    <input type="date" placeholder="Start date" {...register("startDate")} />
-                    <input type="date" placeholder="End date" {...register("endDate")} />
+                    <input type="date" {...register("startDate")} />
+                    <input type="date" {...register("endDate")} />
                 </div>
 
                 <input type="number" placeholder="Price" step="0.01" {...register("price")} />
@@ -80,7 +87,7 @@ function UpdateVacation(): JSX.Element {
                 <div className="image-upload">
                     <label>Image: </label>
                     <input type="file" accept="image/*" {...register("image")} onChange={handleFileChange} />
-                    <img src={imageSrc? imageSrc : imgUrl} />
+                    <img src={imageSrc ? imageSrc : imgUrl} />
                 </div>
 
                 <button>Update Flight</button>

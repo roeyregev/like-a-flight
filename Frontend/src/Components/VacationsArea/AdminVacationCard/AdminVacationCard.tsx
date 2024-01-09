@@ -10,6 +10,19 @@ type VacationProps = {
 
 function AdminVacationCard(props: VacationProps): JSX.Element {
 
+    function formatRawDate(rawDate: string): string {
+        const dateObject = new Date(rawDate);
+
+        const options: Intl.DateTimeFormatOptions = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            timeZone: 'UTC'
+        };
+
+        return dateObject.toLocaleString('en-GB', options);
+    }
+
     return (
         <div className="AdminVacationCard">
 
@@ -22,7 +35,12 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
                 </div>
             </div>
             <h2>{props.vacation.destination}</h2>
-            <p>Start Date - End Date</p>
+            <div className="date-div">
+                <span>{formatRawDate(new Date(props.vacation.startDate).toISOString())}</span>
+
+                <span> - </span>
+                <span>{formatRawDate(new Date(props.vacation.endDate).toISOString())}</span>
+            </div>
             <p>{props.vacation.description}</p>
 
         </div>

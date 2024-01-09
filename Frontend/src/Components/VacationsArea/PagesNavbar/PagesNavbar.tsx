@@ -4,33 +4,44 @@ type PagesNavbarProps = {
     pages: number
     currentPage: number
     setCurrentPage: Function
+    nextPage: Function
+    previousPage: Function
+    totalPages: number
+    activePage: number
+
+
 }
 
 function PagesNavbar(props: PagesNavbarProps): JSX.Element {
 
-    function next(pageNumber: number) {
-        props.setCurrentPage(pageNumber + 1);
-        console.log(props.currentPage);
+    function nextPage() {
+        props.nextPage()
     }
 
-    function prev(pageNumber: number) {
-        props.setCurrentPage(pageNumber - 1)
+    function previousPage() {
+        props.previousPage()
     }
 
     const pagesArray = [];
-    for (let i = 1; i <= props.pages; i++) {
+    for (let i = 1; i <= props.totalPages; i++) {
         pagesArray.push(i);
     }
 
+    // function goToPage(pageNumber: number) {
+    //     props.setCurrentPage(pageNumber);
+    // }
+
     function goToPage(pageNumber: number) {
-        props.setCurrentPage(pageNumber);
+        props.activePage = pageNumber
     }
+
 
     return (
         <div className="PagesNavbar">
-            <button onClick={() => prev(props.currentPage)} disabled={props.currentPage <= 1}>Prev</button>
-            {pagesArray.map(p => <button className="smallBtn" key={p} value={p} onClick={() => goToPage(p)} >{p}</button>)}
-            <button onClick={() => next(props.currentPage)} disabled={props.currentPage >= pagesArray.length}>Next</button>
+            <button onClick={previousPage} disabled={props.activePage <= 1}>Prev</button>
+            {pagesArray.map(p => <button className="smallBtn" key={p} value={p} onClick={() => goToPage(p)}>{p}</button>)}
+            {/* <em>(page {props.activePage}/{props.totalPages})</em> */}
+            <button onClick={nextPage} disabled={props.activePage >= props.totalPages}>Next</button>
         </div>
     );
 }

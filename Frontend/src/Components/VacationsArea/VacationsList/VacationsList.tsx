@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
@@ -13,6 +13,7 @@ import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
 
 
+
 function VacationsList(): JSX.Element {
 
     const [vacations, setVacations] = useState<VacationModel[]>([])
@@ -20,6 +21,24 @@ function VacationsList(): JSX.Element {
     const [numOfPages, setNumOfPages] = useState<number>(1);
     const [user, setUser] = useState<UserModel>()
     const vacationsPerPage = 4;
+
+    const usePagination = (items: VacationModel[], page = 1, perPage = vacationsPerPage) => {
+        const [activePage, setActivePage] = useState(page)
+        const totalPages = Math.ceil(items.length / perPage)
+        const offset = perPage * (activePage - 1)
+        const paginatedItems = items.slice(offset, perPage * activePage)
+
+        return {
+            activePage,
+            nextPage: () => setActivePage(p => p < totalPages ? p + 1 : p),
+            previousPage: () => setActivePage(p => p > 1 ? p - 1 : p),
+            totalPages,
+            totalItems: items.length,
+            items: paginatedItems,
+        }
+    }
+
+    const { activePage, nextPage, previousPage, totalPages, totalItems, items } = usePagination(vacations);
 
     //Get user state
     useEffect(() => {
@@ -59,16 +78,6 @@ function VacationsList(): JSX.Element {
     }, [currentPage, user])
 
 
-    // useEffect(() => {
-    //     vacationsService.getVacationsData()
-    //         .then(data => {
-    //             setNumOfPages(Math.ceil(data.count / 4));
-    //         })
-    //         .catch(err => notificationService.error(err))
-    // }, [])
-
-   
-
     if (!user)
         return (
             <div>
@@ -83,10 +92,10 @@ function VacationsList(): JSX.Element {
             <div className="VacationsList">
                 <h2> Our Flights</h2>
                 <NavLink to={appConfig.addVacationRoute} className="add-btn"> Add-A-Flight</NavLink>
-                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage}  activePage={activePage}/>
 
                 <div className="cards-list">
-                    {vacations.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)}
+                    {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)}
                     {/* {vacations.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)} */}
                 </div>
             </div>
@@ -98,7 +107,7 @@ function VacationsList(): JSX.Element {
             <div className="VacationsList">
                 <h2> Our Flights</h2>
                 <FilterBar />
-                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage}/>
 
                 <div className="cards-list">
                     {vacations.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} />)}

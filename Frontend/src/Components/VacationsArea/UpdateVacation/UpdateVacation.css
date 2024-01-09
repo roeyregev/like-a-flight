@@ -1,29 +1,30 @@
-.AddVacation form {
-    display: flex;
+
+
+.UpdateVacation form {
+	display: flex;
     flex-direction: column;
     padding: 20px;
     gap: 20px;
 
 }
 
-.AddVacation input {
+.UpdateVacation input {
     height: 40px;
-
+    
 }
-
-.AddVacation .dates-inputs {
+.UpdateVacation .dates-inputs {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    width: max-content;
+    width:max-content;
 }
 
-.AddVacation textarea {
+.UpdateVacation textarea {
     height: 200px;
 
 }
 
-.AddVacation button {
+.UpdateVacation button {
     height: 30px;
     border-radius: 50px;
     border: none;
@@ -33,7 +34,7 @@
     font-weight: 900;
 }
 
-.AddVacation .image-upload img {
+.UpdateVacation .image-upload img {
     width: 100px;
     height: 60px;
     object-fit: contain;

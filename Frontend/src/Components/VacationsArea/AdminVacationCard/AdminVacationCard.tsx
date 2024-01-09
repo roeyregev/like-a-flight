@@ -1,5 +1,7 @@
+import { NavLink } from "react-router-dom";
 import VacationModel from "../../../Models/vacation-model";
 import "./AdminVacationCard.css";
+import appConfig from "../../../Utils/AppConfig";
 
 type VacationProps = {
     key: number
@@ -7,6 +9,7 @@ type VacationProps = {
 }
 
 function AdminVacationCard(props: VacationProps): JSX.Element {
+
     return (
         <div className="AdminVacationCard">
 
@@ -14,7 +17,7 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
                 <div className="likes-number">Likes number</div>
                 <img src={props.vacation.imageUrl} />
                 <div className="admin-btns">
-                    <div className="edit-btn">Edit</div>
+                    <NavLink className="edit-btn" to={appConfig.editVacationRoute + props.vacation.vacationId}>Edit</NavLink>
                     <div className="delete-btn">Delete</div>
                 </div>
             </div>

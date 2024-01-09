@@ -21,11 +21,11 @@ class VacationsService {
         return vacations;
     }
 
-    // public async getNineVacations(pageNumber: number = 1): Promise<VacationModel[]> {
-    //     const response = await axios.get(appConfig.vacationsUrl + "pages/" + pageNumber);
-    //     const vacations = response.data;
-    //     return vacations;
-    // }
+    public async getOneVacation(vacationId: number): Promise<VacationModel> {
+        const response = await axios.get(appConfig.vacationsUrl + vacationId);
+        const vacation = response.data[0];
+        return vacation;
+    }
 
 
     public async getVacationsData(): Promise<VacationData> {
@@ -34,12 +34,35 @@ class VacationsService {
         return vacationsData;
     }
 
+
     public async likeVacation(vacationId: number, userId: number): Promise<void> {
         await axios.post(appConfig.vacationsUrl + vacationId + "/" + userId);
     }
 
+
     public async unLikeVacation(vacationId: number, userId: number): Promise<void> {
         await axios.delete(appConfig.vacationsUrl + vacationId + "/" + userId);
+    }
+
+
+    public async addVacation(vacation: VacationModel): Promise<void> {
+        const options = {
+            headers: { "Content-Type": "multipart/form-data" }
+        }
+        const response = await axios.post<VacationModel>(appConfig.vacationsUrl, vacation, options);
+        const addedVacation = response.data;
+        console.log(addedVacation);
+    }
+
+
+    public async updateVacation(vacation: VacationModel): Promise<VacationModel> {
+        const options = {
+            headers: { "Content-Type": "multipart/form-data" }
+        }
+        const response = await axios.put<VacationModel>(appConfig.vacationsUrl + vacation.vacationId, vacation, options);
+        const updatedVacation = response.data;
+        console.log(updatedVacation);
+        return updatedVacation;
     }
 }
 

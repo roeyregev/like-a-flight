@@ -25,7 +25,7 @@ function Menu(): JSX.Element {
         return (
             <div className="Menu">
                 <NavLink to={appConfig.vacationsRoute}>Flights</NavLink>
-                <NavLink to={appConfig.addVacationRoute}>Add</NavLink>
+               
                 <NavLink to={appConfig.analyticsRoute}>Analytics</NavLink>
             </div>
         );

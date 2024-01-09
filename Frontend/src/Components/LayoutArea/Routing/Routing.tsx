@@ -5,9 +5,9 @@ import Register from "../../AuthArea/Register/Register";
 import Home from "../../HomeArea/Home/Home";
 import AddVacation from "../../VacationsArea/AddVacation/AddVacation";
 import Analytics from "../../VacationsArea/Analytics/Analytics";
-import EditVacation from "../../VacationsArea/EditVacation/EditVacation";
 import VacationsList from "../../VacationsArea/VacationsList/VacationsList";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import UpdateVacation from "../../VacationsArea/UpdateVacation/UpdateVacation";
 
 function Routing(): JSX.Element {
     return (
@@ -24,7 +24,7 @@ function Routing(): JSX.Element {
                 <Route path={appConfig.addVacationRoute} element={<AddVacation />} />
 
                 {/* Edit Route */}
-                <Route path={appConfig.editVacationRoute} element={<EditVacation />} />
+                <Route path={appConfig.editVacationRoute + ":vacationId"} element={<UpdateVacation />} />
 
                 {/* Analytics Route */}
                 <Route path={appConfig.analyticsRoute} element={<Analytics />} />

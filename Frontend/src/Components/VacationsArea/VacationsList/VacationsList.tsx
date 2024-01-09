@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
+import { authStore } from "../../../Redux/AuthState";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
+import appConfig from "../../../Utils/AppConfig";
+import AdminVacationCard from "../AdminVacationCard/AdminVacationCard";
+import FilterBar from "../FilterBar/FilterBar";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
-import { authStore } from "../../../Redux/AuthState";
-import UserModel from "../../../Models/user-model";
-import AdminVacationCard from "../AdminVacationCard/AdminVacationCard";
 
 
 function VacationsList(): JSX.Element {
@@ -64,7 +67,7 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-
+                <NavLink to={appConfig.addVacationRoute} className="add-btn"> Add-A-Flight</NavLink>
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
                 <div className="cards-list">
@@ -78,7 +81,7 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-
+                <FilterBar />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
                 <div className="cards-list">

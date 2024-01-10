@@ -8,8 +8,6 @@ type PagesNavbarProps = {
     previousPage: Function
     totalPages: number
     activePage: number
-
-
 }
 
 function PagesNavbar(props: PagesNavbarProps): JSX.Element {

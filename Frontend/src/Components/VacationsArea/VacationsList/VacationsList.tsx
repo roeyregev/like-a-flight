@@ -17,9 +17,11 @@ import "./VacationsList.css";
 function VacationsList(): JSX.Element {
 
     const [vacations, setVacations] = useState<VacationModel[]>([])
+    const [originalVacations, setOriginalVacations] = useState<VacationModel[]>(vacations);
+    const [user, setUser] = useState<UserModel>()
+
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numOfPages, setNumOfPages] = useState<number>(1);
-    const [user, setUser] = useState<UserModel>()
     const vacationsPerPage = 4;
 
     const usePagination = (items: VacationModel[], page = 1, perPage = vacationsPerPage) => {
@@ -50,18 +52,6 @@ function VacationsList(): JSX.Element {
     }, [])
 
 
-    // // Get nine vacations each time:
-    // useEffect(() => {
-    //     if (!user) return;
-
-    //     vacationsService.getNineVacations(currentPage, user.userId)
-    //         .then(dbVacations => {
-    //             setVacations(dbVacations);
-    //         })
-    //         .catch(err => notificationService.error(err))
-    // }, [currentPage, user, vacations])
-
-
     // Get all vacations:
     useEffect(() => {
         if (!user) return;
@@ -70,12 +60,45 @@ function VacationsList(): JSX.Element {
         vacationsService.getAllVacations(user.userId)
             .then(dbVacations => {
                 setVacations(dbVacations);
+                setOriginalVacations(dbVacations);
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
                 console.log(dbVacations);
             })
             .catch(err => notificationService.error(err))
-    }, [currentPage, user])
+    }, [currentPage, user]);
+
+
+    //---------------------------------------------------------------------------------------------------------------------------------
+    // Filters functions:
+
+    function filterAll() {
+        console.log(originalVacations);
+        setVacations(originalVacations);
+    }
+
+    function filterLiked() {
+        const likedVacations = originalVacations.filter((v) => v.isFollowing != 0);
+        console.log(likedVacations);
+        setVacations(likedVacations)
+    }
+
+    function filterOngoing() {
+        const now = new Date;
+        const formattedNow = now.toISOString();
+        const ongoingVacations = originalVacations.filter((v) => v.startDate >= formattedNow && v.endDate <= formattedNow);
+        console.log(ongoingVacations)
+        setVacations(ongoingVacations);
+    }
+
+    function filterFuture() {
+        const now = new Date;
+        const formattedNow = now.toISOString();
+        const futureVacations = originalVacations.filter((v) => v.startDate >= formattedNow);
+        console.log(futureVacations);
+        setVacations(futureVacations);
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------
 
 
     if (!user)
@@ -92,7 +115,7 @@ function VacationsList(): JSX.Element {
             <div className="VacationsList">
                 <h2> Our Flights</h2>
                 <NavLink to={appConfig.addVacationRoute} className="add-btn"> Add-A-Flight</NavLink>
-                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage}  activePage={activePage}/>
+                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
                     {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)}
@@ -106,8 +129,8 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-                <FilterBar />
-                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage}/>
+                <FilterBar filterAll={filterAll} filterLiked={filterLiked} filterOngoing={filterOngoing} filterFuture={filterFuture} setVacations={setVacations} />
+                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
                     {vacations.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} />)}

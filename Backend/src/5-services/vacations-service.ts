@@ -5,6 +5,7 @@ import dal from "../2-utils/dal";
 import VacationModel from "../3-models/vacation-model";
 import { ResourceNotFound } from "../3-models/error-models";
 import { number } from "joi";
+import ChartDataModel from "../3-models/chart-data-model";
 
 class VacationsService {
 
@@ -32,7 +33,7 @@ class VacationsService {
                 GROUP BY vacationId
                 ORDER BY startDate
                 `
-        const vacations = await dal.execute(sql,[userId ]);
+        const vacations = await dal.execute(sql, [userId]);
         return vacations;
     }
 
@@ -181,6 +182,23 @@ class VacationsService {
         const sql = `DELETE FROM followers WHERE userId=? AND vacationId=?`
         await dal.execute(sql, [userId, vacationId])
     }
+
+
+
+    public async getChartData(): Promise<ChartDataModel[]> {
+        const sql = `SELECT COUNT(followers.vacationId) AS count, vacations.destination, vacations.vacationId FROM followers  JOIN vacations ON followers.vacationId = vacations.vacationId GROUP BY followers.vacationId`;
+        const chartData = await dal.execute(sql);
+        return chartData;
+    }
+
+    // ANALYTICS SQL:
+
+    //WINNER:
+    //SELECT COUNT(followers.vacationId), vacations.destination FROM followers  JOIN vacations ON followers.vacationId = vacations.vacationId GROUP BY followers.vacationId
+
+    // WINNER with vacationId:
+    // SELECT COUNT(followers.vacationId), vacations.destination, vacations.vacationId FROM followers  JOIN vacations ON followers.vacationId = vacations.vacationId GROUP BY followers.vacationId
+
 }
 
 const vacationsService = new VacationsService();

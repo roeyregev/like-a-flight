@@ -1,6 +1,7 @@
 import axios from "axios";
 import VacationModel from "../Models/vacation-model";
 import appConfig from "../Utils/AppConfig";
+import ChartDataModel from "../Models/chart-data-model";
 
 interface VacationData {
     count: number;
@@ -64,6 +65,13 @@ class VacationsService {
         console.log(updatedVacation);
         return updatedVacation;
     }
+
+    public async getChartData(): Promise<ChartDataModel[]> {
+        const response = await axios.get(appConfig.analyticsUrl);
+        const chartData = response.data;
+        return chartData;
+    }
+
 }
 
 const vacationsService = new VacationsService();

@@ -84,12 +84,6 @@ router.delete("/vacations/:vacationId/:userId", async (request: Request, respons
 });
 
 
-
-
-
-
-
-
 //GET one vacation
 router.get("/vacations/:vacationId", async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -158,6 +152,16 @@ router.delete("/vacations/:vacationId", async (request: Request, response: Respo
         await vacationsService.deleteVacation(vacationId);
         console.log(`vacation #${vacationId} was deleted`);
         response.status(StatusCode.NoContent).sendStatus(StatusCode.NoContent);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
+router.get("/analytics", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const chartData = await vacationsService.getChartData();
+        response.json(chartData);
     }
     catch (err: any) {
         next(err);

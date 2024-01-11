@@ -66,6 +66,13 @@ class VacationsService {
         return updatedVacation;
     }
 
+
+    public async deleteVacation(vacationId: number): Promise<void> {
+        await axios.delete<VacationModel>(appConfig.vacationsUrl + vacationId);
+        console.log(`vacation #${vacationId} was deleted`);
+    }
+
+
     public async getChartData(): Promise<ChartDataModel[]> {
         const response = await axios.get(appConfig.analyticsUrl);
         const chartData = response.data;

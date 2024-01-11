@@ -118,7 +118,7 @@ function VacationsList(): JSX.Element {
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
-                    {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)}
+                    {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user}/>)}
                     {/* {vacations.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)} */}
                 </div>
             </div>

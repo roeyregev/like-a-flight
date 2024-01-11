@@ -96,6 +96,7 @@ router.get("/vacations/:vacationId", async (request: Request, response: Response
     }
 });
 
+
 //POST vacation
 router.post("/vacations", async (request: Request, response: Response, next: NextFunction) => {
     try {

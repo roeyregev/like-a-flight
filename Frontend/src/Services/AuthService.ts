@@ -12,8 +12,7 @@ class AuthService {
         const action: AuthAction = { type: AuthActionTypes.Register, payload: token }
         authStore.dispatch(action);
 
-        // sessionStorage.setItem("token", token)
-        // return token;
+
     }
 
 

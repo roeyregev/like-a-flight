@@ -38,20 +38,6 @@ class VacationsService {
     }
 
 
-    //Pagination query service:
-    // public async getNineVacations(pageNumber: number): Promise<VacationModel[]> {
-
-    //     if (pageNumber > 0) {
-    //         const limit = 4;
-    //         const offset = (pageNumber - 1) * limit;
-
-    //         const sql = `SELECT vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl FROM vacations LIMIT ?,?`;
-    //         const vacations = await dal.execute(sql, [offset, limit]);
-    //         return vacations;
-    //     }
-    // }
-
-
     public async getNineVacations(pageNumber: number, userId: number): Promise<VacationModel[]> {
 
         if (pageNumber > 0) {
@@ -77,7 +63,6 @@ class VacationsService {
     }
 
 
-
     //GET one vacation
     public async getOneVacation(vacationId: number): Promise<VacationModel> {
 
@@ -90,6 +75,7 @@ class VacationsService {
         return vacation;
     }
 
+    
     //POST vacation:
     public async addVacation(vacation: VacationModel): Promise<VacationModel> {
 
@@ -108,8 +94,8 @@ class VacationsService {
         //delete image from model:
         delete vacation.image;
 
-        //update image url:
-        vacation.imageUrl = appConfig.appHost + "/api/vacations/images/" + imageName;
+        // //update image url:
+        // vacation.imageUrl = appConfig.appHost + "/api/vacations/images/" + imageName;
 
         //return added product:
         return vacation;

@@ -10,17 +10,18 @@ class UserModel {
     public password: string;
     public roleId: number;
     public userImageUrl: string;
-    // public image: UploadedFile;
+    public image: UploadedFile;
 
 
     constructor(user: UserModel) {
+        this.userId = user.userId;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
         this.roleId = user.roleId;
         this.userImageUrl = user.userImageUrl;
-        // this.userImageUrl = user.userImageUrl;
+        this.image = user.image;
     }
 
     // //POST validation schema:

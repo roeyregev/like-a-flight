@@ -75,7 +75,7 @@ class VacationsService {
         return vacation;
     }
 
-    
+
     //POST vacation:
     public async addVacation(vacation: VacationModel): Promise<VacationModel> {
 
@@ -84,7 +84,10 @@ class VacationsService {
 
         // save image to disk:
         const imageName = await fileSaver.add(vacation.image);
-        console.log(imageName);
+       
+        //update image url:
+        // vacation.imageUrl = appConfig.appHost + "/api/vacations/images/" + imageName;
+
 
         //execute sql query & adding ID
         const sql = "INSERT INTO vacations VALUES(DEFAULT,?,?,?,?,?,?)";
@@ -110,7 +113,6 @@ class VacationsService {
         //Get existing imageName
         console.log("vacationId: " + vacation.vacationId);
         const existingImageName = await this.getExistingImageName(vacation.vacationId);
-        console.log("*************************************************************************")
 
         //update image name if exists and GET new or existing image name:
         const imageName = vacation.image ? await fileSaver.update(existingImageName, vacation.image) : existingImageName;

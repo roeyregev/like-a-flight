@@ -43,7 +43,6 @@ function VacationCard(props: VacationProps): JSX.Element {
     return (
         <div className="VacationCard">
             <div className="card-top-div">
-                {/* <div className="likes-number">likes number</div> */}
                 <div className="likes-number">{props.vacation.likes} likes</div>
                 <img src={props.vacation.imageUrl} />
                 <div className={classNames("like-btn", { "like-on": isFollowing === 1, "like-off": isFollowing === 0 })} onClick={likeToggle}>LIKE</div>

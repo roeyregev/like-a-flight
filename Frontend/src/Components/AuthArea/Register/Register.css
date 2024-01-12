@@ -125,3 +125,15 @@
     font-weight: 300;
     line-height: 100%
 }
+
+.Register .image-upload img {
+    width: 100px
+}
+
+.Register .image-upload label {
+    color: #FBAFAF;
+    font-family: Roboto Condensed;
+    font-size: 1.125rem;
+    font-weight: 200;
+    line-height: normal;
+}

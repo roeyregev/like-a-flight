@@ -32,16 +32,13 @@ class AuthService {
         //(firstName, lastName, email, password, roleId, userImageUrl)
 
         //save user:
-        const info: OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.email, user.password, user.roleId, `${imageName}`]);
+        const info: OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.email, user.password, user.roleId, `${user.userImageUrl}`]);
 
         //set user id:
         user.userId = info.insertId;
 
         //delete image from model:
         delete user.image;
-
-        // //update image url:
-        // user.userImageUrl = appConfig.appHost + "/api/register/images/" + imageName;
 
         //Generate token:
         const token = cyber.getNewToken(user);

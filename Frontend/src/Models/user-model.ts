@@ -7,7 +7,7 @@ class UserModel {
     public password: string;
     public roleId: number;
     public userImageUrl: string;
-    // public image: File;
+    public image: File;
 }
 
 export default UserModel

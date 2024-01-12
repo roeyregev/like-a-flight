@@ -119,7 +119,6 @@ function VacationsList(): JSX.Element {
 
                 <div className="cards-list">
                     {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user}/>)}
-                    {/* {vacations.map(v => <AdminVacationCard key={v.vacationId} vacation={v} />)} */}
                 </div>
             </div>
         );

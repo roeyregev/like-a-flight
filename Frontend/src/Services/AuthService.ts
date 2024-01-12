@@ -6,13 +6,16 @@ import { AuthAction, AuthActionTypes, authStore } from "../Redux/AuthState";
 
 class AuthService {
     public async register(user: UserModel): Promise<void> {
-        const response = await axios.post(appConfig.registerUrl, user);
+
+        const options = {
+            headers: { "Content-Type": "multipart/form-data" }
+        }
+
+        const response = await axios.post(appConfig.registerUrl, user, options);
         const token = response.data;
 
         const action: AuthAction = { type: AuthActionTypes.Register, payload: token }
         authStore.dispatch(action);
-
-
     }
 
 

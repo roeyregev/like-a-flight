@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,7 @@ import UserModel from "../../../Models/user-model";
 import authService from "../../../Services/AuthService";
 import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
+import useImagePreview from "../../../Utils/UseImagePreview";
 import "./Register.css";
 
 type RegisterProps = {
@@ -16,11 +18,22 @@ type RegisterProps = {
 function Register(props: RegisterProps): JSX.Element {
 
     const { register, handleSubmit } = useForm<UserModel>()
+    const [imageFile, setImageFile] = useState<File | null>();
     const navigate = useNavigate();
+    const imageSrc = useImagePreview(imageFile);
+
+    function handleFileChange(event: any) {
+        const files = event.target.files;
+        if (!files || !files.item(0)) return;
+        setImageFile(files.item(0));
+    }
 
     async function send(user: UserModel) {
         try {
-           await authService.register(user);
+            //extract and assign image file to vacation object:
+            user.image = (user.image as unknown as FileList)[0];
+
+            await authService.register(user);
             // console.log(token);
             notificationService.success("You have been register successfully");
             navigate(appConfig.vacationsRoute);
@@ -45,8 +58,13 @@ function Register(props: RegisterProps): JSX.Element {
                     <input type="text" placeholder="First Name" {...register("firstName")} />
                     <input type="text" placeholder="Last Name" {...register("lastName")} />
                     <input type="email" placeholder="Email" {...register("email")} />
-                    <input type="text" placeholder="Image" {...register("userImageUrl")} />
                     <input type="password" placeholder="password" {...register("password")} />
+
+                    <div className="image-upload">
+                        <label>Image: </label>
+                        <input type="file" accept="image/*" {...register("image")} onChange={handleFileChange} />
+                        <img src={imageSrc} />
+                    </div>
                 </div>
 
                 <button className="main-btn">Enter</button>

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import placeholderImage from "../../../Assets/Images/user-image.png";
+import UserModel from "../../../Models/user-model";
+import { authStore } from "../../../Redux/AuthState";
 import authService from "../../../Services/AuthService";
+import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import Login from "../../AuthArea/Login/Login";
 import Register from "../../AuthArea/Register/Register";
 import "./Header.css";
-import UserModel from "../../../Models/user-model";
-import { authStore } from "../../../Redux/AuthState";
-import notificationService from "../../../Services/NotificationService";
 
 function Header(): JSX.Element {
 
@@ -44,7 +45,9 @@ function Header(): JSX.Element {
                     <a href="#" onClick={logout}>Logout</a>
                     <span>|</span>
                     <a href="#" >Hello {user.firstName}</a>
-                    <img src="" className="user-image"/>
+                    {user.userImageUrl ? (
+                        <img src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
+                    }
                 </div>
             </div>
         )

@@ -49,6 +49,7 @@ function Header(): JSX.Element {
                         <img src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
                     }
                 </div>
+                {/* <UserPopup/> */}
             </div>
         )
     };

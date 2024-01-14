@@ -1,0 +1,61 @@
+/* .UserPopup {
+    filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.25));
+} */
+
+.UserPopup .user-popup-main {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #88C8BC;
+    top: 95%;
+    right: 5px;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+
+.UserPopup .full-name {
+    width: 7.5625rem;
+    height: 2.125rem;
+    color: #FFFCE4;
+    font-family: Roboto Condensed;
+    font-size: 1.35rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20%;
+    letter-spacing: 0.4pt;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.UserPopup .likes-count {
+    display: flex;
+    color: #FFFCE4;
+    font-family: Roboto Condensed;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    align-items: center;
+    gap: 5px;
+}
+
+.UserPopup button {
+    display: inline-flex;
+    padding: 0.35rem 1.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 1.875rem;
+    background: #FFFAD9;
+    color: #88C8BC;
+    text-align: center;
+    font-family: Roboto Condensed;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    border: none;
+}

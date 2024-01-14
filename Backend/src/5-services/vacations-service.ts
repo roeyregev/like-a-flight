@@ -84,7 +84,7 @@ class VacationsService {
 
         // save image to disk:
         const imageName = await fileSaver.add(vacation.image);
-       
+
         //update image url:
         // vacation.imageUrl = appConfig.appHost + "/api/vacations/images/" + imageName;
 

@@ -3,6 +3,8 @@ import vacationsService from "../5-services/vacations-service";
 import VacationModel from "../3-models/vacation-model";
 import StatusCode from "../3-models/status-codes";
 import { fileSaver } from "uploaded-file-saver";
+import verifyToken from "../4-middleware/verify-token";
+import verifyAdmin from "../4-middleware/verify-admin";
 
 const router = express.Router();
 
@@ -43,18 +45,6 @@ router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, resp
     }
 });
 
-// //GET nine vacations
-// router.get("/vacations/pages/:pageNumber", async (request: Request, response: Response, next: NextFunction) => {
-//     try {
-//         // const pageNumber = +request.query.pageNumber;
-//         const pageNumber = +request.params.pageNumber;
-//         const vacations = await vacationsService.getNineVacations(pageNumber);
-//         response.json(vacations);
-//     }
-//     catch (err: any) {
-//         next(err);
-//     }
-// });
 
 
 //POST like a vacations
@@ -130,7 +120,6 @@ router.get("/vacations/images/:imageName", async (request: Request, response: Re
 // PUT http://localhost:4000/api/vacations/:vacationId
 router.put("/vacations/:vacationId", async (request: Request, response: Response, next: NextFunction) => {
     try {
-        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         console.log(request.body)
         const vacationId = +request.params.vacationId
 

@@ -22,35 +22,35 @@ class Cyber {
         return token;
     }
 
-    // // Verify token validity:
-    // public verifyToken(token: string): void {
+    // Verify token validity:
+    public verifyToken(token: string): void {
 
-    //     // If no token:
-    //     if (!token) throw new Unauthorized("You are not logged in.");
+        // If no token:
+        if (!token) throw new Unauthorized("You are not logged in.");
 
-    //     try {
-    //         jwt.verify(token, this.secretKey);
-    //     }
-    //     catch (err: any) {
-    //         throw new Unauthorized(err.message);
-    //     }
-    // }
+        try {
+            jwt.verify(token, this.secretKey);
+        }
+        catch (err: any) {
+            throw new Unauthorized(err.message);
+        }
+    }
 
     // Verify admin role: 
-    // public verifyAdmin(token: string): void {
+    public verifyAdmin(token: string): void {
 
-    //     // Verify token: 
-    //     this.verifyToken(token);
+        // Verify token: 
+        this.verifyToken(token);
 
-    //     // Get the container containing the user object: 
-    //     const container = jwt.verify(token, this.secretKey) as { user: UserModel };
+        // Get the container containing the user object: 
+        const container = jwt.verify(token, this.secretKey) as { user: UserModel };
 
-    //     // Extract the user from the container: 
-    //     const user = container.user;
+        // Extract the user from the container: 
+        const user = container.user;
 
-    //     // If user is not an admin: 
-    //     if(user.roleId !== RoleModel.Admin) throw new Forbidden("You are not admin.");
-    // }
+        // If user is not an admin: 
+        if (user.roleId !== RoleModel.Admin) throw new Forbidden("You are not admin.");
+    }
 
 }
 

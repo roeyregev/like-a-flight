@@ -104,7 +104,7 @@ function VacationsList(): JSX.Element {
     //---------------------------------------------------------------------------------------------------------------------------------
 
 
-    if (!user)
+    if (!user )
         return (
             <div>
                 <p>You have to log in</p>
@@ -113,7 +113,7 @@ function VacationsList(): JSX.Element {
             </div>
         );
 
-    if (user && user.roleId === 1)
+    if (user.roleId === 1)
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
@@ -127,7 +127,7 @@ function VacationsList(): JSX.Element {
         );
 
 
-    if (user && user.roleId === 2)
+    if (user.roleId === 2)
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>

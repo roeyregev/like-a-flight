@@ -1,7 +1,6 @@
+import classNames from "classnames";
 import { useState } from "react";
 import "./FilterBar.css";
-import classNames from "classnames";
-import VacationModel from "../../../Models/vacation-model";
 
 
 type FiltersBarProps = {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
-import { authStore } from "../../../Redux/AuthState";
+import { AuthState, authStore } from "../../../Redux/AuthState";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
@@ -19,6 +19,7 @@ function VacationsList(): JSX.Element {
     const [vacations, setVacations] = useState<VacationModel[]>([])
     const [originalVacations, setOriginalVacations] = useState<VacationModel[]>(vacations);
     const [user, setUser] = useState<UserModel>()
+    const [token, setToken] = useState<string>("")
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numOfPages, setNumOfPages] = useState<number>(1);
@@ -47,9 +48,11 @@ function VacationsList(): JSX.Element {
         setUser(authStore.getState().user);
         const unsubscribe = authStore.subscribe(() => {
             setUser(authStore.getState().user);
+            console.log()
         });
         return unsubscribe;
     }, [])
+
 
 
     // Get all vacations:
@@ -118,7 +121,7 @@ function VacationsList(): JSX.Element {
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
-                    {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user}/>)}
+                    {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user} />)}
                 </div>
             </div>
         );

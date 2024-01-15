@@ -21,7 +21,7 @@ router.get("/vacations/data", async (request: Request, response: Response, next:
 
 
 //GET all vacations
-router.get("/vacations/user/:userId", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/vacations/user/:userId", verifyToken, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const userId = +request.params.userId;
         const vacations = await vacationsService.getAllVacations(userId);
@@ -31,6 +31,7 @@ router.get("/vacations/user/:userId", async (request: Request, response: Respons
         next(err);
     }
 });
+
 
 //GET nine vacations
 router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, response: Response, next: NextFunction) => {
@@ -88,7 +89,7 @@ router.get("/vacations/:vacationId", async (request: Request, response: Response
 
 
 //POST vacation
-router.post("/vacations", async (request: Request, response: Response, next: NextFunction) => {
+router.post("/vacations", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         //set uploaded image:
         request.body.image = request.files?.image;
@@ -118,7 +119,7 @@ router.get("/vacations/images/:imageName", async (request: Request, response: Re
 
 
 // PUT http://localhost:4000/api/vacations/:vacationId
-router.put("/vacations/:vacationId", async (request: Request, response: Response, next: NextFunction) => {
+router.put("/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         console.log(request.body)
         const vacationId = +request.params.vacationId
@@ -136,7 +137,7 @@ router.put("/vacations/:vacationId", async (request: Request, response: Response
     }
 });
 
-router.delete("/vacations/:vacationId", async (request: Request, response: Response, next: NextFunction) => {
+router.delete("/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const vacationId = +request.params.vacationId;
         await vacationsService.deleteVacation(vacationId);
@@ -148,7 +149,7 @@ router.delete("/vacations/:vacationId", async (request: Request, response: Respo
     }
 });
 
-router.get("/analytics", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/analytics", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         const chartData = await vacationsService.getChartData();
         response.json(chartData);

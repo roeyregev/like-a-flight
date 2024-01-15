@@ -14,7 +14,7 @@ class AuthService {
     public async register(user: UserModel): Promise<string> {
 
         //validate:
-        //user.validate()
+        user.postValidate()
 
         //is email taken:
         //if...
@@ -51,7 +51,7 @@ class AuthService {
     public async login(credentials: CredentialsModel): Promise<string> {
 
         // Validate: 
-        // user.validate();
+        credentials.postValidate();
 
         // Create sql:
         const sql = `SELECT * FROM users WHERE

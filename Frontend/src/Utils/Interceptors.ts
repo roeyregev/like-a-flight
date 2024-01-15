@@ -11,7 +11,7 @@ class Interceptors {
             if (authStore.getState().token) {
                 requestObject.headers.Authorization = `Bearer ${authStore.getState().token}`
             }
-
+            console.log("test interceptor")
             return requestObject;
         });
 

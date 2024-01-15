@@ -24,43 +24,25 @@ class UserModel {
         this.image = user.image;
     }
 
-    // //POST validation schema:
-    // private static postValidationSchema = Joi.object({
-    //     userId: Joi.number().positive().forbidden(),
-    //     firstName: Joi.string().required().min(2).max(20),
-    //     lastName: Joi.string().required().min(2).max(20),
-    //     email: Joi.string().required().min(2).max(40),
-    //     password: Joi.string().required().min(2).max(50),
-    //     roleId: Joi.number().required().positive(),
-    //     userImageUrl: Joi.string().optional().min(40).max(300),
-    //     image: Joi.object().required(),
+    //POST validation schema:
+    private static postValidationSchema = Joi.object({
+        userId: Joi.number().positive().forbidden(),
+        firstName: Joi.string().required().min(2).max(20),
+        lastName: Joi.string().required().min(2).max(20),
+        email: Joi.string().required().min(2).max(40),
+        password: Joi.string().required().min(2).max(50),
+        roleId: Joi.number().forbidden().positive(),
+        userImageUrl: Joi.string().optional().min(40).max(300),
+        image: Joi.object().required(),
 
-    // })
+    })
 
-    // //PUT validation schema:
-    // private static putValidationSchema = Joi.object({
-    //     userId: Joi.number().positive().forbidden(),
-    //     firstName: Joi.string().required().min(2).max(20),
-    //     lastName: Joi.string().required().min(2).max(20),
-    //     email: Joi.string().required().min(2).max(40),
-    //     password: Joi.string().required().min(2).max(50),
-    //     roleId: Joi.number().required().positive(),
-    //     userImageUrl: Joi.string().optional().min(40).max(300),
-    //     image: Joi.object().optional(),
+    //POST validate current object, throw if not valid:
+    public postValidate(): void {
+        const result = UserModel.postValidationSchema.validate(this);
+        if (result.error?.message) throw new Validation(result.error.message)
+    }
 
-    // })
-
-    // //POST validate current object, throw if not valid:
-    // public postValidate(): void {
-    //     const result = UserModel.postValidationSchema.validate(this);
-    //     if (result.error?.message) throw new Validation(result.error.message)
-    // }
-
-    // //PUT validate current object, throw if not valid:
-    // public putValidate(): void {
-    //     const result = UserModel.putValidationSchema.validate(this);
-    //     if (result.error?.message) throw new Validation(result.error.message)
-    // }
 }
 
 export default UserModel

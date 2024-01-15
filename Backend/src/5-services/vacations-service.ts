@@ -80,14 +80,13 @@ class VacationsService {
     public async addVacation(vacation: VacationModel): Promise<VacationModel> {
 
         // Validate: 
-        //  vacation.postValidate();
+         vacation.postValidate();
 
         // save image to disk:
         const imageName = await fileSaver.add(vacation.image);
 
         //update image url:
         // vacation.imageUrl = appConfig.appHost + "/api/vacations/images/" + imageName;
-
 
         //execute sql query & adding ID
         const sql = "INSERT INTO vacations VALUES(DEFAULT,?,?,?,?,?,?)";
@@ -97,9 +96,6 @@ class VacationsService {
         //delete image from model:
         delete vacation.image;
 
-        // //update image url:
-        // vacation.imageUrl = appConfig.appHost + "/api/vacations/images/" + imageName;
-
         //return added product:
         return vacation;
     }
@@ -108,7 +104,7 @@ class VacationsService {
     public async updateVacation(vacation: VacationModel): Promise<VacationModel> {
 
         //validate
-        //...
+        vacation.putValidate();
 
         //Get existing imageName
         console.log("vacationId: " + vacation.vacationId);

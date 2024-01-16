@@ -28,7 +28,7 @@ class UserModel {
         firstName: Joi.string().required().min(2).max(20),
         lastName: Joi.string().required().min(2).max(20),
         email: Joi.string().required().min(2).max(40),
-        password: Joi.string().required().min(2).max(50),
+        password: Joi.string().required().min(4).max(200),
         roleId: Joi.number().forbidden().positive(),
         userImageUrl: Joi.string().optional().min(40).max(300),
         image: Joi.object().required(),

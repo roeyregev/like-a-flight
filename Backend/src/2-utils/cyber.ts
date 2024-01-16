@@ -2,6 +2,8 @@ import { Forbidden, Unauthorized } from "../3-models/error-models";
 import RoleModel from "../3-models/role-model";
 import UserModel from "../3-models/user-model";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
+// import Cryptr from "cryptr";
 
 class Cyber {
 
@@ -52,6 +54,17 @@ class Cyber {
         if (user.roleId !== RoleModel.Admin) throw new Forbidden("You are not admin.");
     }
 
+
+    // Has password:
+    public hashPassword(plainText: string): string {
+        if (!plainText) return null;
+
+        // Create hash with salt: 
+        const salt = "HimalayanPinkSalt";
+        const hashedPassword = crypto.createHmac("sha512", salt).update(plainText).digest("hex"); // hex = convert to string.
+        console.log(hashedPassword);
+        return hashedPassword;
+    }
 }
 
 const cyber = new Cyber();

@@ -20,6 +20,9 @@ class AuthService {
         //is email taken:
         if (await this.isEmailTaken(user.email)) throw new Validation(`Email ${user.email} already taken`);
 
+        // Hash password: 
+        user.password = cyber.hashPassword(user.password);
+
         // save image to disk:
         const imageName = await fileSaver.add(user.image);
         //update image url:
@@ -54,11 +57,13 @@ class AuthService {
         // Validate: 
         credentials.postValidate();
 
+        // Hash password to compare the hashes!
+        credentials.password = cyber.hashPassword(credentials.password);
+
         // Create sql:
         const sql = `SELECT * FROM users WHERE
                         email = '${credentials.email}' AND
                         password = '${credentials.password}'`;
-
         // Execute: 
         const users = await dal.execute(sql);
 
@@ -104,7 +109,6 @@ class AuthService {
         // If id not found:
         if (info.affectedRows === 0) throw new ResourceNotFound(userId);
     }
-//http://localhost:4000/api/register/images/04c9566b-2e79-48d8-9c8a-26bf9e3c8726.png
 
     //Get image name by ID  >>> (to use for deleting image from disk):
     private async getExistingImageName(userId: number): Promise<string> {

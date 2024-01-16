@@ -34,7 +34,7 @@ function Register(props: RegisterProps): JSX.Element {
             user.image = (user.image as unknown as FileList)[0];
 
             await authService.register(user);
-            // console.log(token);
+
             notificationService.success("You have been register successfully");
             navigate(appConfig.vacationsRoute);
             props.onClose();

@@ -1,6 +1,5 @@
 import { UploadedFile } from "express-fileupload";
 import Joi from "joi";
-import { Validation } from "./error-models";
 
 class UserModel {
     public userId: number;
@@ -11,7 +10,6 @@ class UserModel {
     public roleId: number;
     public userImageUrl: string;
     public image: UploadedFile;
-
 
     constructor(user: UserModel) {
         this.userId = user.userId;
@@ -34,13 +32,12 @@ class UserModel {
         roleId: Joi.number().forbidden().positive(),
         userImageUrl: Joi.string().optional().min(40).max(300),
         image: Joi.object().required(),
-
     })
 
     //POST validate current object, throw if not valid:
-    public postValidate(): void {
+    public postValidate(): string {
         const result = UserModel.postValidationSchema.validate(this);
-        if (result.error?.message) throw new Validation(result.error.message)
+        return result.error?.message;
     }
 
 }

@@ -1,21 +1,25 @@
 import classNames from "classnames";
+import { useState } from "react";
 import VacationModel from "../../../Models/vacation-model";
 import vacationsService from "../../../Services/VacationsService";
 import "./VacationCard.css";
-import { useState } from "react";
+import axios from "axios";
+import appConfig from "../../../Utils/AppConfig";
 
 type VacationProps = {
     key: number
     vacation: VacationModel
     userId: number
+    vacations: VacationModel[]
+    setVacations: Function
 
 }
 
 function VacationCard(props: VacationProps): JSX.Element {
-
+    const [likesNumber, setLikesNumber] = useState<number>(props.vacation.likes)
     const [isFollowing, setIsFollowing] = useState<number>(props.vacation.isFollowing);
 
-    function likeToggle() {
+    async function likeToggle() {
         if (isFollowing === 0) {
             vacationsService.likeVacation(props.vacation.vacationId, props.userId);
             setIsFollowing(1);
@@ -35,7 +39,6 @@ function VacationCard(props: VacationProps): JSX.Element {
             year: 'numeric',
             timeZone: 'UTC'
         };
-
         return dateObject.toLocaleString('en-GB', options);
     }
 
@@ -43,7 +46,7 @@ function VacationCard(props: VacationProps): JSX.Element {
     return (
         <div className="VacationCard">
             <div className="card-top-div">
-                <div className="likes-number">{props.vacation.likes} likes</div>
+                <div className="likes-number">{likesNumber} likes</div>
                 <img src={props.vacation.imageUrl} />
                 <div className={classNames("like-btn", { "like-on": isFollowing === 1, "like-off": isFollowing === 0 })} onClick={likeToggle}>LIKE</div>
             </div>

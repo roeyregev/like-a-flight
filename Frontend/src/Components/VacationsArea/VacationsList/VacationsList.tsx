@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
-import { AuthState, authStore } from "../../../Redux/AuthState";
+import { authStore } from "../../../Redux/AuthState";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
@@ -11,6 +11,7 @@ import FilterBar from "../FilterBar/FilterBar";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
+import { setLabels } from "react-chartjs-2/dist/utils";
 
 
 
@@ -52,8 +53,6 @@ function VacationsList(): JSX.Element {
         });
         return unsubscribe;
     }, [])
-
-
 
     // Get all vacations:
     useEffect(() => {
@@ -104,7 +103,7 @@ function VacationsList(): JSX.Element {
     //---------------------------------------------------------------------------------------------------------------------------------
 
 
-    if (!user )
+    if (!user)
         return (
             <div>
                 <p>You have to log in</p>
@@ -135,7 +134,7 @@ function VacationsList(): JSX.Element {
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
-                    {vacations.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} />)}
+                    {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} />)}
                 </div>
             </div>
         );

@@ -25,21 +25,18 @@ function PagesNavbar(props: PagesNavbarProps): JSX.Element {
         pagesArray.push(i);
     }
 
-    // function goToPage(pageNumber: number) {
-    //     props.setCurrentPage(pageNumber);
-    // }
 
     function goToPage(pageNumber: number) {
-        props.activePage = pageNumber
+        console.log("Test")
     }
 
 
     return (
         <div className="PagesNavbar">
-            <button onClick={previousPage} disabled={props.activePage <= 1}>Prev</button>
-            {pagesArray.map(p => <button className="smallBtn" key={p} value={p} onClick={() => goToPage(p)}>{p}</button>)}
-            {/* <em>(page {props.activePage}/{props.totalPages})</em> */}
-            <button onClick={nextPage} disabled={props.activePage >= props.totalPages}>Next</button>
+            <button onClick={previousPage} disabled={props.activePage <= 1}>⬅️</button>
+            {/* {pagesArray.map(p => <button className="smallBtn" key={p} value={p} onClick={() => goToPage(p)}>{p}</button>)} */}
+            <p>(page {props.activePage}/{props.totalPages})</p>
+            <button onClick={nextPage} disabled={props.activePage >= props.totalPages}>➡️</button>
         </div>
     );
 }

@@ -16,7 +16,6 @@ class VacationsService {
     }
 
     public async getNineVacations(pageNumber: number = 1, userId: number): Promise<VacationModel[]> {
-        // console.log(appConfig.vacationsUrl + "pages/" + pageNumber + "/" + userId)
         const response = await axios.get(appConfig.vacationsUrl + "pages/" + pageNumber + "/" + userId);
         const vacations = response.data;
         return vacations;

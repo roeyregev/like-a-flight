@@ -1,9 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
+import { fileSaver } from "uploaded-file-saver";
 import CredentialsModel from "../3-models/credentials-model";
 import StatusCode from "../3-models/status-codes";
 import UserModel from "../3-models/user-model";
 import authService from "../5-services/auth-service";
-import { fileSaver } from "uploaded-file-saver";
 
 const router = express.Router();
 
@@ -22,8 +22,7 @@ router.post("/register", async (request: Request, response: Response, next: Next
     }
 });
 
-// Getting the image
-// GET http://localhost:4000/api/register/images/:imageName
+// Getting the image >>  GET http://localhost:4000/api/register/images/:imageName
 router.get("/register/images/:imageName", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const imageName = request.params.imageName;
@@ -35,9 +34,17 @@ router.get("/register/images/:imageName", async (request: Request, response: Res
     }
 });
 
-
-
-
+// DELETE http://localhost:4000/api/users/:userId
+router.delete("/register/:userId", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const userId = +request.params.userId;
+        await authService.deleteAccount(userId);
+        response.sendStatus(StatusCode.NoContent);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
 
 
 

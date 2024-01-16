@@ -104,8 +104,7 @@ router.post("/vacations", verifyAdmin, async (request: Request, response: Respon
     }
 });
 
-// Getting the image
-// GET http://localhost:4000/api/vacations/images/:imageName
+// Getting the image >> GET http://localhost:4000/api/vacations/images/:imageName
 router.get("/vacations/images/:imageName", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const imageName = request.params.imageName;
@@ -116,7 +115,7 @@ router.get("/vacations/images/:imageName", async (request: Request, response: Re
         next(err);
     }
 });
-
+//http://localhost:4000/api/register/images/e5af5ae5-5a34-4e44-a8a4-f2fb2ff3bc51.png
 
 // PUT http://localhost:4000/api/vacations/:vacationId
 router.put("/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {

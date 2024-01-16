@@ -5,7 +5,7 @@ import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import cyber from "../2-utils/cyber";
 import CredentialsModel from "../3-models/credentials-model";
-import { Unauthorized, Validation } from "../3-models/error-models";
+import { ResourceNotFound, Unauthorized, Validation } from "../3-models/error-models";
 import { fileSaver } from "uploaded-file-saver";
 import appConfig from "../2-utils/app-config";
 
@@ -79,11 +79,40 @@ class AuthService {
     public async isEmailTaken(email: string): Promise<boolean> {
 
         const sql = `SELECT COUNT(*) AS count FROM users WHERE email = ?`;
-        const result = await dal.execute(sql,[email]);
+        const result = await dal.execute(sql, [email]);
         const count = result[0].count;
 
         //return true/false:
         return count > 0;
+    }
+
+    public async deleteAccount(userId: number): Promise<void> {
+
+        //Get existing image name
+        const existingImageName = await this.getExistingImageName(userId);
+        console.log(existingImageName);
+
+        // Create sql:
+        const sql = `DELETE FROM users WHERE userId = ?`
+
+        // Execute - delete that product in the database:
+        const info: OkPacket = await dal.execute(sql, [userId]);
+
+        //delete image from disk:
+        await fileSaver.delete(existingImageName);
+
+        // If id not found:
+        if (info.affectedRows === 0) throw new ResourceNotFound(userId);
+    }
+//http://localhost:4000/api/register/images/04c9566b-2e79-48d8-9c8a-26bf9e3c8726.png
+
+    //Get image name by ID  >>> (to use for deleting image from disk):
+    private async getExistingImageName(userId: number): Promise<string> {
+        const sql = `SELECT userImageUrl FROM users WHERE userId = ?`;
+        const users = await dal.execute(sql, [userId]);
+        const user = users[0];
+        const imageName = user.userImageUrl.slice(user.userImageUrl.indexOf("images/") + "images/".length);
+        return imageName;
     }
 
 }

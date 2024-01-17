@@ -36,6 +36,11 @@ function Header(): JSX.Element {
         navigate("/home");
     }
 
+    function deleteUser(userId: number) {
+        authService.deleteAccount(userId);
+        console.log("userId: " + userId)
+    }
+
     if (user) {
         return (
             <div className="Header">
@@ -51,7 +56,7 @@ function Header(): JSX.Element {
                         <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
                     }
                 </div>
-                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout}/>
+                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser} />
             </div>
         )
     };

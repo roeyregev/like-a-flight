@@ -32,7 +32,6 @@ function VacationsList(): JSX.Element {
     const handleClickedTab = (id: number) => {
         setTabs(tabs => tabs.map(t => {
             t.id === id ? t.isSelected = true : t.isSelected = false;
-
             return t
         }))
     }

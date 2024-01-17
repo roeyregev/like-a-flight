@@ -20,18 +20,14 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
 
     const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
-
-
     function formatRawDate(rawDate: string): string {
         const dateObject = new Date(rawDate);
-
         const options: Intl.DateTimeFormatOptions = {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
             timeZone: 'UTC'
         };
-
         return dateObject.toLocaleString('en-GB', options);
     }
 

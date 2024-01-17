@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
+import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
-import "./AdminVacationCard.css";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
-import UserModel from "../../../Models/user-model";
-import notificationService from "../../../Services/NotificationService";
+import "./AdminVacationCard.css";
 
 type VacationProps = {
     key: number
@@ -63,20 +63,22 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
 
             <div className="card-top-div">
                 <div className="likes-number">Likes number</div>
+                <div className="price">$ {props.vacation.price}</div>
                 <img src={props.vacation.imageUrl} />
                 <div className="admin-btns">
                     <NavLink className="edit-btn" to={appConfig.editVacationRoute + props.vacation.vacationId}>Edit</NavLink>
                     <div className="delete-btn" onClick={openConfirmation}>Delete</div>
                 </div>
             </div>
-            <h2>{props.vacation.destination}</h2>
-            <div className="date-div">
-                <span>{formatRawDate(new Date(props.vacation.startDate).toISOString())}</span>
-
-                <span> - </span>
-                <span>{formatRawDate(new Date(props.vacation.endDate).toISOString())}</span>
+            <div className="card-bottom-div">
+                <h2>{props.vacation.destination}</h2>
+                <div className="date-div">
+                    <span>{formatRawDate(new Date(props.vacation.startDate).toISOString())}</span>
+                    <span> - </span>
+                    <span>{formatRawDate(new Date(props.vacation.endDate).toISOString())}</span>
+                </div>
+                <p>{props.vacation.description}</p>
             </div>
-            <p>{props.vacation.description}</p>
 
         </div>
     );

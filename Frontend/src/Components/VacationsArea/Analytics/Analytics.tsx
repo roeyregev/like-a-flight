@@ -22,7 +22,7 @@ function Analytics(): JSX.Element {
 
     return (
         <div className="Analytics">
-            <h2> here's the Analytics</h2>
+            <h2>Likes Distribution</h2>
             <div className="chart-container">
                 <BarChart width={400} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))}>
                     <CartesianGrid strokeDasharray="3 3" />

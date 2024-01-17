@@ -1,11 +1,9 @@
 .VacationCard {
     background-color: #FFFEF5;
     box-shadow: 0px 4px 17px 0px rgba(253, 103, 106, 0.40);
-    padding: 15px;
     margin: 0 15px 0 15px;
     text-align: left;
 }
-
 
 .VacationCard .card-top-div {
     position: relative;
@@ -13,6 +11,21 @@
 
 .VacationCard img {
     width: 100%;
+}
+
+.VacationCard .price {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #FFFEF5;
+    background-color: rgba(0, 0, 0, 0.50);
+    font-family: Shrikhand;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    padding: 2px 10px;
+    border-radius: 30px;
 }
 
 .VacationCard .like-btn {
@@ -42,9 +55,20 @@
 
 .VacationCard .likes-number {
     position: absolute;
-    top: 15px;
+    bottom: 15px;
     left: 15px;
     background-color: #FFFEF5;
     padding: 4px 8px;
     border-radius: 10px;
+}
+
+.VacationCard .card-bottom-div {
+    padding: 15px;
+    text-align: left;
+}
+
+.VacationCard .card-bottom-div h2 {
+    text-align: left;
+    font-size: 1.75rem;
+    line-height: 0.5rem;
 }

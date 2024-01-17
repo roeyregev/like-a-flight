@@ -37,11 +37,27 @@ function Header(): JSX.Element {
     }
 
     function deleteUser(userId: number) {
-        authService.deleteAccount(userId);
+        authService.deleteAccount(userId)
         console.log("userId: " + userId)
     }
 
-    if (user) {
+    if (user && user.roleId === 1) {
+        return (
+            <div className="Header Master-Header">
+                <NavLink to={appConfig.homeRoute} className="logo">
+                    <h2>Logo</h2>
+                </NavLink>
+                <a className="hello-master" href="#" >Hello Master</a>
+                {user.userImageUrl ? (
+                    <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
+                }
+
+                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser} />
+            </div>
+        )
+    };
+
+    if (user && user.roleId === 2) {
         return (
             <div className="Header">
                 <NavLink to={appConfig.homeRoute} className="logo">
@@ -60,7 +76,6 @@ function Header(): JSX.Element {
             </div>
         )
     };
-
 
     return (
         <div className="Header">

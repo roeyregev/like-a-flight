@@ -12,8 +12,27 @@
     margin: 0;
 }
 
+.Master-Header {
+    position: relative;
+    height: 60px;
+    background-color: #FD676A;
+    color: #F4EEB7;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 0 15px;
+    margin: 0;
+}
+
 .Header .logo {
     color: #FD676A;
+    text-align: center;
+    font-family: Shrikhand;
+}
+
+.Master-Header .logo {
+    color: #F4EEB7;
     text-align: center;
     font-family: Shrikhand;
 }
@@ -25,12 +44,33 @@
     gap: 5px;
 }
 
+.Master-Header  .hello-master {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.7rem;
+    font-family: Roboto Condensed;
+    
+}
+
 .Header a,
 .Header span {
     color: #9D3B3B;
     text-align: center;
     font-family: Roboto Condensed;
     font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 2.125rem;
+    text-decoration: none;
+}
+
+.Master-Header a,
+.Master-Header span {
+    color: #F4EEB7;
+    text-align: center;
+    font-family: Roboto Condensed;
     font-style: normal;
     font-weight: 300;
     line-height: 2.125rem;

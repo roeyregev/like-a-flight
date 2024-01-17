@@ -7,7 +7,6 @@
 }
 
 
-
 .FilterBar .filter-btns :first-child {
     border-radius: 12px 0px 0px 12px;
 }
@@ -22,7 +21,7 @@
     display: flex;
 }
 
-.FilterBar .filter-btns > .active {
+.FilterBar  .active {
     background: #88C8BC;
     color: #FFFCE4;
     

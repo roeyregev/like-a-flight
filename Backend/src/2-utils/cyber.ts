@@ -10,6 +10,9 @@ class Cyber {
     private secretKey = "Like-A-Flight-Secret-Key";
 
     public getNewToken(user: UserModel): string {
+        
+        // Never return passwords to frontend:
+        delete user.password;
 
         // Containing the user inside a container object: 
         const container = { user };

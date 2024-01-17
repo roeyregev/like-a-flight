@@ -6,7 +6,6 @@ import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./UpdateVacation.css";
-import { start } from "repl";
 
 function UpdateVacation(): JSX.Element {
 

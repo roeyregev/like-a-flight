@@ -48,6 +48,7 @@ class AuthService {
         const token = cyber.getNewToken(user);
 
         //return token
+        console.log("token:");
         return token;
     }
 
@@ -62,10 +63,10 @@ class AuthService {
 
         // Create sql:
         const sql = `SELECT * FROM users WHERE
-                        email = '${credentials.email}' AND
-                        password = '${credentials.password}'`;
+                        email = ? AND
+                        password = ?`;
         // Execute: 
-        const users = await dal.execute(sql);
+        const users = await dal.execute(sql, [credentials.email, credentials.password]);
 
         // Get single user: 
         const user = users[0];

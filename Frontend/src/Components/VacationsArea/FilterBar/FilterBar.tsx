@@ -1,56 +1,28 @@
 import classNames from "classnames";
 import { useState } from "react";
 import "./FilterBar.css";
-
+import vacationsService from "../../../Services/VacationsService";
+import { Tabs } from "../VacationsList/VacationsList";
 
 type FiltersBarProps = {
-    filterAll: Function;
-    filterLiked: Function;
-    filterOngoing: Function;
-    filterFuture: Function;
-    setVacations: Function
+    tabs: Tabs[]
+    handleClickedTab: Function
 }
 
-
 function FilterBar(props: FiltersBarProps): JSX.Element {
-
-    const [activeTab, setActiveTab] = useState<string>("All");
-
-
-    function filterAll() {
-        setActiveTab("All");
-        props.setVacations()
-        props.filterAll();
-    }
-
-    function filterLikes() {
-        setActiveTab("My Likes");
-        props.filterLiked();
-    }
-
-    function filterOngoing() {
-        setActiveTab("Ongoing");
-        props.filterOngoing();
-    }
-
-    function filterFuture() {
-        setActiveTab("Future");
-        props.filterFuture();
-    }
-
-
 
     return (
         <div className="FilterBar">
             <span>Filter:</span>
             <div className="filter-btns">
-                <button className={classNames({ "active": activeTab === "All" })} onClick={filterAll}>All</button>
-                <div className="separator"></div>
-                <button className={classNames({ "active": activeTab === "My Likes" })} onClick={filterLikes}>My Likes</button>
-                <div className="separator"></div>
-                <button className={classNames({ "active": activeTab === "Ongoing" })} onClick={filterOngoing}>Ongoing</button>
-                <div className="separator"></div>
-                <button className={classNames({ "active": activeTab === "Future" })} onClick={filterFuture}>Future</button>
+                {props.tabs.map(
+                    t => (<span key={t.id}>
+                        <button className={classNames({ "active": t.isSelected })}
+                            onClick={() => props.handleClickedTab(t.id)}>{t.name}</button>
+                        <div className="separator"></div>
+                    </span>)
+                )}
+
             </div>
         </div>
     );

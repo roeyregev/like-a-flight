@@ -11,16 +11,31 @@ import FilterBar from "../FilterBar/FilterBar";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
-import { setLabels } from "react-chartjs-2/dist/utils";
 
-
+export type Tabs = {
+    id: number;
+    name: string;
+    isSelected: boolean
+}
 
 function VacationsList(): JSX.Element {
-
-    const [vacations, setVacations] = useState<VacationModel[]>([])
-    const [originalVacations, setOriginalVacations] = useState<VacationModel[]>(vacations);
     const [user, setUser] = useState<UserModel>()
-    const [token, setToken] = useState<string>("")
+    const [vacations, setVacations] = useState<VacationModel[]>([])
+
+    const [tabs, setTabs] = useState<Tabs[]>([
+        { id: 1, name: "All", isSelected: true },
+        { id: 2, name: "My Likes", isSelected: false },
+        { id: 3, name: "Ongoing", isSelected: false },
+        { id: 4, name: "Future", isSelected: false },
+    ]);
+
+    const handleClickedTab = (id: number) => {
+        setTabs(tabs => tabs.map(t => {
+            t.id === id ? t.isSelected = true : t.isSelected = false;
+
+            return t
+        }))
+    }
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numOfPages, setNumOfPages] = useState<number>(1);
@@ -42,7 +57,25 @@ function VacationsList(): JSX.Element {
         }
     }
 
-    const { activePage, nextPage, previousPage, totalPages, totalItems, items } = usePagination(vacations);
+    const filteredVacations = () => {
+        const selectedTabId = tabs.find(t => t.isSelected).id;
+        const now = new Date;
+        const formattedNow = now.toISOString();
+
+        switch (selectedTabId) {
+            case 1:
+                return vacations
+            case 2:
+                return vacations.filter(v => v.isFollowing);
+            case 3:
+                return vacations.filter((v) => v.startDate >= formattedNow && v.endDate <= formattedNow);
+            case 4:
+                return vacations.filter((v) => v.startDate >= formattedNow);
+        }
+    }
+
+    const { activePage, nextPage, previousPage, totalPages, totalItems, items } = usePagination(filteredVacations());
+
 
     //Get user state
     useEffect(() => {
@@ -54,6 +87,7 @@ function VacationsList(): JSX.Element {
         return unsubscribe;
     }, [])
 
+
     // Get all vacations:
     useEffect(() => {
         if (!user) return;
@@ -62,7 +96,7 @@ function VacationsList(): JSX.Element {
         vacationsService.getAllVacations(user.userId)
             .then(dbVacations => {
                 setVacations(dbVacations);
-                setOriginalVacations(dbVacations);
+                // setOriginalVacations(dbVacations);
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
                 console.log(dbVacations);
@@ -71,36 +105,18 @@ function VacationsList(): JSX.Element {
     }, [currentPage, user]);
 
 
-    //---------------------------------------------------------------------------------------------------------------------------------
-    // Filters functions:
+    async function likeToggle(vacId: number) {
 
-    function filterAll() {
-        console.log(originalVacations);
-        setVacations(originalVacations);
-    }
+        setVacations(v => v.map(_vacation =>
+            _vacation.vacationId === vacId
+                ? { ..._vacation, isFollowing: _vacation.isFollowing ? 0 : 1, likes: _vacation.isFollowing ? _vacation.likes - 1 : _vacation.likes + 1 }
+                : _vacation
+        ));
 
-    function filterLiked() {
-        const likedVacations = originalVacations.filter((v) => v.isFollowing != 0);
-        console.log(likedVacations);
-        setVacations(likedVacations)
+        vacations.find(v => v.vacationId === vacId).isFollowing ?
+            vacationsService.unLikeVacation(vacId, user.userId) :
+            vacationsService.likeVacation(vacId, user.userId);
     }
-
-    function filterOngoing() {
-        const now = new Date;
-        const formattedNow = now.toISOString();
-        const ongoingVacations = originalVacations.filter((v) => v.startDate >= formattedNow && v.endDate <= formattedNow);
-        console.log(ongoingVacations)
-        setVacations(ongoingVacations);
-    }
-
-    function filterFuture() {
-        const now = new Date;
-        const formattedNow = now.toISOString();
-        const futureVacations = originalVacations.filter((v) => v.startDate >= formattedNow);
-        console.log(futureVacations);
-        setVacations(futureVacations);
-    }
-    //---------------------------------------------------------------------------------------------------------------------------------
 
 
     if (!user)
@@ -130,11 +146,11 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-                <FilterBar filterAll={filterAll} filterLiked={filterLiked} filterOngoing={filterOngoing} filterFuture={filterFuture} setVacations={setVacations} />
+                <FilterBar tabs={tabs} handleClickedTab={handleClickedTab} />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
-                    {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} />)}
+                    {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />)}
                 </div>
             </div>
         );

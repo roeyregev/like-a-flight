@@ -9,6 +9,7 @@ import appConfig from "../../../Utils/AppConfig";
 import Login from "../../AuthArea/Login/Login";
 import Register from "../../AuthArea/Register/Register";
 import "./Header.css";
+import UserPopup from "../../AuthArea/UserPopup/UserPopup";
 
 function Header(): JSX.Element {
 
@@ -16,6 +17,7 @@ function Header(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
     const [registerOpen, setRegisterOpen] = useState<boolean>(false)
     const [loginOpen, setLoginOpen] = useState<boolean>(false)
+    const [userPopupOpen, setUserPopupOpen] = useState<boolean>(false)
 
     useEffect(() => {
         setUser(authStore.getState().user);
@@ -46,10 +48,10 @@ function Header(): JSX.Element {
                     <span>|</span>
                     <a href="#" >Hello {user.firstName}</a>
                     {user.userImageUrl ? (
-                        <img src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
+                        <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
                     }
                 </div>
-                {/* <UserPopup/> */}
+                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout}/>
             </div>
         )
     };

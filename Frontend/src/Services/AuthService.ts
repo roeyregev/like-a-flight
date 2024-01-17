@@ -31,6 +31,11 @@ class AuthService {
         const action: AuthAction = { type: AuthActionTypes.Logout };
         authStore.dispatch(action);
     }
+
+    // public deleteAccount(): Promise<void>{
+    //     await axios.delete<UserModel>(appConfig.use + vacationId);
+    //     console.log(`vacation #${vacationId} was deleted`);
+    // }
 }
 
 const authService = new AuthService();

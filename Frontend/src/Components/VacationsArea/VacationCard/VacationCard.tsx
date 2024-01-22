@@ -2,6 +2,10 @@ import classNames from "classnames";
 import VacationModel from "../../../Models/vacation-model";
 import "./VacationCard.css";
 
+import greenHeart from "../../../Assets/Images/green-heart.svg"
+import likeOff from "../../../Assets/Images/like-btn-off.png"
+import likeOn from "../../../Assets/Images/like-btn-on.png"
+
 type VacationProps = {
     key: number
     vacation: VacationModel
@@ -29,11 +33,14 @@ function VacationCard(props: VacationProps): JSX.Element {
     return (
         <div className="VacationCard">
             <div className="card-top-div">
-                <div className="likes-number">{props.vacation.likes} likes</div>
+                <div className="likes-number">
+                    <img src={greenHeart} alt="green-heart" />
+                    {props.vacation.likes}</div>
                 <div className="price">$ {props.vacation.price}</div>
-                <img src={props.vacation.imageUrl} />
-                <div className={classNames("like-btn", { "like-on": props.vacation.isFollowing === 1, "like-off": props.vacation.isFollowing === 0 })} onClick={() => props.likeToggle(props.vacation.vacationId)}>LIKE</div>
-                {/* <div className={classNames("like-btn", { "like-on": isFollowing === 1, "like-off": isFollowing === 0 })} onClick={likeToggle}>LIKE</div> */}
+                <img src={props.vacation.imageUrl} className="destination-pic"/>
+                <div className={classNames("like-btn", { "like-on": props.vacation.isFollowing === 1, "like-off": props.vacation.isFollowing === 0 })} onClick={() => props.likeToggle(props.vacation.vacationId)}>
+                    {props.vacation.isFollowing ? <img src={likeOn} /> : <img src={likeOff} />}
+                </div>
             </div>
             <div className="card-bottom-div">
                 <h2>{props.vacation.destination}</h2>

@@ -1,15 +1,39 @@
 .Menu {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     gap: 26px;
     font-size: 1.5rem;
     margin: 0;
     height: 60px;
+    padding: 6px 15px;
 }
 
 .Menu>.active {
     color: green;
     font-weight: bold;
+}
+
+.Menu .menu-icon {
+    display: flex;
+    align-items: center;
+    border-radius: 1.25rem;
+    background: rgba(255, 198, 165, 0.4);
+    padding: 4px 10px;
+}
+
+.Menu .menu-icon .right {
+    scale: -100%;
+}
+
+ .space-flex {
+    justify-content: space-between;
+}
+
+ .left-flex {
+    justify-content: left;
+}
+
+.right-flex {
+    justify-content: right;
 }

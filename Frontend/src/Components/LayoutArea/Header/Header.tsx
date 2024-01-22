@@ -8,8 +8,12 @@ import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import Login from "../../AuthArea/Login/Login";
 import Register from "../../AuthArea/Register/Register";
-import "./Header.css";
 import UserPopup from "../../AuthArea/UserPopup/UserPopup";
+import "./Header.css";
+
+import adminLogo from "../../../Assets/Images/admin-logo.png"
+import logo from "../../../Assets/Images/logo.png"
+
 
 function Header(): JSX.Element {
 
@@ -45,7 +49,8 @@ function Header(): JSX.Element {
         return (
             <div className="Header Master-Header">
                 <NavLink to={appConfig.homeRoute} className="logo">
-                    <h2>Logo</h2>
+                    {/* <h2>Logo</h2> */}
+                    <img src={adminLogo} alt="admin-logo" />
                 </NavLink>
                 <a className="hello-master" href="#" >Hello Master</a>
                 {user.userImageUrl ? (
@@ -61,7 +66,7 @@ function Header(): JSX.Element {
         return (
             <div className="Header">
                 <NavLink to={appConfig.homeRoute} className="logo">
-                    <h2>Logo</h2>
+                <img src={logo} alt="logo" />
                 </NavLink>
 
                 <div className="authLinks">

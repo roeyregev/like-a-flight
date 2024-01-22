@@ -1,5 +1,5 @@
 .PagesNavbar {
-	display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -7,9 +7,14 @@
 }
 
 .PagesNavbar button {
-    height: 50px;
-    width: 50px;
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
+    border: none;
+    background: rgba(251, 175, 175, 0.20);
 }
 
 .PagesNavbar .smallBtn {
@@ -18,4 +23,16 @@
     border-radius: 50%;
 }
 
+.PagesNavbar .right {
+    scale: -100%;
+}
 
+.PagesNavbar p {
+    color: #9D3B3B;
+    text-align: center;
+    font-family: "Roboto Condensed";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 129%;
+}

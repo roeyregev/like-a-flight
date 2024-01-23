@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
@@ -11,12 +11,16 @@ import FilterBar from "../FilterBar/FilterBar";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
+import FilterSelector from "../FilterSelector/FilterSelector";
+import { Type } from "typescript";
+import largePlusIcon from "../../../Assets/Images/plus-icon-large.svg"
 
 export type Tabs = {
     id: number;
     name: string;
     isSelected: boolean
 }
+
 
 function VacationsList(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
@@ -35,6 +39,7 @@ function VacationsList(): JSX.Element {
             return t
         }))
     }
+
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numOfPages, setNumOfPages] = useState<number>(1);
@@ -131,7 +136,10 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-                <NavLink to={appConfig.addVacationRoute} className="add-btn"> Add-A-Flight</NavLink>
+                <NavLink to={appConfig.addVacationRoute} className="add-btn">
+                    <img src={largePlusIcon} alt="large-plus-icon" />
+                    <h3>Add-A-Flight</h3>
+                </NavLink>
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">
@@ -146,6 +154,7 @@ function VacationsList(): JSX.Element {
             <div className="VacationsList">
                 <h2> Our Flights</h2>
                 <FilterBar tabs={tabs} handleClickedTab={handleClickedTab} />
+                {/* <FilterSelector tabs={tabs}  handleClickedTab={handleClickedTab} /> */}
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">

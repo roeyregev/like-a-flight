@@ -22,7 +22,6 @@ function FilterBar(props: FiltersBarProps): JSX.Element {
                         <div className="separator"></div>
                     </span>)
                 )}
-
             </div>
         </div>
     );

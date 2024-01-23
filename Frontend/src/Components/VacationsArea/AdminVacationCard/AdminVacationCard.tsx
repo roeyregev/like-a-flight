@@ -7,6 +7,9 @@ import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 import "./AdminVacationCard.css";
+import greenHeart from "../../../Assets/Images/green-heart.svg"
+import deleteBtn from "../../../Assets/Images/Delete-btn.png"
+import editBtn from "../../../Assets/Images/Edit-btn.png"
 
 type VacationProps = {
     key: number
@@ -62,12 +65,19 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
             )}
 
             <div className="card-top-div">
-                <div className="likes-number">Likes number</div>
+                <div className="likes-number">
+                    <img src={greenHeart} alt="green-heart" />
+                    {props.vacation.likes}
+                </div>
                 <div className="price">$ {props.vacation.price}</div>
-                <img src={props.vacation.imageUrl} />
+                <img src={props.vacation.imageUrl} className="destination-pic" />
                 <div className="admin-btns">
-                    <NavLink className="edit-btn" to={appConfig.editVacationRoute + props.vacation.vacationId}>Edit</NavLink>
-                    <div className="delete-btn" onClick={openConfirmation}>Delete</div>
+                    <NavLink className="edit-btn" to={appConfig.editVacationRoute + props.vacation.vacationId}>
+                        <img src={editBtn} alt="edit-btn" />
+                    </NavLink>
+                    <div className="delete-btn" onClick={openConfirmation}>
+                        <img src={deleteBtn} alt="delete-btn" />
+                    </div>
                 </div>
             </div>
             <div className="card-bottom-div">

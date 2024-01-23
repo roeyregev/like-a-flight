@@ -7,6 +7,7 @@ import notificationService from "../../../Services/NotificationService";
 import ConfirmationPopup from "../../VacationsArea/ConfirmationPopup/ConfirmationPopup";
 import { useNavigate } from "react-router-dom";
 import appConfig from "../../../Utils/AppConfig";
+import closeIcon from "../../../Assets/Images/close-icon-small.svg"
 
 type UserPopupProps = {
     open: boolean
@@ -14,7 +15,6 @@ type UserPopupProps = {
     user: UserModel
     logout: Function
     deleteUser: Function
-    // onClose: any
 }
 
 function UserPopup(props: UserPopupProps): JSX.Element {
@@ -55,17 +55,15 @@ function UserPopup(props: UserPopupProps): JSX.Element {
                 <div className=" triangle"></div>
 
                 <div className="user-popup-main">
-                    <button className="close-btn" onClick={() => props.setOpen(false)}>X</button>
+                    <button className="close-btn" onClick={() => props.setOpen(false)}>
+                        <img src={closeIcon} alt="close-icon" />
+                    </button>
                     <div className="full-name">
                         <p>{props.user.firstName}</p>
                         <p>{props.user.lastName}</p>
                     </div>
-                    {/* <div className="likes-count">
-                        <div>❤️</div>
-                        <div>xxx liked flights</div>
-                    </div> */}
                     <button onClick={() => props.logout()}>Logout</button>
-                    <button onClick={() => openConfirmation()}>Delete Account</button>
+                    <button onClick={() => openConfirmation()} className="delete-btn">Delete Account</button>
                 </div>
             </div>
         </>,

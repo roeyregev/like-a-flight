@@ -6,14 +6,9 @@ body,
     margin: 0;
     padding: 0;
     text-align: center;
-    background: linear-gradient(180deg, #FFFBE4 47.01%, #FFDFDF 108.74%);
+    background: linear-gradient(180deg, #FFFBE4 47%, #FFDFDF 100%);
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 300;
-    ;
-}
-
-a {
-    color: blue;
 }
 
 #portal {

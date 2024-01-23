@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import analyticsIcon from "../../../Assets/Images/analytics-menu.svg";
+import smallArrow from "../../../Assets/Images/arrow-icon-small.svg";
+import flightIcon from "../../../Assets/Images/flights-menu.svg";
+import homeIcon from "../../../Assets/Images/home-menu.svg";
 import UserModel from "../../../Models/user-model";
 import { authStore } from "../../../Redux/AuthState";
 import appConfig from "../../../Utils/AppConfig";
 import "./Menu.css";
-import homeIcon from "../../../Assets/Images/home-menu.svg"
-import flightIcon from "../../../Assets/Images/flights-menu.svg"
-import analyticsIcon from "../../../Assets/Images/analytics-menu.svg"
-import smallArrow from "../../../Assets/Images/arrow-icon-small.svg"
 
 function Menu(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
@@ -26,8 +26,7 @@ function Menu(): JSX.Element {
     }, [])
 
 
-
-    if (user && user.roleId === 1 && location.pathname == "/vacations/")
+    if (user && user.roleId === 1 && (location.pathname == "/vacations/" || location.pathname == "/vacations"))
         return (
             <div className="Menu space-flex">
                 <NavLink to={appConfig.homeRoute}>
@@ -44,6 +43,7 @@ function Menu(): JSX.Element {
                 </NavLink>
             </div>
         );
+
 
     if (user && user.roleId === 1 && location.pathname == "/vacations/analytics/")
         return (
@@ -63,6 +63,7 @@ function Menu(): JSX.Element {
             </div>
         );
 
+
     if (user && user.roleId === 2 && location.pathname == "/vacations/")
         return (
             <div className="Menu left-flex">
@@ -75,6 +76,7 @@ function Menu(): JSX.Element {
             </div>
         );
 
+
     if (location.pathname == "/home" || location.pathname == "/home/")
         return (
             <div className="Menu right-flex">
@@ -86,7 +88,6 @@ function Menu(): JSX.Element {
                 </NavLink>
             </div>
         );
-
-
 }
+
 export default Menu;

@@ -1,40 +1,160 @@
+.AddVacation {
+    background-color: #FFFEF5;
+}
+
+.AddVacation>h2 {
+    color: #88C8BC;
+    text-align: center;
+    font-family: Shrikhand;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
 .AddVacation form {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    gap: 20px;
+    width: 23.4375rem;
+    padding: 0rem 1.25rem;
+    gap: 1.25rem;
+}
+
+.AddVacation span {
+    color: #FBAFAF;
+    text-align: center;
+    font-family: Shrikhand;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.75rem;
+}
+
+.AddVacation input,
+.AddVacation input::placeholder,
+.AddVacation textarea,
+.AddVacation textarea::placeholder {
+    border-radius: 0.625rem;
+    background: #FFEADE;
+    border: none;
+    display: flex;
+    height: 2.25rem;
+    padding: 0.9375rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    color: #FBAFAF;
+    font-family: "Roboto Condensed";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.AddVacation input,
+.AddVacation textarea {
+    color: #5E2626;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 
 }
 
-.AddVacation input {
-    height: 40px;
-
+.AddVacation form>input:first-of-type {
+    font-family: Shrikhand;
+    font-size: 1.5rem;
 }
 
 .AddVacation .dates-inputs {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    width: max-content;
+    align-items: center;
+    gap: 10px;
+}
+
+.AddVacation .dates-inputs>input {
+    width: 100%;
 }
 
 .AddVacation textarea {
-    height: 200px;
+    height: 15.625rem;
+}
 
+
+.AddVacation .btns-flex {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 50px;
+}
+
+.AddVacation .btns-flex :last-child {
+    background-color: #FD8A8B;
 }
 
 .AddVacation button {
-    height: 30px;
-    border-radius: 50px;
+    padding: 0.3125rem 1.25rem;
+    justify-content: center;
+    align-items: center;
     border: none;
-    background-color: #88C8BC;
-    color: #FFFCE4;
-    font-size: 1rem;
-    font-weight: 900;
+    border-radius: 3.75rem;
+    background: #88C8BC;
+    box-shadow: 0px 5px 12px 0px rgba(253, 103, 106, 0.50);
+    color: #FFF;
+    text-align: center;
+    font-family: "Roboto Condensed";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.125rem;
+    letter-spacing: 0.0225rem;
+    width: 190px;
+}
+
+
+.AddVacation .image-upload {
+    display: flex;
+    flex-direction: row;
 }
 
 .AddVacation .image-upload img {
     width: 100px;
     height: 60px;
     object-fit: contain;
+}
+
+.AddVacation .image-upload .tn-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.875rem;
+    height: 5.25rem;
+    border: 8px solid #FFF;
+    background: #FFEADE;
+    box-shadow: 0px 5px 12px 0px rgba(253, 103, 106, 0.50);
+}
+
+.AddVacation .image-thumbnail button {
+    display: flex;
+    padding: 0.25rem 0.625rem;
+    align-items: center;
+    gap: 5px;
+    border-radius: 1.25rem;
+    background: rgba(253, 138, 139, 0.20);
+    box-shadow: none;
+    color: #FBAFAF;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    width: 100px;
+}
+
+.AddVacation .image-thumbnail button img {
+    width: 16px;
+    height: 16px;
 }

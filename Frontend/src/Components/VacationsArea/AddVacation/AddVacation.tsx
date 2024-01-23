@@ -6,6 +6,7 @@ import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./AddVacation.css";
+import buttonPlusIcon from "../../../Assets/Images/add-photo-plus-icon.svg"
 
 function AddVacation(): JSX.Element {
 
@@ -22,10 +23,16 @@ function AddVacation(): JSX.Element {
         setImageFile(files.item(0));
     }
 
+
     async function send(vacation: VacationModel) {
         try {
             console.log(vacation);
-             
+
+            //validate dates logic:
+            if (vacation.endDate < vacation.startDate) {
+                throw new Error("End date can't be earlier than Start date");
+            }
+
             //extract and assign image file to vacation object:
             vacation.image = (vacation.image as unknown as FileList)[0];
 
@@ -45,22 +52,31 @@ function AddVacation(): JSX.Element {
             <h2> Add a Flight</h2>
 
             <form onSubmit={handleSubmit(send)}>
-                <input placeholder="Destination" {...register("destination")} />
+                <input placeholder="Destination" {...register("destination")} required/>
                 <div className="dates-inputs">
-                    <input type="date" placeholder="Start date" {...register("startDate")} />
-                    <input type="date" placeholder="End date" {...register("endDate")} />
+                    <input type="date" placeholder="Start date" {...register("startDate")} required />
+                    <span>-</span>
+                    <input type="date" placeholder="End date" {...register("endDate")} required />
                 </div>
 
-                <input type="number" placeholder="Price" {...register("price")} />
-                <textarea placeholder="Description" cols={30} rows={10} {...register("description")}></textarea>
+                <input type="number" placeholder="Price ($)" {...register("price")} min={0} max={10000}  required/>
+                <textarea placeholder="Description" cols={30} rows={10} {...register("description")} required></textarea>
 
                 <div className="image-upload">
-                    <label>Image: </label>
-                    <input type="file" accept="image/*" {...register("image")} onChange={handleFileChange} />
-                    <img src={imageSrc} />
+
+                    <label>Image:</label>
+                    <div className="image-thumbnail">
+                        <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required />
+                        {/* <img src={imageSrc} /> */}
+                        {imageSrc ? <img src={imageSrc} /> : <div className="tn-placeholder">
+                            <button><img src={buttonPlusIcon} alt="button-plus-icon" /> Add photo</button></div>}
+                    </div>
                 </div>
-                <button>Add Flight</button>
-                <button>Cancel</button>
+
+                <div className="btns-flex">
+                    <button>Add Flight</button>
+                    <button>Cancel</button>
+                </div>
             </form>
         </div>
     );

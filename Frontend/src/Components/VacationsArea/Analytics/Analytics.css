@@ -3,15 +3,32 @@
     justify-content: center;
     height: 70vh;
     padding: 15px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
-.Analytics h2 {
+.Analytics>h2 {
     color: #88C8BC;
     text-align: center;
     font-family: Shrikhand;
-    font-size: 1.375rem;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 2.75rem;
+    line-height: 1.5rem;
+}
+
+.Analytics .download-button {
+    position: absolute;
+    top: 76px;
+    right: 20px;
+    background: #88C8BC;
+    box-shadow: 0px 3px 4px 0px #E9D7AA;
+    display: inline-flex;
+    padding: 0.5rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-family: "Roboto Condensed";
+    font-weight: 300;
+    color: #fff;
+    cursor: pointer;
 }

@@ -8,6 +8,7 @@ import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./Register.css";
+import { error } from "console";
 
 type RegisterProps = {
     open: boolean
@@ -28,8 +29,14 @@ function Register(props: RegisterProps): JSX.Element {
         setImageFile(files.item(0));
     }
 
+
     async function send(user: UserModel) {
         try {
+            //check email address structure:
+            if (user.email != "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/") {
+                throw new Error("Not a valid email address")
+            }
+
             //extract and assign image file to vacation object:
             user.image = (user.image as unknown as FileList)[0];
 
@@ -55,11 +62,10 @@ function Register(props: RegisterProps): JSX.Element {
                 <button className="close-btn" onClick={props.onClose}>X</button>
 
                 <div className="input-flex">
-                    <input type="text" placeholder="First Name" {...register("firstName")} />
-                    <input type="text" placeholder="Last Name" {...register("lastName")} />
-                    <input type="email" placeholder="Email" {...register("email")} />
-                    <input type="password" placeholder="password" {...register("password")} />
-
+                    <input type="text" placeholder="First Name" {...register("firstName")} minLength={2} required />
+                    <input type="text" placeholder="Last Name" {...register("lastName")} minLength={2} required />
+                    <input placeholder="Email" {...register("email")} required />
+                    <input type="password" placeholder="password" {...register("password")} minLength={4} required />
                     <div className="image-upload">
                         <label>Image: </label>
                         <input type="file" accept="image/*" {...register("image")} onChange={handleFileChange} />

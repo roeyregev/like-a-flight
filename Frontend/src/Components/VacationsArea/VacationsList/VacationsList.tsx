@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
 import { authStore } from "../../../Redux/AuthState";
@@ -14,6 +14,8 @@ import "./VacationsList.css";
 import FilterSelector from "../FilterSelector/FilterSelector";
 import { Type } from "typescript";
 import largePlusIcon from "../../../Assets/Images/plus-icon-large.svg"
+import NotLoggedInPopup from "../../AuthArea/NotLoggedInPopup/NotLoggedInPopup";
+import Home from "../../HomeArea/Home/Home";
 
 export type Tabs = {
     id: number;
@@ -21,10 +23,10 @@ export type Tabs = {
     isSelected: boolean
 }
 
-
 function VacationsList(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
     const [vacations, setVacations] = useState<VacationModel[]>([])
+    const navigate = useNavigate();
 
     const [tabs, setTabs] = useState<Tabs[]>([
         { id: 1, name: "All", isSelected: true },
@@ -100,7 +102,6 @@ function VacationsList(): JSX.Element {
         vacationsService.getAllVacations(user.userId)
             .then(dbVacations => {
                 setVacations(dbVacations);
-                // setOriginalVacations(dbVacations);
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
                 console.log(dbVacations);
@@ -123,16 +124,16 @@ function VacationsList(): JSX.Element {
     }
 
 
-    if (!user)
-        return (
-            <div>
-                <p>You have to log in</p>
-                <button>Login</button>
-                <button>Back to Homepage</button>
-            </div>
-        );
 
-    if (user.roleId === 1)
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate(appConfig.homeRoute);
+    //         //show NotLoggedIn popup
+    //     }
+    // }, [])
+
+
+    if (user?.roleId === 1)
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
@@ -149,12 +150,12 @@ function VacationsList(): JSX.Element {
         );
 
 
-    if (user.roleId === 2)
+    if (user?.roleId === 2)
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-                <FilterBar tabs={tabs} handleClickedTab={handleClickedTab} />
-                {/* <FilterSelector tabs={tabs}  handleClickedTab={handleClickedTab} /> */}
+                {/* <FilterBar tabs={tabs} handleClickedTab={handleClickedTab} /> */}
+                <FilterSelector tabs={tabs} handleClickedTab={handleClickedTab} />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 <div className="cards-list">

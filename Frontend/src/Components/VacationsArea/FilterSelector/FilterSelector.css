@@ -1,4 +1,12 @@
-.FilterSelector select {
+.FilterSelector .custom-select {
+    position: relative;
+}
+
+.FilterSelector .custom-select select {
+    display: none;
+}
+
+.FilterSelector .custom-select select {
     display: flex;
     justify-content: center;
     width: 17.5625rem;
@@ -12,14 +20,20 @@
     background: #FEEDD9;
 }
 
-.FilterSelector .filter-icon {
+/* .FilterSelector .custom-select .filter-icon {
     width: 24px;
     height: 24px;
     background-color: #9D3B3B;
     border-radius: 4px;
-}
+} */
 
-.FilterSelector option {
+/* .FilterSelector .custom-select .select-selected {
+    background-color: red;
+} */
+
+
+
+.FilterSelector .custom-select option {
     color: #9D3B3B;
     text-align: left;
     font-size: 1.25rem;

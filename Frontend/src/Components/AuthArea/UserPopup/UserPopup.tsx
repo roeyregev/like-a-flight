@@ -38,6 +38,7 @@ function UserPopup(props: UserPopupProps): JSX.Element {
 
     function handleCancelDelete() {
         setShowConfirmationPopup(false);
+        props.setOpen(false);
     }
 
     //------------------------------------------------------------------------------------------------

@@ -1,11 +1,9 @@
-
-
 .NotLoggedInPopup {
     position: absolute;
     top: 150px;
     display: flex;
     width: 20.3125rem;
-    padding: 1.25rem 1em;
+    padding: 2rem 1em;
     flex-direction: column;
     align-items: center;
     gap: 1.875rem;
@@ -24,8 +22,7 @@
     height: 100%;
 }
 
-
-.NotLoggedInPopup p {
+.NotLoggedInPopup h2 {
     color: #88C8BC;
     text-align: center;
     font-family: Shrikhand;
@@ -33,13 +30,14 @@
     font-style: normal;
     font-weight: 400;
     line-height: 2.75rem;
-    /* 137.5% */
+    margin: 0;
+    margin-top: 20px;
 }
 
 .NotLoggedInPopup .close-btn {
     position: absolute;
-    right: 30px;
-    top: 30px;
+    right: 20px;
+    top: 20px;
 }
 
 .NotLoggedInPopup button {
@@ -53,7 +51,6 @@
     background: #88C8BC;
     box-shadow: 0px 5px 12px 0px rgba(253, 103, 106, 0.50);
     border: none;
-
     color: #FFF;
     text-align: center;
     font-family: Roboto Condensed;
@@ -69,7 +66,6 @@
     flex-direction: column;
     gap: 1.25rem;
 }
-
 
 .NotLoggedInPopup a {
     display: flex;

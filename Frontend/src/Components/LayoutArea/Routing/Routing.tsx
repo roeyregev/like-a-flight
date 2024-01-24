@@ -1,15 +1,14 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import appConfig from "../../../Utils/AppConfig";
-import Login from "../../AuthArea/Login/Login";
-import Register from "../../AuthArea/Register/Register";
 import Home from "../../HomeArea/Home/Home";
 import AddVacation from "../../VacationsArea/AddVacation/AddVacation";
 import Analytics from "../../VacationsArea/Analytics/Analytics";
+import UpdateVacation from "../../VacationsArea/UpdateVacation/UpdateVacation";
 import VacationsList from "../../VacationsArea/VacationsList/VacationsList";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import UpdateVacation from "../../VacationsArea/UpdateVacation/UpdateVacation";
 
 function Routing(): JSX.Element {
+
     return (
         <div className="Routing">
             <Routes>
@@ -30,13 +29,11 @@ function Routing(): JSX.Element {
                 <Route path={appConfig.analyticsRoute} element={<Analytics />} />
 
             //--------------------------------------------------------------------------//
-
                 {/* Register Route */}
                 {/* <Route path={appConfig.registerRoute} element={<Register />} /> */}
 
                 {/* Login Route */}
                 {/* <Route path={appConfig.loginRoute} element={<Login />} /> */}
-
             //--------------------------------------------------------------------------//
 
                 {/* Default Route */}

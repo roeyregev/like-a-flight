@@ -9,6 +9,8 @@ import appConfig from "../../../Utils/AppConfig";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./Register.css";
 import { error } from "console";
+import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg"
+
 
 type RegisterProps = {
     open: boolean
@@ -59,7 +61,7 @@ function Register(props: RegisterProps): JSX.Element {
             <form className="Register" onSubmit={handleSubmit(send)}>
 
                 <h2>Register</h2>
-                <button className="close-btn" onClick={props.onClose}>X</button>
+                <button className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
 
                 <div className="input-flex">
                     <input type="text" placeholder="First Name" {...register("firstName")} minLength={2} required />

@@ -6,6 +6,7 @@ import authService from "../../../Services/AuthService";
 import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import "./Login.css";
+import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg"
 
 type LoginProps = {
     open: boolean
@@ -39,7 +40,7 @@ function Login(props: LoginProps): JSX.Element {
             <form className="Register" onSubmit={handleSubmit(send)}>
 
                 <h2>Log In</h2>
-                <button className="close-btn" onClick={props.onClose}>X</button>
+                <button className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
 
                 <div className="input-flex">
                     <input type="email" placeholder="Email" {...register("email")} />

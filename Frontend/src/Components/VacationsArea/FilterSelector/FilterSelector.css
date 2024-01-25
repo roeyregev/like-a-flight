@@ -1,37 +1,12 @@
-.FilterSelector .custom-select {
-    position: relative;
-}
-
-.FilterSelector .custom-select select {
-    display: none;
-}
-
-.FilterSelector .custom-select select {
+.FilterSelector .filter-flex {
     display: flex;
     justify-content: center;
-    width: 17.5625rem;
-    padding: 0.5rem 0.8rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    margin: 0 auto;
-    border: none;
-    border-radius: 0.25rem;
-    background: #FEEDD9;
+    gap: 5px;
 }
 
-/* .FilterSelector .custom-select .filter-icon {
-    width: 24px;
-    height: 24px;
-    background-color: #9D3B3B;
-    border-radius: 4px;
-} */
-
-/* .FilterSelector .custom-select .select-selected {
-    background-color: red;
-} */
-
-
+.FilterSelector .select-bar {
+    width: 20rem;
+}
 
 .FilterSelector .custom-select option {
     color: #9D3B3B;

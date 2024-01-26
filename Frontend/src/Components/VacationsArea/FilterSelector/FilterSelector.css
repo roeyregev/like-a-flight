@@ -1,18 +1,14 @@
 .FilterSelector .filter-flex {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 5px;
+    background-color: #FEEDD9;
+    width: 22rem;
+    margin: 0 auto;
+    padding: 0 6px;
+    border-radius: 4px;
 }
 
 .FilterSelector .select-bar {
     width: 20rem;
-}
-
-.FilterSelector .custom-select option {
-    color: #9D3B3B;
-    text-align: left;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 129%;
 }

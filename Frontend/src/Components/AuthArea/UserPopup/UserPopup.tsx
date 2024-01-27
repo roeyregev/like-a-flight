@@ -1,13 +1,13 @@
-import ReactDOM from "react-dom";
-import "./UserPopup.css";
-import UserModel from "../../../Models/user-model";
 import { useState } from "react";
-import authService from "../../../Services/AuthService";
-import notificationService from "../../../Services/NotificationService";
-import ConfirmationPopup from "../../VacationsArea/ConfirmationPopup/ConfirmationPopup";
+import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
+import closeIcon from "../../../Assets/Images/close-icon-small.svg";
+import greenChupchik from "../../../Assets/Images/greenChupchick.svg";
+import UserModel from "../../../Models/user-model";
+import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
-import closeIcon from "../../../Assets/Images/close-icon-small.svg"
+import ConfirmationPopup from "../../VacationsArea/ConfirmationPopup/ConfirmationPopup";
+import "./UserPopup.css";
 
 type UserPopupProps = {
     open: boolean
@@ -53,9 +53,10 @@ function UserPopup(props: UserPopupProps): JSX.Element {
 
             <div className="background" onClick={() => props.setOpen(false)}></div>
             <div className="UserPopup">
-                <div className=" triangle"></div>
+               
 
                 <div className="user-popup-main">
+                <div className="chupchik"><img src={greenChupchik} alt="green-chupchik" /></div>
                     <button className="close-btn" onClick={() => props.setOpen(false)}>
                         <img src={closeIcon} alt="close-icon" />
                     </button>

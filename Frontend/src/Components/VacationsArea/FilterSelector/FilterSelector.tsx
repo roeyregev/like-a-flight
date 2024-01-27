@@ -2,7 +2,6 @@ import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 import filterIcon from "../../../Assets/Images/filter-icon.svg";
 import { Tabs } from "../VacationsList/VacationsList";
 import "./FilterSelector.css";
-import { stat } from 'fs';
 
 type FiltersBarProps = {
     tabs: Tabs[]
@@ -44,7 +43,7 @@ function FilterSelector(props: FiltersBarProps): JSX.Element {
         }),
         dropdownIndicator: (base: CSSObjectWithLabel, state: any) => ({
             ...base,
-            color: '#FBAFAF', 
+            color: '#FBAFAF',
             ':hover': {
                 color: '#EC8A8A', // Change this to the desired hover color
             },
@@ -62,32 +61,10 @@ function FilterSelector(props: FiltersBarProps): JSX.Element {
         <div className="FilterSelector">
             <div className="filter-flex">
                 <img src={filterIcon} alt="filter-icon" />
-                <Select options={tabs} onChange={handleChange2} defaultValue={tabs[0]} styles={styles} isSearchable={false}  className="select-bar" />
+                <Select options={tabs} onChange={handleChange2} defaultValue={tabs[0]} styles={styles} isSearchable={false} className="select-bar" />
             </div>
         </div >
     );
 }
 
 export default FilterSelector;
-
-
-// function handleChange(args: SyntheticEvent): void {
-//     const selectElement: HTMLSelectElement = args.target as HTMLSelectElement;
-//     const tabValue = +selectElement.value;
-//     console.log("tabValue: " + tabValue);
-//     props.handleClickedTab(tabValue);
-// }
-
-// return (
-//     <div className="FilterSelector">
-//         <div className="custom-select" >
-//             <select name="filter-selector" onChange={handleChange}>
-//                 {/* <select name="filter-selector" onChange = {() => props.handleClickedTab(t.id)}> */}
-//                 {props.tabs.map(
-//                     t => (<option defaultValue="1" className={classNames({ "active": t.isSelected })} value={t.id} key={t.id} >{t.name}</option>)
-//                 )}
-//             </select>
-//         </div>
-//         <Select options={tabs} />
-//     </div >
-// );

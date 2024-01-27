@@ -35,13 +35,16 @@ function Header(): JSX.Element {
 
     function logout() {
         authService.logout();
+        setUserPopupOpen(false)
         notificationService.success("You are now Logged out");
         navigate("/home");
     }
 
     function deleteUser(userId: number) {
-        authService.deleteAccount(userId)
-        console.log("userId: " + userId)
+        authService.deleteAccount(userId);
+        console.log("userId: " + userId);
+        setUserPopupOpen(false)
+        notificationService.success("Your account was deleted");
     }
 
     if (user && user.roleId === 1) {
@@ -69,8 +72,6 @@ function Header(): JSX.Element {
                 </NavLink>
 
                 <div className="authLinks">
-                    {/* <a href="#" onClick={logout}>Logout</a>
-                    <span>|</span> */}
                     <a href="#" >Hello {user.firstName}</a>
                     {user.userImageUrl ? (
                         <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)

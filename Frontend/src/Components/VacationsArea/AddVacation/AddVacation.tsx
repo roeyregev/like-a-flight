@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import buttonPlusIcon from "../../../Assets/Images/add-photo-plus-icon.svg";
+import buttonPlusIconWhite from "../../../Assets/Images/change-photo-plus-icon-.svg";
 import VacationModel from "../../../Models/vacation-model";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./AddVacation.css";
-import buttonPlusIcon from "../../../Assets/Images/add-photo-plus-icon.svg"
 
 function AddVacation(): JSX.Element {
 
@@ -52,26 +53,38 @@ function AddVacation(): JSX.Element {
             <h2> Add a Flight</h2>
 
             <form onSubmit={handleSubmit(send)}>
-                <input placeholder="Destination" {...register("destination")} required/>
+                <input placeholder="Destination" {...register("destination")} required />
                 <div className="dates-inputs">
                     <input type="date" placeholder="Start date" {...register("startDate")} required />
                     <span>-</span>
                     <input type="date" placeholder="End date" {...register("endDate")} required />
                 </div>
 
-                <input type="number" placeholder="Price ($)" {...register("price")} min={0} max={10000}  required/>
+                <input type="number" placeholder="Price ($)" {...register("price")} min={0} max={10000} required />
                 <textarea placeholder="Description" cols={30} rows={10} {...register("description")} required></textarea>
+
+
 
                 <div className="image-upload">
 
                     <label>Image:</label>
                     <div className="image-thumbnail">
-                        <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required />
-                        {/* <img src={imageSrc} /> */}
-                        {imageSrc ? <img src={imageSrc} /> : <div className="tn-placeholder">
-                            <button><img src={buttonPlusIcon} alt="button-plus-icon" /> Add photo</button></div>}
+                        <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
+                       
+                        {!imageSrc ?
+                            <div className="tn-placeholder">
+                                <button><img src={buttonPlusIcon} alt="button-plus-icon" /> Add photo</button>
+                            </div> :
+                            <div className="tn-preview">
+                                <img src={imageSrc} alt="" className="img-preview" />
+                                <button className="change-btn"><img src={buttonPlusIconWhite} alt="button-plus-icon" /> Change</button>
+                            </div>
+                        }
+
                     </div>
                 </div>
+
+
 
                 <div className="btns-flex">
                     <button>Add Flight</button>

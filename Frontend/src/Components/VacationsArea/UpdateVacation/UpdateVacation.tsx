@@ -6,6 +6,8 @@ import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./UpdateVacation.css";
+import buttonPlusIcon from "../../../Assets/Images/add-photo-plus-icon.svg";
+import buttonPlusIconWhite from "../../../Assets/Images/change-photo-plus-icon-.svg";
 
 function UpdateVacation(): JSX.Element {
 
@@ -83,14 +85,36 @@ function UpdateVacation(): JSX.Element {
                 <input type="number" placeholder="Price" step="0.01" {...register("price")} />
                 <textarea placeholder="Description" cols={30} rows={10} {...register("description")}></textarea>
 
-                <div className="image-upload">
+                {/* <div className="image-upload">
                     <label>Image: </label>
                     <input type="file" accept="image/*" {...register("image")} onChange={handleFileChange} />
                     <img src={imageSrc ? imageSrc : imgUrl} />
-                </div>
+                </div> */}
 
-                <button>Update Flight</button>
-                <button>Cancel</button>
+                <div className="image-upload">
+
+                    <label>Image:</label>
+                    <div className="image-thumbnail">
+                        <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
+
+                        {!imageSrc ?
+                            <div className="tn-preview">
+                                <img src={imgUrl} alt="img-url" className="img-preview" />
+                                <button className="change-btn"><img src={buttonPlusIconWhite} alt="button-plus-icon" />Change</button>
+                            </div> :
+                            <div className="tn-preview">
+                                <img src={imageSrc} alt="img-preview" className="img-preview" />
+                                <button className="change-btn"><img src={buttonPlusIconWhite} alt="button-plus-icon" />Change</button>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+                <div className="btns-flex">
+                    <button>Update Flight</button>
+                    <button>Cancel</button>
+                </div>
             </form>
         </div>
     );

@@ -70,9 +70,9 @@ function AddVacation(): JSX.Element {
                     <label>Image:</label>
                     <div className="image-thumbnail">
                         <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
-                       
+
                         {!imageSrc ?
-                            <div className="tn-placeholder">
+                            <div className="tn-preview">
                                 <button><img src={buttonPlusIcon} alt="button-plus-icon" /> Add photo</button>
                             </div> :
                             <div className="tn-preview">

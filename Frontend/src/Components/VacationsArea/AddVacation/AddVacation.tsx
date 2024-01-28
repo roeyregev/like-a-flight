@@ -14,8 +14,6 @@ function AddVacation(): JSX.Element {
     const { register, handleSubmit } = useForm<VacationModel>()
     const navigate = useNavigate();
     const [imageFile, setImageFile] = useState<File | null>();
-
-
     const imageSrc = useImagePreview(imageFile);
 
     function handleFileChange(event: any) {
@@ -23,7 +21,6 @@ function AddVacation(): JSX.Element {
         if (!files || !files.item(0)) return;
         setImageFile(files.item(0));
     }
-
 
     async function send(vacation: VacationModel) {
         try {
@@ -51,7 +48,6 @@ function AddVacation(): JSX.Element {
     return (
         <div className="AddVacation">
             <h2> Add a Flight</h2>
-
             <form onSubmit={handleSubmit(send)}>
                 <input placeholder="Destination" {...register("destination")} required />
                 <div className="dates-inputs">
@@ -63,14 +59,10 @@ function AddVacation(): JSX.Element {
                 <input type="number" placeholder="Price ($)" {...register("price")} min={0} max={10000} required />
                 <textarea placeholder="Description" cols={30} rows={10} {...register("description")} required></textarea>
 
-
-
                 <div className="image-upload">
-
                     <label>Image:</label>
                     <div className="image-thumbnail">
                         <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
-
                         {!imageSrc ?
                             <div className="tn-preview">
                                 <button><img src={buttonPlusIcon} alt="button-plus-icon" /> Add photo</button>
@@ -80,15 +72,12 @@ function AddVacation(): JSX.Element {
                                 <button className="change-btn"><img src={buttonPlusIconWhite} alt="button-plus-icon" /> Change</button>
                             </div>
                         }
-
                     </div>
                 </div>
 
-
-
                 <div className="btns-flex">
-                    <button>Add Flight</button>
-                    <button>Cancel</button>
+                    <button type="submit">Add Flight</button>
+                    <button type="button" onClick={() => navigate("/vacations")}>Cancel</button>
                 </div>
             </form>
         </div>

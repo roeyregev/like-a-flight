@@ -129,18 +129,6 @@
     line-height: 100%
 }
 
-/* .Register .image-upload img {
-    width: 100px
-} */
-
-/* .Register .image-upload label {
-    color: #FBAFAF;
-    font-family: Roboto Condensed;
-    font-size: 1.125rem;
-    font-weight: 200;
-    line-height: normal;
-} */
-
 .Register .image-upload {
     display: flex;
     flex-direction: row;
@@ -205,8 +193,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6rem;
-    height: 6rem;
+    width: 90px;
+    height: 90px;
     box-sizing: border-box;
     border-radius: 50%;
     background: #FFEADE;
@@ -228,7 +216,8 @@
     border: none;
     background: none;
     color: #FBAFAF;
-    font-size: 0.875rem;
+    font-family: Roboto Condensed;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 300;
     line-height: normal;

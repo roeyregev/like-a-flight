@@ -35,8 +35,9 @@ function Register(props: RegisterProps): JSX.Element {
 
     async function send(user: UserModel) {
         try {
-            //check email address structure:
-            if (user.email != "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/") {
+            //check email address pattern:
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(user.email)) {
                 throw new Error("Not a valid email address")
             }
 
@@ -71,7 +72,7 @@ function Register(props: RegisterProps): JSX.Element {
                             <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
                             {!imageSrc ?
                                 <div className="tn-preview">
-                                    <button><img src={buttonPlusIcon} alt="button-plus-icon" />Your image</button>
+                                    <button>Add your image</button>
                                 </div> :
                                 <div className="tn-preview">
                                     <img src={imageSrc} alt="" className="img-preview" />

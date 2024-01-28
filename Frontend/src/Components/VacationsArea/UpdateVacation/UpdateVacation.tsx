@@ -85,12 +85,6 @@ function UpdateVacation(): JSX.Element {
                 <input type="number" placeholder="Price" step="0.01" {...register("price")} />
                 <textarea placeholder="Description" cols={30} rows={10} {...register("description")}></textarea>
 
-                {/* <div className="image-upload">
-                    <label>Image: </label>
-                    <input type="file" accept="image/*" {...register("image")} onChange={handleFileChange} />
-                    <img src={imageSrc ? imageSrc : imgUrl} />
-                </div> */}
-
                 <div className="image-upload">
 
                     <label>Image:</label>
@@ -112,8 +106,8 @@ function UpdateVacation(): JSX.Element {
 
                 </div>
                 <div className="btns-flex">
-                    <button>Update Flight</button>
-                    <button>Cancel</button>
+                    <button type="submit">Update Flight</button>
+                    <button type="button" onClick={() => navigate("/vacations")}>Cancel</button>
                 </div>
             </form>
         </div>

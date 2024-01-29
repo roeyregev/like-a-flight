@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
-import "./NotLoggedInPopup.css";
-import appConfig from "../../../Utils/AppConfig";
 import ReactDOM from "react-dom";
-import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg"
+import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg";
+import "./NotLoggedInPopup.css";
+
 
 function NotLoggedInPopup(): JSX.Element {
 

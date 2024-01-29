@@ -53,10 +53,8 @@ function UserPopup(props: UserPopupProps): JSX.Element {
 
             <div className="background" onClick={() => props.setOpen(false)}></div>
             <div className="UserPopup">
-               
-
                 <div className="user-popup-main">
-                <div className="chupchik"><img src={greenChupchik} alt="green-chupchik" /></div>
+                    <div className="chupchik"><img src={greenChupchik} alt="green-chupchik" /></div>
                     <button className="close-btn" onClick={() => props.setOpen(false)}>
                         <img src={closeIcon} alt="close-icon" />
                     </button>

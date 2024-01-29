@@ -1,21 +1,18 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import largePlusIcon from "../../../Assets/Images/plus-icon-large.svg";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
 import { authStore } from "../../../Redux/AuthState";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
+import NotLoggedInPopup from "../../AuthArea/NotLoggedInPopup/NotLoggedInPopup";
 import AdminVacationCard from "../AdminVacationCard/AdminVacationCard";
-import FilterBar from "../FilterBar/FilterBar";
+import FilterSelector from "../FilterSelector/FilterSelector";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
-import FilterSelector from "../FilterSelector/FilterSelector";
-import { Type } from "typescript";
-import largePlusIcon from "../../../Assets/Images/plus-icon-large.svg"
-import NotLoggedInPopup from "../../AuthArea/NotLoggedInPopup/NotLoggedInPopup";
-import Home from "../../HomeArea/Home/Home";
 
 export type Tabs = {
     id: number;
@@ -42,10 +39,9 @@ function VacationsList(): JSX.Element {
         }))
     }
 
-
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [numOfPages, setNumOfPages] = useState<number>(1);
-    const vacationsPerPage = 4;
+    const vacationsPerPage = 9;
 
     const usePagination = (items: VacationModel[], page = 1, perPage = vacationsPerPage) => {
         const [activePage, setActivePage] = useState(page)
@@ -85,13 +81,23 @@ function VacationsList(): JSX.Element {
 
     //Get user state
     useEffect(() => {
-        setUser(authStore.getState().user);
-        const unsubscribe = authStore.subscribe(() => {
-            setUser(authStore.getState().user);
-            console.log()
-        });
-        return unsubscribe;
-    }, [])
+        const user = authStore.getState().user;
+
+        if (!user) {
+            // Redirect to the home page when user is not logged in:
+            navigate(appConfig.homeRoute);
+            // setNotLoggedPopup(true);
+            notificationService.error("You have to be logged in")
+
+        } else {
+            setUser(user);
+            const unsubscribe = authStore.subscribe(() => {
+                setUser(authStore.getState().user);
+            });
+            return unsubscribe;
+        }
+    }, [navigate]);
+
 
 
     // Get all vacations:
@@ -124,15 +130,6 @@ function VacationsList(): JSX.Element {
     }
 
 
-
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate(appConfig.homeRoute);
-    //         //show NotLoggedIn popup
-    //     }
-    // }, [])
-
-
     if (user?.roleId === 1)
         return (
             <div className="VacationsList">
@@ -154,7 +151,6 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-                {/* <FilterBar tabs={tabs} handleClickedTab={handleClickedTab} /> */}
                 <FilterSelector tabs={tabs} handleClickedTab={handleClickedTab} />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 

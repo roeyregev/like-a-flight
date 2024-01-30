@@ -25,6 +25,16 @@ function VacationsList(): JSX.Element {
     const [vacations, setVacations] = useState<VacationModel[]>([])
     const navigate = useNavigate();
 
+    //Get user state
+    useEffect(() => {
+        const user = authStore.getState().user;
+        setUser(user);
+        const unsubscribe = authStore.subscribe(() => {
+            setUser(authStore.getState().user);
+        });
+        return unsubscribe;
+    }, []);
+
     const [tabs, setTabs] = useState<Tabs[]>([
         { id: 1, name: "All", isSelected: true },
         { id: 2, name: "My Likes", isSelected: false },
@@ -79,24 +89,7 @@ function VacationsList(): JSX.Element {
     const { activePage, nextPage, previousPage, totalPages, totalItems, items } = usePagination(filteredVacations());
 
 
-    //Get user state
-    useEffect(() => {
-        const user = authStore.getState().user;
 
-        if (!user) {
-            // Redirect to the home page when user is not logged in:
-            navigate(appConfig.homeRoute);
-            // setNotLoggedPopup(true);
-            notificationService.error("You have to be logged in")
-
-        } else {
-            setUser(user);
-            const unsubscribe = authStore.subscribe(() => {
-                setUser(authStore.getState().user);
-            });
-            return unsubscribe;
-        }
-    }, [navigate]);
 
 
 

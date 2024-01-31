@@ -15,6 +15,7 @@ type UserPopupProps = {
     user: UserModel
     logout: Function
     deleteUser: Function
+    // className: string
 }
 
 function UserPopup(props: UserPopupProps): JSX.Element {
@@ -52,7 +53,7 @@ function UserPopup(props: UserPopupProps): JSX.Element {
             )}
 
             <div className="background-user-popup" onClick={() => props.setOpen(false)}></div>
-            <div className="UserPopup">
+            <div className="UserPopup" >
                 <div className="user-popup-main">
                     <div className="chupchik"><img src={greenChupchik} alt="green-chupchik" /></div>
                     <button className="close-btn" onClick={() => props.setOpen(false)}>

@@ -1,4 +1,3 @@
-
 .VacationsList>h2 {
     color: #88C8BC;
     text-align: center;
@@ -16,18 +15,20 @@
     margin-bottom: 30px;
     margin-inline: auto;
     max-width: 1100px;
+    padding: clamp(0px, 1%, 40px);
 }
 
 .VacationsList .add-btn {
-    margin-top: 20px;
-    height: 3.125rem;
-    flex-shrink: 0;
-    display: inline-flex;
+    margin: 10px 0 20px 0;
+    max-height: 3.125rem;
+    width: 220px;
+    display: flex;
     flex-direction: row;
-    padding: 0rem 1.25rem;
+    margin-inline: auto;
+    padding: 0 10px;
     justify-content: center;
     align-items: center;
-    gap: 0.9375rem;
+    gap: 10px;
     border-radius: 4px;
     background: #88C8BC;
     box-shadow: 0px 4px 14px 0px rgba(253, 138, 139, 0.70);
@@ -35,9 +36,13 @@
     text-decoration: none;
     text-align: center;
     font-family: Shrikhand;
-    font-size: 1.375rem;
+    font-size: clamp(0.6rem, 1.2rem, 1.375rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 1rem;
     letter-spacing: 0.06875rem;
+}
+
+.VacationsList .add-btn img {
+    max-width: 32px;
+    max-height: 32px;
 }

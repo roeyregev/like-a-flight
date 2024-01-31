@@ -10,12 +10,17 @@
     flex-direction: column;
 }
 
-main {
+.Layout main {
     flex: 1;
+
 }
 
+.Layout menu {
+    margin-top: 90px;
+}
 
-/* footer {
-    flex-shrink: 0;
-    /* Prevent the footer from shrinking 
-} */
+.Layout header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}

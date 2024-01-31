@@ -51,7 +51,7 @@ function UserPopup(props: UserPopupProps): JSX.Element {
                 <ConfirmationPopup openConfirmation={openConfirmation} handleConfirmDelete={handleConfirmDelete} handleCancelDelete={handleCancelDelete} />
             )}
 
-            <div className="background" onClick={() => props.setOpen(false)}></div>
+            <div className="background-user-popup" onClick={() => props.setOpen(false)}></div>
             <div className="UserPopup">
                 <div className="user-popup-main">
                     <div className="chupchik"><img src={greenChupchik} alt="green-chupchik" /></div>

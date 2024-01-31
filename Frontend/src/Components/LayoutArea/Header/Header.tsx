@@ -51,14 +51,12 @@ function Header(): JSX.Element {
         return (
             <div className="Header Master-Header">
                 <NavLink to={appConfig.homeRoute} className="logo">
-                    {/* <h2>Logo</h2> */}
                     <img src={adminLogo} alt="admin-logo" />
                 </NavLink>
                 <a className="hello-master" href="#" >Hello Master</a>
                 {user.userImageUrl ? (
                     <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
                 }
-
                 <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser} />
             </div>
         )
@@ -90,7 +88,6 @@ function Header(): JSX.Element {
             <NavLink to={appConfig.homeRoute} className="logo">
                 <img src={logo} alt="logo" />
             </NavLink>
-
             <div className="authLinks">
                 <a href="#" onClick={() => setLoginOpen(true)}>Login</a>
                 <span>|</span>

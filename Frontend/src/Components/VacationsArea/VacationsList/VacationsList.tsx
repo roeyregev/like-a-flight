@@ -7,7 +7,6 @@ import { authStore } from "../../../Redux/AuthState";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
-import NotLoggedInPopup from "../../AuthArea/NotLoggedInPopup/NotLoggedInPopup";
 import AdminVacationCard from "../AdminVacationCard/AdminVacationCard";
 import FilterSelector from "../FilterSelector/FilterSelector";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
@@ -88,11 +87,6 @@ function VacationsList(): JSX.Element {
 
     const { activePage, nextPage, previousPage, totalPages, totalItems, items } = usePagination(filteredVacations());
 
-
-
-
-
-
     // Get all vacations:
     useEffect(() => {
         if (!user) return;
@@ -110,7 +104,6 @@ function VacationsList(): JSX.Element {
 
 
     async function likeToggle(vacId: number) {
-
         setVacations(v => v.map(_vacation =>
             _vacation.vacationId === vacId
                 ? { ..._vacation, isFollowing: _vacation.isFollowing ? 0 : 1, likes: _vacation.isFollowing ? _vacation.likes - 1 : _vacation.likes + 1 }
@@ -132,13 +125,12 @@ function VacationsList(): JSX.Element {
                     <h3>Add-A-Flight</h3>
                 </NavLink>
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
-
                 <div className="cards-list">
                     {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user} />)}
                 </div>
+                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
             </div>
         );
-
 
     if (user?.roleId === 2)
         return (
@@ -146,10 +138,10 @@ function VacationsList(): JSX.Element {
                 <h2> Our Flights</h2>
                 <FilterSelector tabs={tabs} handleClickedTab={handleClickedTab} />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
-
                 <div className="cards-list">
                     {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />)}
                 </div>
+                <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
             </div>
         );
 }

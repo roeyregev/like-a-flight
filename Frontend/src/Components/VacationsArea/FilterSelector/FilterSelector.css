@@ -1,14 +1,14 @@
 .FilterSelector .filter-flex {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 5px;
     background-color: #FEEDD9;
-    width: 22rem;
-    margin: 0 auto;
+    margin-inline: auto;
     padding: 0 6px;
     border-radius: 4px;
+    width: clamp(200px, 90%, 400px);
 }
 
 .FilterSelector .select-bar {
-    width: 20rem;
+    width: clamp(200px, 80%, 400px);
 }

@@ -66,7 +66,6 @@ function Menu(): JSX.Element {
     if (user && user.roleId === 1 && (location.pathname == "/vacations/add/" ||location.pathname == "/vacations/edit/" ))
         return (
             <div className="Menu left-flex">
-             
                 <NavLink to={appConfig.vacationsRoute}>
                     <div className="menu-icon">
                         <img src={smallArrow} alt="small-arrow" />

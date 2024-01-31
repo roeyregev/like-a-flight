@@ -1,4 +1,3 @@
-
 .Home {
     height: 100%;
 }
@@ -27,11 +26,32 @@
     color: #9D3B3B;
     text-align: center;
     font-size: 1.625rem;
-    font-style: normal;    
+    font-style: normal;
     line-height: 2.125rem;
 }
 
-.Home button {
+.Home a {
+    border-radius: 3.75rem;
+    background: #88C8BC;
+    box-shadow: 0px 5px 12px 0px rgba(253, 103, 106, 0.50);
+    border: none;
+    display: inline-flex;
+    padding: 0.625rem 1.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    color: #FFFAD9;
+    text-align: center;
+    font-family: Shrikhand;
+    font-size: 1.375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.75rem;
+    letter-spacing: 0.08rem;
+}
+
+/* .Home button {
     border-radius: 3.75rem;
     background: #88C8BC;
     box-shadow: 0px 5px 12px 0px rgba(253, 103, 106, 0.50);
@@ -51,7 +71,7 @@
     font-weight: 400;
     line-height: 2.75rem;
     letter-spacing: 0.08rem;
-}
+} */
 
 .Home .home-illustration {
     background: rgba(253, 103, 106, 0.40);

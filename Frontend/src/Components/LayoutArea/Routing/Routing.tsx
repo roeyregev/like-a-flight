@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import UserModel from "../../../Models/user-model";
 import { authStore } from "../../../Redux/AuthState";
 import appConfig from "../../../Utils/AppConfig";
 import Home from "../../HomeArea/Home/Home";
@@ -12,8 +10,13 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 
 
 function PrivateRoute({ element }: any): JSX.Element {
-    console.log('auth: ',authStore.getState().user)
+    console.log('auth: ', authStore.getState().user)
     return authStore.getState().user ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showPopup: true }} replace />);
+}
+
+function AdminRoute({ element }: any): JSX.Element {
+    console.log('auth: ', authStore.getState().user)
+    return authStore.getState().user && authStore.getState().user.roleId === 1 ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showAdminPopup: true }} replace />);
 }
 
 function Routing(): JSX.Element {
@@ -30,15 +33,15 @@ function Routing(): JSX.Element {
                 <Route path={appConfig.vacationsRoute} element={<PrivateRoute element={<VacationsList />} />} />
 
                 {/* Add Route */}
-                <Route path={appConfig.addVacationRoute} element={<PrivateRoute element={<AddVacation />} />} />
+                <Route path={appConfig.addVacationRoute} element={<AdminRoute element={<AddVacation />} />} />
                 {/* <Route path={appConfig.addVacationRoute} element={<AddVacation />} /> */}
 
                 {/* Edit Route */}
-                <Route path={appConfig.editVacationRoute + ":vacationId"} element={<PrivateRoute element={<UpdateVacation />} />} />
+                <Route path={appConfig.editVacationRoute + ":vacationId"} element={<AdminRoute element={<UpdateVacation />} />} />
                 {/* <Route path={appConfig.editVacationRoute + ":vacationId"} element={<UpdateVacation />} /> */}
 
                 {/* Analytics Route */}
-                <Route path={appConfig.analyticsRoute} element={<PrivateRoute element={<Analytics />} />} />
+                <Route path={appConfig.analyticsRoute} element={<AdminRoute element={<Analytics />} />} />
                 {/* <Route path={appConfig.analyticsRoute} element={<Analytics />} /> */}
 
                 {/* Default Route */}

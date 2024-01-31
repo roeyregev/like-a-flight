@@ -1,22 +1,22 @@
 import ReactDOM from "react-dom";
 import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg";
-import "./NotLoggedInPopup.css";
+import "./NotAdminPopup.css";
+
 
 type popupProps = {
     closePopup: Function
 }
 
-function NotLoggedInPopup(props: popupProps): JSX.Element {
+function NotAdminPopup(props: popupProps): JSX.Element {
 
     return ReactDOM.createPortal(
         <>
             <div className="background"></div>
-            <div className="NotLoggedInPopup">
+            <div className="NotAdminPopup">
                 <img src={mediumCloseIcon} alt="close-icon" className="close-btn" onClick={() => props.closePopup()} />
-                <h2>You have be logged-in</h2>
+                <h2>Only administrators can see this</h2>
                 <div className="btns-flex">
                     <button onClick={() => props.closePopup()}>Got it</button>
-                    {/* <button>Register</button> */}
                 </div>
             </div>
         </>,
@@ -24,4 +24,4 @@ function NotLoggedInPopup(props: popupProps): JSX.Element {
     );
 }
 
-export default NotLoggedInPopup;
+export default NotAdminPopup;

@@ -36,7 +36,7 @@ function Login(props: LoginProps): JSX.Element {
 
     return ReactDOM.createPortal(
         <>
-            <div className="background"></div>
+            <div className="background-black"></div>
             <form className="Register" onSubmit={handleSubmit(send)}>
 
                 <h2>Log In</h2>

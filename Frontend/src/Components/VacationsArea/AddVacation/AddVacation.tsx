@@ -47,13 +47,14 @@ function AddVacation(): JSX.Element {
 
     return (
         <div className="AddVacation">
+            <div className="light-bg"></div>
             <h2> Add a Flight</h2>
             <form onSubmit={handleSubmit(send)}>
                 <input placeholder="Destination" {...register("destination")} required />
                 <div className="dates-inputs">
-                    <input type="date" placeholder="Start date" {...register("startDate")} required />
+                    <input type="date" className="my-custom-date-input" {...register("startDate")} required />
                     <span>-</span>
-                    <input type="date" placeholder="End date" {...register("endDate")} required />
+                    <input type="date" {...register("endDate")} required />
                 </div>
 
                 <input type="number" placeholder="Price ($)" {...register("price")} min={0} max={10000} required />

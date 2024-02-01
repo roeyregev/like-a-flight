@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import buttonPlusIconWhite from "../../../Assets/Images/change-photo-plus-icon-.svg";
 import VacationModel from "../../../Models/vacation-model";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./UpdateVacation.css";
-import buttonPlusIcon from "../../../Assets/Images/add-photo-plus-icon.svg";
-import buttonPlusIconWhite from "../../../Assets/Images/change-photo-plus-icon-.svg";
 
 function UpdateVacation(): JSX.Element {
 
@@ -73,8 +72,8 @@ function UpdateVacation(): JSX.Element {
 
     return (
         <div className="UpdateVacation">
+            <div className="light-bg"></div>
             <h2> Update Flight</h2>
-
             <form onSubmit={handleSubmit(update)}>
                 <input placeholder="Destination" {...register("destination")} />
                 <div className="dates-inputs">

@@ -59,7 +59,7 @@ function Register(props: RegisterProps): JSX.Element {
 
     return ReactDOM.createPortal(
         <>
-            <div className="background"></div>
+            <div className="background-black"></div>
             <form className="Register" onSubmit={handleSubmit(send)}>
 
                 <h2>Register</h2>
@@ -67,12 +67,11 @@ function Register(props: RegisterProps): JSX.Element {
 
                 <div className="input-flex">
                     <div className="image-upload">
-                        {/* <label>Image:</label> */}
                         <div className="image-thumbnail">
                             <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
                             {!imageSrc ?
                                 <div className="tn-preview">
-                                    <button>Add your image</button>
+                                    <button>Add your photo</button>
                                 </div> :
                                 <div className="tn-preview">
                                     <img src={imageSrc} alt="" className="img-preview" />

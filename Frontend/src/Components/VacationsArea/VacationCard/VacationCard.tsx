@@ -1,10 +1,11 @@
 import classNames from "classnames";
+import { useEffect, useState } from "react";
+import Lottie from 'react-lottie';
+import likeOffAnimation from "../../../Assets/Animations/like-off.json";
+import likeOnAnimation from "../../../Assets/Animations/like-on.json";
+import greenHeart from "../../../Assets/Images/green-heart.svg";
 import VacationModel from "../../../Models/vacation-model";
 import "./VacationCard.css";
-
-import greenHeart from "../../../Assets/Images/green-heart.svg"
-import likeOff from "../../../Assets/Images/like-btn-off.png"
-import likeOn from "../../../Assets/Images/like-btn-on.png"
 
 type VacationProps = {
     key: number
@@ -16,6 +17,38 @@ type VacationProps = {
 }
 
 function VacationCard(props: VacationProps): JSX.Element {
+
+    const [isFollowing, setIsFollowing] = useState<boolean>(props.vacation.isFollowing === 1);
+
+    // set initial animation state
+    const currentAnimationData = isFollowing ? likeOnAnimation : likeOffAnimation;
+
+    // Initialize likeAnimationOptions
+    const [likeAnimationOptions, setLikeAnimationOptions] = useState({
+        loop: false,
+        autoplay: false,
+        animationData: currentAnimationData, // Default to likeAnimationOn
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+        },
+    });
+
+    useEffect(() => {
+        // Set initial on mount animation options 
+        setLikeAnimationOptions({
+            loop: false,
+            autoplay: false,
+            animationData: currentAnimationData,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice",
+            },
+        });
+    }, [isFollowing, currentAnimationData]);
+
+    const handleClick = () => {
+        setIsFollowing(!isFollowing);
+        props.likeToggle(props.vacation.vacationId);
+    }
 
     function formatRawDate(rawDate: string): string {
         const dateObject = new Date(rawDate);
@@ -29,7 +62,6 @@ function VacationCard(props: VacationProps): JSX.Element {
         return dateObject.toLocaleString('en-GB', options);
     }
 
-
     return (
         <div className="VacationCard">
             <div className="card-top-div">
@@ -37,9 +69,10 @@ function VacationCard(props: VacationProps): JSX.Element {
                     <img src={greenHeart} alt="green-heart" />
                     {props.vacation.likes}</div>
                 <div className="price">$ {props.vacation.price}</div>
-                <img src={props.vacation.imageUrl} className="destination-pic"/>
-                <div className={classNames("like-btn", { "like-on": props.vacation.isFollowing === 1, "like-off": props.vacation.isFollowing === 0 })} onClick={() => props.likeToggle(props.vacation.vacationId)}>
-                    {props.vacation.isFollowing ? <img src={likeOn} /> : <img src={likeOff} />}
+                <img src={props.vacation.imageUrl} className="destination-pic" />
+
+                <div className={classNames("like-btn", { "like-on": props.vacation.isFollowing === 1, "like-off": props.vacation.isFollowing === 0 })} onClick={handleClick}>
+                    <Lottie options={likeAnimationOptions} />
                 </div>
             </div>
             <div className="card-bottom-div">

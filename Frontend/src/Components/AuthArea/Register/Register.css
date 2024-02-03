@@ -25,6 +25,27 @@
     height: 100%;
 }
 
+.Register .input-div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.Register .input-div .error-message {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: -6px;
+    color: white;
+    background-color: #FD676A;
+    border-radius: 0.625rem 0.625rem 0 0;
+    width: 100%;
+    height: 24px;
+}
+
 .Register input {
     height: 30px;
     padding: 0.9375rem 0.625rem;
@@ -43,6 +64,15 @@
     font-size: 1.125rem;
     font-weight: 200;
     line-height: normal;
+}
+
+.Register .invalid-input {
+    border: 4px solid #FD676A;
+}
+
+.Register .invalid-input::placeholder {
+    color: #FD676A;
+    font-weight: 400;
 }
 
 .Register h2 {

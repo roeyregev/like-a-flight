@@ -60,5 +60,5 @@
 
 .Home .home-illustration {
     width: clamp(280px, 80%, 600px);
-    transform: scaleX(-1);
+    /* transform: scaleX(-1); */
 }

@@ -56,7 +56,7 @@ function Home(): JSX.Element {
 
             <div className="home-illustration">
                 <Lottie options={homeAnimationData} />
-                <div className="clouds"></div>
+                {/* <div className="clouds"></div> */}
             </div>
         </div>
     );

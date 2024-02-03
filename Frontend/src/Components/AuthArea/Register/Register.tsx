@@ -11,6 +11,7 @@ import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./Register.css";
+import redChupchik from "../../../Assets/Images/redChupchick.svg"
 
 
 type RegisterProps = {
@@ -71,7 +72,9 @@ function Register(props: RegisterProps): JSX.Element {
                 <div className="input-flex">
                     <div className="image-upload">
                         <div className="image-thumbnail">
-                            <input type="file" accept="image/*"  {...register("image")} onChange={handleFileChange} required className="upload-input" />
+                            <input type="file" accept="image/*"
+                                {...register("image")} onChange={handleFileChange}
+                                className="upload-input" />
                             {!imageSrc ?
                                 <div className="tn-preview">
                                     <button>Add your photo</button>
@@ -86,7 +89,7 @@ function Register(props: RegisterProps): JSX.Element {
 
                     <div className="input-div">
                         <input type="text"
-                            placeholder={errors.firstName ? `${errors.firstName.message}` : "First Name"}
+                            placeholder="First Name"
                             {...register("firstName", {
                                 required: "First name is required",
                                 minLength: {
@@ -97,42 +100,65 @@ function Register(props: RegisterProps): JSX.Element {
                             className={classNames({ 'invalid-input': errors?.firstName })}
                             onChange={(e) => setValue("firstName", e.target.value)}
                         />
-                            {errors?.firstName && <span className="error-message">{errors.firstName.message}</span>}
+                        {errors?.firstName && <div className="error-message">
+                            <span >{errors.firstName?.message}</span>
+                            <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
+                        </div>}
                     </div>
 
-                    <input type="text"
-                        placeholder={errors.lastName ? errors.lastName.message : "Last Name"}
-                        {...register("lastName", {
-                            required: "Last name name is required",
-                            minLength: {
-                                value: 2,
-                                message: "Last name must be at least 2 characters long",
-                            },
-                        })}
-                        className={classNames({ 'invalid-input': errors?.lastName })}
-                    />
+                    <div className="input-div">
+                        <input type="text"
+                            placeholder="Last Name"
+                            {...register("lastName", {
+                                required: "Last name name is required",
+                                minLength: {
+                                    value: 2,
+                                    message: "Last name must be at least 2 characters long",
+                                },
+                            })}
+                            className={classNames({ 'invalid-input': errors?.lastName })}
+                            onChange={(e) => setValue("lastName", e.target.value)}
+                        />
+                        {errors?.lastName && <div className="error-message">
+                            <span >{errors.lastName?.message}</span>
+                            <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
+                        </div>}
+                    </div>
 
-                    <input type="text"
-                        placeholder={errors.email ? errors.email.message : "Email"}
-                        {...register("email", {
-                            required: "Email is required",
-                        })}
-                        className={classNames({ 'invalid-input': errors?.email })}
-                        value={errors?.email ? "" : undefined} // Clear value if there's an error
-                    />
+                    <div className="input-div">
+                        <input type="text"
+                            placeholder="Email"
+                            {...register("email", {
+                                required: "Email is required",
+                            })}
+                            className={classNames({ 'invalid-input': errors?.email })}
+                            onChange={(e) => setValue("email", e.target.value)}
+                        />
+                        {errors?.email && <div className="error-message">
+                            <span >{errors.email?.message}</span>
+                            <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
+                        </div>}
+                    </div>
 
-                    <input type="password"
+                    <div className="input-div">
+                        <input type="password"
 
-                        placeholder={errors.password ? errors.password.message : "Password"}
-                        {...register("password", {
-                            required: "Password is required",
-                            minLength: {
-                                value: 4,
-                                message: "Password must be at least 4 characters long",
-                            },
-                        })}
-                        className={classNames({ 'invalid-input': errors?.password })}
-                    />
+                            placeholder="Password"
+                            {...register("password", {
+                                required: "Password is required",
+                                minLength: {
+                                    value: 4,
+                                    message: "Password must be at least 4 characters long",
+                                },
+                            })}
+                            className={classNames({ 'invalid-input': errors?.password })}
+                            onChange={(e) => setValue("password", e.target.value)}
+                        />
+                        {errors?.password && <div className="error-message">
+                            <span >{errors.password?.message}</span>
+                            <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
+                        </div>}
+                    </div>
 
                 </div>
 

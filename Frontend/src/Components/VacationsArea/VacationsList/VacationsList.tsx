@@ -12,6 +12,7 @@ import FilterSelector from "../FilterSelector/FilterSelector";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
+import NoVacations from "../NoVacations/NoVacations";
 
 export type Tabs = {
     id: number;
@@ -115,6 +116,7 @@ function VacationsList(): JSX.Element {
             vacationsService.likeVacation(vacId, user.userId);
     }
 
+    if (user && vacations.length === 0 || !vacations) return (<NoVacations />);
 
     if (user?.roleId === 1)
         return (

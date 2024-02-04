@@ -2,8 +2,24 @@ import { Notyf } from "notyf";
 
 class NotificationService {
     private notification = new Notyf({
-        duration: 4000,
-        position: { x: 'center', y: 'top' }
+        duration: 2500,
+        position: { x: 'center', y: 'top' },
+        ripple: true, 
+        types: [
+            {
+              type: 'success',
+              background: '#88C8BC',
+              icon: false, 
+              className: 'custom-notification', 
+            },
+            {
+                type: 'error',
+                background: '#FD676A',
+                icon: false, 
+                className: 'custom-notification', 
+                
+              },
+          ],
     });
 
     public success(message: string): void {

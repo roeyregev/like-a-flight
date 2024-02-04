@@ -4,6 +4,7 @@
     height: 70vh;
     padding: 15px;
     margin-top: 30px;
+    min-width: 300px;
 }
 
 .Analytics>h2 {
@@ -18,8 +19,8 @@
 
 .Analytics .download-button {
     position: absolute;
-    top: 76px;
-    right: 20px;
+    top: 98px;
+    right:  5%;
     background: #88C8BC;
     box-shadow: 0px 3px 4px 0px #E9D7AA;
     display: inline-flex;
@@ -32,3 +33,7 @@
     color: #fff;
     cursor: pointer;
 }
+
+.chart-container .recharts-wrapper rect {
+    margin: 0 5px; /* adjust margin to control the gap between bars */
+  }

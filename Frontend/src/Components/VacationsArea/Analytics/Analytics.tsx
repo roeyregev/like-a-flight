@@ -19,6 +19,8 @@ function Analytics(): JSX.Element {
             .catch(err => notificationService.error(err))
     }, []);
 
+    // const chartDataOptions = {rawData.map(({ count, destination }) => ({ count, destination }))}
+
 
     const arrayToCSV = (data: ChartDataModel[]) => {
         // Add header row with column titles
@@ -52,13 +54,19 @@ function Analytics(): JSX.Element {
                 <span>Download CSV</span>
             </div>
             <div className="chart-container">
-                <BarChart width={400} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))}>
-                    <CartesianGrid strokeDasharray="3 3" />
+                <BarChart width={800} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))} barGap={100}>
+                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis dataKey="destination" /> {/* Use 'destination' as the dataKey */}
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="count" fill="#EB6161" /> {/* Use 'count' as the dataKey */}
+                    <Bar dataKey="count"
+                        fill="#EB6161"
+                        barSize={80}
+                        shape={(props: any) => (
+                            <rect {...props} rx={4} ry={4} />
+                        )}
+                    /> {/* Use 'count' as the dataKey */}
                 </BarChart>
 
             </div>

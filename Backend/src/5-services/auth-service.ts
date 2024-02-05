@@ -23,10 +23,15 @@ class AuthService {
         // Hash password: 
         user.password = cyber.hashPassword(user.password);
 
-        // save image to disk:
-        const imageName = await fileSaver.add(user.image);
-        //update image url:
-        user.userImageUrl = appConfig.appHost + "/api/register/images/" + imageName;
+        let imageName = "";
+
+        //check if user provided image:
+        if (user.image) {
+            // save image to disk:
+            imageName = await fileSaver.add(user.image);
+            //update image url:
+            user.userImageUrl = appConfig.appHost + "/api/register/images/" + imageName;
+        }
 
         //Declare user as regular user
         user.roleId = RoleModel.User

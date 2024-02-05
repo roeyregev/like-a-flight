@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import adminLogo from "../../../Assets/Images/admin-logo.png";
 import logo from "../../../Assets/Images/logo.png";
-import placeholderImage from "../../../Assets/Images/user-image.png";
+import placeholderImage from "../../../Assets/Images/default-user-pic.png";
 import UserModel from "../../../Models/user-model";
 import { authStore } from "../../../Redux/AuthState";
 import authService from "../../../Services/AuthService";
@@ -57,7 +57,7 @@ function Header(): JSX.Element {
                 {user.userImageUrl ? (
                     <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
                 }
-                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser}  />
+                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser} />
             </div>
         )
     };
@@ -68,14 +68,11 @@ function Header(): JSX.Element {
                 <NavLink to={appConfig.homeRoute} className="logo">
                     <img src={logo} alt="logo" />
                 </NavLink>
-
                 <div className="authLinks">
                     <a href="#" >Hello {user.firstName}</a>
-                    {user.userImageUrl ? (
-                        <img onClick={() => setUserPopupOpen(true)} src={user.userImageUrl} className="user-image" />) : (<img src={placeholderImage} className="user-image" />)
-                    }
+                    <img onClick={() => setUserPopupOpen(true)} src={(!user.userImageUrl || user.userImageUrl == "undefined") ? placeholderImage : user.userImageUrl} className="user-image" />
                 </div>
-                <UserPopup  open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser}/>
+                <UserPopup open={userPopupOpen} setOpen={setUserPopupOpen} user={user} logout={logout} deleteUser={deleteUser} />
             </div>
         )
     };

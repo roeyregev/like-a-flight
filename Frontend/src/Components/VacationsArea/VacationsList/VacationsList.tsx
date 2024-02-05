@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import Lottie from "react-lottie";
 import { NavLink, useNavigate } from "react-router-dom";
+import loader from "../../../Assets/Animations/loader.json";
 import largePlusIcon from "../../../Assets/Images/plus-icon-large.svg";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
@@ -9,12 +11,10 @@ import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
 import AdminVacationCard from "../AdminVacationCard/AdminVacationCard";
 import FilterSelector from "../FilterSelector/FilterSelector";
+import NoVacations from "../NoVacations/NoVacations";
 import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
-import NoVacations from "../NoVacations/NoVacations";
-import loader from "../../../Assets/Animations/loader.json"
-import Lottie from "react-lottie";
 
 export type Tabs = {
     id: number;

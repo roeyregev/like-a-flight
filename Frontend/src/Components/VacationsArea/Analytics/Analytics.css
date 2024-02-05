@@ -33,3 +33,9 @@
     color: #fff;
     cursor: pointer;
 }
+
+.Analytics .loader {
+    width: 180px;
+    margin-inline: auto;
+    margin-top: 200px;
+}

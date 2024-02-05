@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import Lottie from "react-lottie";
+import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import loader from "../../../Assets/Animations/loader.json";
 import downloadIcon from "../../../Assets/Images/download-icon.svg";
 import ChartDataModel from "../../../Models/chart-data-model";
 import notificationService from "../../../Services/NotificationService";
@@ -9,17 +11,20 @@ import "./Analytics.css";
 function Analytics(): JSX.Element {
 
     const [rawData, setRawData] = useState<ChartDataModel[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         vacationsService.getChartData()
             .then(dbChartData => {
                 setRawData(dbChartData);
+                setLoading(false);
                 // console.log(dbChartData);
             })
-            .catch(err => notificationService.error(err))
+            .catch(err => {
+                notificationService.error(err)
+                setLoading(false);
+            })
     }, []);
-
-    // const chartDataOptions = {rawData.map(({ count, destination }) => ({ count, destination }))}
 
 
     const arrayToCSV = (data: ChartDataModel[]) => {
@@ -45,6 +50,11 @@ function Analytics(): JSX.Element {
         document.body.removeChild(link);
     };
 
+    const loaderOptions = {
+        animationData: loader,
+        loop: true,
+        autoplay: true,
+    }
 
     return (
         <div className="Analytics">
@@ -53,23 +63,24 @@ function Analytics(): JSX.Element {
                 <img src={downloadIcon} alt="download-button" />
                 <span>Download CSV</span>
             </div>
-            <div className="chart-container">
-                <BarChart width={800} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))} barGap={100}>
-                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                    <XAxis dataKey="destination" /> {/* Use 'destination' as the dataKey */}
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="count"
-                        fill="#EB6161"
-                        barSize={80}
-                        shape={(props: any) => (
-                            <rect {...props} rx={4} ry={4} />
-                        )}
-                    /> {/* Use 'count' as the dataKey */}
-                </BarChart>
 
-            </div>
+            {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
+                <div className="chart-container">
+                    <BarChart width={800} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))} barGap={100}>
+                        {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                        <XAxis dataKey="destination" /> {/* Use 'destination' as the dataKey */}
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="count"
+                            fill="#EB6161"
+                            barSize={80}
+                            shape={(props: any) => (
+                                <rect {...props} rx={4} ry={4} />
+                            )}
+                        /> {/* Use 'count' as the dataKey */}
+                    </BarChart>
+                </div>}
         </div>
     );
 }

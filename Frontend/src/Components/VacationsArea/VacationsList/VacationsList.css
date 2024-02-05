@@ -46,3 +46,9 @@
     max-width: 32px;
     max-height: 32px;
 }
+
+.VacationsList .loader {
+    width: 180px;
+    margin-inline: auto;
+    margin-top: 50px;
+}

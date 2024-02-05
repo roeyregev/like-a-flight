@@ -13,6 +13,8 @@ import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
 import NoVacations from "../NoVacations/NoVacations";
+import loader from "../../../Assets/Animations/loader.json"
+import Lottie from "react-lottie";
 
 export type Tabs = {
     id: number;
@@ -23,6 +25,7 @@ export type Tabs = {
 function VacationsList(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
     const [vacations, setVacations] = useState<VacationModel[]>([])
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     //Get user state
@@ -99,8 +102,13 @@ function VacationsList(): JSX.Element {
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
                 console.log(dbVacations);
+                setLoading(false);
             })
-            .catch(err => notificationService.error(err))
+            .catch(err => {
+                notificationService.error(err);
+                setLoading(false);
+            });
+
     }, [currentPage, user]);
 
 
@@ -116,7 +124,13 @@ function VacationsList(): JSX.Element {
             vacationsService.likeVacation(vacId, user.userId);
     }
 
-    if (user && vacations.length === 0 || !vacations) return (<NoVacations />);
+    const loaderOptions = {
+        animationData: loader,
+        loop: true,
+        autoplay: true,
+    }
+
+    if ((user && vacations.length === 0 || !vacations) && !loading) return (<NoVacations />);
 
     if (user?.roleId === 1)
         return (
@@ -127,9 +141,11 @@ function VacationsList(): JSX.Element {
                     <h3>Add-A-Flight</h3>
                 </NavLink>
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
-                <div className="cards-list">
-                    {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user} />)}
-                </div>
+
+                {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
+                    <div className="cards-list">
+                        {items.map(v => <AdminVacationCard key={v.vacationId} vacation={v} setVacations={setVacations} vacations={vacations} user={user} />)}
+                    </div>}
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
             </div>
         );
@@ -140,9 +156,11 @@ function VacationsList(): JSX.Element {
                 <h2> Our Flights</h2>
                 <FilterSelector tabs={tabs} handleClickedTab={handleClickedTab} />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
-                <div className="cards-list">
-                    {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />)}
-                </div>
+
+                {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
+                    <div className="cards-list">
+                        {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />)}
+                    </div>}
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
             </div>
         );

@@ -5,13 +5,13 @@ import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import buttonPlusIconWhite from "../../../Assets/Images/change-photo-plus-icon-.svg";
 import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg";
+import redChupchik from "../../../Assets/Images/redChupchick.svg";
 import UserModel from "../../../Models/user-model";
 import authService from "../../../Services/AuthService";
 import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./Register.css";
-import redChupchik from "../../../Assets/Images/redChupchick.svg"
 
 
 type RegisterProps = {

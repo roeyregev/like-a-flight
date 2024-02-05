@@ -110,6 +110,7 @@ function AddVacation(): JSX.Element {
                 <div className="input-div">
                     <input type="number"
                         placeholder="Price ($)"
+                        step="0.1"
                         {...register("price", {
                             required: "Price is required",
                             min: {

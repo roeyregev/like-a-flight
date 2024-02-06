@@ -34,17 +34,17 @@ router.get("/vacations/user/:userId", verifyToken, async (request: Request, resp
 
 
 //GET nine vacations
-router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, response: Response, next: NextFunction) => {
-    try {
-        const pageNumber = +request.params.pageNumber;
-        const userId = +request.params.userId;
-        const vacations = await vacationsService.getNineVacations(pageNumber, userId);
-        response.json(vacations);
-    }
-    catch (err: any) {
-        next(err);
-    }
-});
+// router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, response: Response, next: NextFunction) => {
+//     try {
+//         const pageNumber = +request.params.pageNumber;
+//         const userId = +request.params.userId;
+//         const vacations = await vacationsService.getNineVacations(pageNumber, userId);
+//         response.json(vacations);
+//     }
+//     catch (err: any) {
+//         next(err);
+//     }
+// });
 
 
 

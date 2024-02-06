@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import loader from "../../../Assets/Animations/loader.json";
 import largePlusIcon from "../../../Assets/Images/plus-icon-large.svg";
 import UserModel from "../../../Models/user-model";
@@ -126,6 +126,7 @@ function VacationsList(): JSX.Element {
         loop: true,
         autoplay: true,
     }
+
 
     if ((user && vacations.length === 0 || !vacations) && !loading) return (<NoVacations />);
 

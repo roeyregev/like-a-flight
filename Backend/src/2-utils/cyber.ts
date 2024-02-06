@@ -3,6 +3,7 @@ import RoleModel from "../3-models/role-model";
 import UserModel from "../3-models/user-model";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import { error } from "console";
 // import Cryptr from "cryptr";
 
 class Cyber {
@@ -10,7 +11,7 @@ class Cyber {
     private secretKey = "Like-A-Flight-Secret-Key";
 
     public getNewToken(user: UserModel): string {
-        
+
         // Never return passwords to frontend:
         delete user.password;
 
@@ -37,6 +38,7 @@ class Cyber {
             jwt.verify(token, this.secretKey);
         }
         catch (err: any) {
+            console.log(err.message)
             throw new Unauthorized(err.message);
         }
     }

@@ -7,16 +7,25 @@ import Analytics from "../../VacationsArea/Analytics/Analytics";
 import UpdateVacation from "../../VacationsArea/UpdateVacation/UpdateVacation";
 import VacationsList from "../../VacationsArea/VacationsList/VacationsList";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import { jwtDecode } from "jwt-decode";
 
+const isExpired = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return false
+
+    const expirationTime = jwtDecode(token).exp;
+    const now = new Date().getTime() / 1000;
+    return now > expirationTime;
+}
 
 function PrivateRoute({ element }: any): JSX.Element {
     console.log('auth: ', authStore.getState().user)
-    return authStore.getState().user ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showPopup: true }} replace />);
+    return authStore.getState().user && !isExpired() ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showPopup: true }} replace />);
 }
 
 function AdminRoute({ element }: any): JSX.Element {
     console.log('auth: ', authStore.getState().user)
-    return authStore.getState().user && authStore.getState().user.roleId === 1 ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showAdminPopup: true }} replace />);
+    return authStore.getState().user && !isExpired() && authStore.getState().user.roleId === 1 ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showAdminPopup: true }} replace />);
 }
 
 function Routing(): JSX.Element {

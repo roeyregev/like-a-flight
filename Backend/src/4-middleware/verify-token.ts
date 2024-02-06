@@ -6,7 +6,6 @@ function verifyToken(request: Request, response: Response, next: NextFunction): 
 
     // Take authorization header: 
     const authorization = request.header("authorization"); // "Bearer the-token"
-
     // Extract the token: 
     const token = authorization?.substring(7);
 

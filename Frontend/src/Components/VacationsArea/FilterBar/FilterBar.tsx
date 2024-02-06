@@ -1,8 +1,6 @@
 import classNames from "classnames";
-import { useState } from "react";
-import "./FilterBar.css";
-import vacationsService from "../../../Services/VacationsService";
 import { Tabs } from "../VacationsList/VacationsList";
+import "./FilterBar.css";
 
 type FiltersBarProps = {
     tabs: Tabs[]

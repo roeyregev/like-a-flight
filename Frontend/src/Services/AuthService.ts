@@ -27,6 +27,7 @@ class AuthService {
 
     public logout(): void {
         const action: AuthAction = { type: AuthActionTypes.Logout };
+        
         authStore.dispatch(action);
     }
 

@@ -35,11 +35,12 @@ export interface AuthAction {
 function authReducer(currentState = new AuthState(), action: AuthAction): AuthState {
     const newState = { ...currentState };
 
+    
     switch (action.type) {
         case AuthActionTypes.Register:
         case AuthActionTypes.Login:
             // Payload is the token
-            console.log(jwtDecode(action.payload));
+            // console.log(jwtDecode(action.payload));
             newState.user = jwtDecode<{ user: UserModel }>(action.payload).user;
             newState.token = action.payload;
             localStorage.setItem(`token`, newState.token);

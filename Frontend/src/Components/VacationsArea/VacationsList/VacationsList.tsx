@@ -26,7 +26,6 @@ function VacationsList(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
     const [vacations, setVacations] = useState<VacationModel[]>([])
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     //Get user state
     useEffect(() => {
@@ -101,14 +100,12 @@ function VacationsList(): JSX.Element {
                 setVacations(dbVacations);
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
-                console.log(dbVacations);
                 setLoading(false);
             })
             .catch(err => {
                 notificationService.error(err);
                 setLoading(false);
             });
-
     }, [currentPage, user]);
 
 

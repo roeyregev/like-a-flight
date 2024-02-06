@@ -18,20 +18,13 @@ class AppConfig {
     public readonly loginRoute: string = "/login/";
 }
 
-// // Singleton
-// const appConfig = new AppConfig();
-
-// export default appConfig;
-
 class DevelopmentConfig extends AppConfig {
-
     public constructor() {
         super("http://localhost:4000");
     }
 }
 
 class ProductionConfig extends AppConfig {
-
     public constructor() {
         super("https://like-a-flight.com"); // The real website.
     }

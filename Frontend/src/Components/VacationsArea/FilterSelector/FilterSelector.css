@@ -7,6 +7,7 @@
     padding: 0 6px;
     border-radius: 4px;
     width: clamp(200px, 90%, 400px);
+    cursor: pointer;
 }
 
 .FilterSelector .select-bar {

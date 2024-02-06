@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin: 10px auto;
+    margin: 30px auto;
 }
 
 .PagesNavbar button {
@@ -15,12 +15,11 @@
     border-radius: 50%;
     border: none;
     background: rgba(251, 175, 175, 0.20);
+    cursor: pointer;
 }
 
-.PagesNavbar .smallBtn {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
+.PagesNavbar button:hover {
+    background: rgba(255, 213, 189, 0.4);
 }
 
 .PagesNavbar .right {

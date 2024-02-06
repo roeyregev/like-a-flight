@@ -19,6 +19,10 @@
     padding: 4px 10px;
 }
 
+.Menu .menu-icon:hover {
+    background: rgba(255, 213, 189, 0.4);
+}
+
 .Menu .menu-icon .right {
     scale: -100%;
 }

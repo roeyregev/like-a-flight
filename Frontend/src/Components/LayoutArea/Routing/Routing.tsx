@@ -1,5 +1,7 @@
+import { jwtDecode } from "jwt-decode";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { authStore } from "../../../Redux/AuthState";
+import authService from "../../../Services/AuthService";
 import appConfig from "../../../Utils/AppConfig";
 import Home from "../../HomeArea/Home/Home";
 import AddVacation from "../../VacationsArea/AddVacation/AddVacation";
@@ -7,7 +9,6 @@ import Analytics from "../../VacationsArea/Analytics/Analytics";
 import UpdateVacation from "../../VacationsArea/UpdateVacation/UpdateVacation";
 import VacationsList from "../../VacationsArea/VacationsList/VacationsList";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { jwtDecode } from "jwt-decode";
 
 const isExpired = () => {
     const token = localStorage.getItem("token");
@@ -15,7 +16,11 @@ const isExpired = () => {
 
     const expirationTime = jwtDecode(token).exp;
     const now = new Date().getTime() / 1000;
-    return now > expirationTime;
+
+    if (now > expirationTime) {
+        authService.logout();
+        return true
+    }
 }
 
 function PrivateRoute({ element }: any): JSX.Element {
@@ -38,20 +43,16 @@ function Routing(): JSX.Element {
                 <Route path={appConfig.homeRoute} element={<Home />} />
 
                 {/* List Route */}
-                {/* <Route path={appConfig.vacationsRoute} element={<VacationsList />} /> */}
                 <Route path={appConfig.vacationsRoute} element={<PrivateRoute element={<VacationsList />} />} />
 
-                {/* Add Route */}
+                {/* Add Flight Route */}
                 <Route path={appConfig.addVacationRoute} element={<AdminRoute element={<AddVacation />} />} />
-                {/* <Route path={appConfig.addVacationRoute} element={<AddVacation />} /> */}
 
-                {/* Edit Route */}
+                {/* Edit Flight Route */}
                 <Route path={appConfig.editVacationRoute + ":vacationId"} element={<AdminRoute element={<UpdateVacation />} />} />
-                {/* <Route path={appConfig.editVacationRoute + ":vacationId"} element={<UpdateVacation />} /> */}
 
                 {/* Analytics Route */}
                 <Route path={appConfig.analyticsRoute} element={<AdminRoute element={<Analytics />} />} />
-                {/* <Route path={appConfig.analyticsRoute} element={<Analytics />} /> */}
 
                 {/* Default Route */}
                 <Route path="/" element={<Navigate to="/home" />} />

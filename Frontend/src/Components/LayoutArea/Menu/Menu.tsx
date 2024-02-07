@@ -26,6 +26,24 @@ function Menu(): JSX.Element {
     }, [])
 
 
+    if (user && user.roleId === 1 && (location.pathname == "/home/" || location.pathname == "/home"))
+        return (
+            <div className="Menu right-flex">
+                 <NavLink to={appConfig.vacationsRoute}>
+                    <div className="menu-icon">
+                        <img src={flightIcon} alt="flights-icon" />
+                        <img src={smallArrow} alt="small-arrow" className="right" />
+                    </div>
+                </NavLink>
+                <NavLink to={appConfig.analyticsRoute}>
+                    <div className="menu-icon">
+                        <img src={analyticsIcon} alt="analytics-icon" />
+                        <img src={smallArrow} alt="small-arrow" className="right" />
+                    </div>
+                </NavLink>
+            </div>
+        );
+
     if (user && user.roleId === 1 && (location.pathname == "/vacations/" || location.pathname == "/vacations"))
         return (
             <div className="Menu space-flex">

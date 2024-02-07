@@ -15,7 +15,6 @@ type UserPopupProps = {
     user: UserModel
     logout: Function
     deleteUser: Function
-    // className: string
 }
 
 function UserPopup(props: UserPopupProps): JSX.Element {

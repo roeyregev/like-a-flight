@@ -70,7 +70,6 @@ function VacationCard(props: VacationProps): JSX.Element {
                     {props.vacation.likes}</div>
                 <div className="price">$ {props.vacation.price}</div>
                 <img src={props.vacation.imageUrl} className="destination-pic" />
-
                 <div className={classNames("like-btn", { "like-on": props.vacation.isFollowing === 1, "like-off": props.vacation.isFollowing === 0 })} onClick={handleClick}>
                     <Lottie options={likeAnimationOptions} />
                 </div>

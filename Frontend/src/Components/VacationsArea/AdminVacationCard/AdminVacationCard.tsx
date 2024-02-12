@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import deleteBtn from "../../../Assets/Images/Delete-btn.png";
+import editBtn from "../../../Assets/Images/Edit-btn.png";
+import greenHeart from "../../../Assets/Images/green-heart.svg";
 import UserModel from "../../../Models/user-model";
 import VacationModel from "../../../Models/vacation-model";
 import notificationService from "../../../Services/NotificationService";
@@ -7,9 +10,6 @@ import vacationsService from "../../../Services/VacationsService";
 import appConfig from "../../../Utils/AppConfig";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 import "./AdminVacationCard.css";
-import greenHeart from "../../../Assets/Images/green-heart.svg"
-import deleteBtn from "../../../Assets/Images/Delete-btn.png"
-import editBtn from "../../../Assets/Images/Edit-btn.png"
 
 type VacationProps = {
     key: number
@@ -34,10 +34,7 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
         return dateObject.toLocaleString('en-GB', options);
     }
 
-
-
-    // Delete flow:
-
+    // ------------------- Delete flow ------------------- 
     function openConfirmation() {
         setShowConfirmationPopup(true);
     }
@@ -53,9 +50,7 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
     function handleCancelDelete() {
         setShowConfirmationPopup(false);
     }
-
-    //------------------------------------------------------------------------------------------------
-
+    // ------------------- End of delete flow ------------------- 
 
     return (
         <div className="AdminVacationCard">
@@ -89,7 +84,6 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
                 </div>
                 <p>{props.vacation.description}</p>
             </div>
-
         </div>
     );
 }

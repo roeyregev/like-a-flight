@@ -25,8 +25,6 @@ function AddVacation(): JSX.Element {
 
     async function send(vacation: VacationModel) {
         try {
-            console.log(vacation);
-
             //validate dates logic:
             if (vacation.endDate < vacation.startDate) {
                 throw new Error("End date can't be earlier than Start date");
@@ -53,9 +51,7 @@ function AddVacation(): JSX.Element {
         <div className="AddVacation">
             <div className="light-bg"></div>
             <h2> Add a Flight</h2>
-
             <form onSubmit={handleSubmit(send, onError)}>
-
                 <div className="input-div">
                     <input placeholder="Destination"
                         {...register("destination", {
@@ -73,9 +69,6 @@ function AddVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
-
-
                 <div className="dates-inputs">
                     <div className="input-div">
                         <input type="date"
@@ -104,9 +97,7 @@ function AddVacation(): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
                 </div>
-
                 <div className="input-div">
                     <input type="number"
                         placeholder="Price ($)"
@@ -130,7 +121,6 @@ function AddVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
                 <div className="input-div">
                     <textarea placeholder="Description"
                         cols={30} rows={10}
@@ -153,8 +143,6 @@ function AddVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
-
                 <div className="input-div">
                     <div className="image-upload">
                         <label>Image:</label>
@@ -183,7 +171,6 @@ function AddVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
                 <div className="btns-flex">
                     <button type="submit">Add Flight</button>
                     <button type="button" onClick={() => navigate("/vacations")}>Cancel</button>

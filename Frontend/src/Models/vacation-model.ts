@@ -1,4 +1,3 @@
-
 class VacationModel {
     public vacationId: number;
     public destination: string;
@@ -13,4 +12,3 @@ class VacationModel {
 }
 
 export default VacationModel
-

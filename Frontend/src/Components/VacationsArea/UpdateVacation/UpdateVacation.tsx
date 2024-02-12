@@ -1,14 +1,14 @@
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import buttonPlusIconWhite from "../../../Assets/Images/change-photo-plus-icon-.svg";
+import redChupchik from "../../../Assets/Images/redChupchick.svg";
 import VacationModel from "../../../Models/vacation-model";
 import notificationService from "../../../Services/NotificationService";
 import vacationsService from "../../../Services/VacationsService";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./UpdateVacation.css";
-import classNames from "classnames";
-import redChupchik from "../../../Assets/Images/redChupchick.svg";
 
 function UpdateVacation(): JSX.Element {
 
@@ -16,21 +16,14 @@ function UpdateVacation(): JSX.Element {
     const navigate = useNavigate();
     const [imageFile, setImageFile] = useState<File | null>();
     const [imgUrl, setImageUrl] = useState<string>("");
-
     const params = useParams();
     const id = +params.vacationId;
-
 
     useEffect(() => {
         vacationsService.getOneVacation(id)
             .then(vacation => {
-
-                console.log(vacation);
-
                 const startDate = vacation.startDate.toString().slice(0, 10);
                 const endDate = vacation.endDate.toString().slice(0, 10);
-                console.log(startDate);
-
                 setValue("destination", vacation.destination);
                 setValue("startDate", startDate);
                 setValue("endDate", endDate);
@@ -38,7 +31,6 @@ function UpdateVacation(): JSX.Element {
                 setValue("description", vacation.description);
                 setValue("imageUrl", vacation.imageUrl);
                 setImageUrl(vacation.imageUrl);
-                console.log("DONE");
             })
             .catch(err => notificationService.error(err))
     }, []);
@@ -53,7 +45,6 @@ function UpdateVacation(): JSX.Element {
 
     async function update(vacation: VacationModel) {
         try {
-            console.log(vacation);
             vacation.vacationId = id;
 
             //validate dates logic:
@@ -101,7 +92,6 @@ function UpdateVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
                 <div className="dates-inputs">
                     <div className="input-div">
                         <input type="date"
@@ -131,7 +121,6 @@ function UpdateVacation(): JSX.Element {
                         </div>}
                     </div>
                 </div>
-
                 <div className="input-div">
                     <input type="number"
                         placeholder="Price ($)"
@@ -155,8 +144,6 @@ function UpdateVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
-
                 <div className="input-div">
                     <textarea placeholder="Description"
                         cols={30} rows={10}
@@ -179,8 +166,6 @@ function UpdateVacation(): JSX.Element {
                         <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                     </div>}
                 </div>
-
-
                 <div className="image-upload">
                     <label>Image:</label>
                     <div className="image-thumbnail">
@@ -205,8 +190,6 @@ function UpdateVacation(): JSX.Element {
                         }
                     </div>
                 </div>
-
-
                 <div className="btns-flex">
                     <button type="submit">Update Flight</button>
                     <button type="button" onClick={() => navigate("/vacations")}>Cancel</button>

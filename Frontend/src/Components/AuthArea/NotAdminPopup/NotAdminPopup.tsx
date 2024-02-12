@@ -2,7 +2,6 @@ import ReactDOM from "react-dom";
 import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg";
 import "./NotAdminPopup.css";
 
-
 type popupProps = {
     closePopup: Function
 }

@@ -9,15 +9,15 @@ import verifyAdmin from "../4-middleware/verify-admin";
 const router = express.Router();
 
 //GET vacations meta-data:
-router.get("/vacations/data", async (request: Request, response: Response, next: NextFunction) => {
-    try {
-        const vacationsData = await vacationsService.getVacationsData();
-        response.json(vacationsData);
-    }
-    catch (err: any) {
-        next(err);
-    }
-});
+// router.get("/vacations/data", async (request: Request, response: Response, next: NextFunction) => {
+//     try {
+//         const vacationsData = await vacationsService.getVacationsData();
+//         response.json(vacationsData);
+//     }
+//     catch (err: any) {
+//         next(err);
+//     }
+// });
 
 
 //GET all vacations
@@ -115,19 +115,14 @@ router.get("/vacations/images/:imageName", async (request: Request, response: Re
         next(err);
     }
 });
-//http://localhost:4000/api/register/images/e5af5ae5-5a34-4e44-a8a4-f2fb2ff3bc51.png
 
 // PUT http://localhost:4000/api/vacations/:vacationId
 router.put("/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
-        console.log(request.body)
         const vacationId = +request.params.vacationId
-
         request.body.vacationId = vacationId;
         request.body.image = request.files?.image;
-
         const vacation = new VacationModel(request.body);
-
         const updatedVacation = await vacationsService.updateVacation(vacation);
         response.json(updatedVacation);
     }

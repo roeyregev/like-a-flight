@@ -3,10 +3,10 @@ import appConfig from "./app-config";
 
 // Creating a connection object:
 const connection = mysql.createPool({
-    host: appConfig.mysqlHost, // Database computer address
-    user: appConfig.mysqlUser, // Database username
-    password: appConfig.mysqlPassword, // database password
-    database: appConfig.mysqlDatabase // database name
+    host: appConfig.mysqlHost, 
+    user: appConfig.mysqlUser, 
+    password: appConfig.mysqlPassword, 
+    database: appConfig.mysqlDatabase
 });
 
 function execute(sql: string, values?: any[]): Promise<any> {

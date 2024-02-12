@@ -21,8 +21,7 @@ function UserPopup(props: UserPopupProps): JSX.Element {
     const navigate = useNavigate()
     const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
-    // Delete flow:
-
+    //--------- Delete flow ------------------------------
     function openConfirmation() {
         setShowConfirmationPopup(true);
     }
@@ -40,8 +39,8 @@ function UserPopup(props: UserPopupProps): JSX.Element {
         setShowConfirmationPopup(false);
         props.setOpen(false);
     }
+    //--------- end of delete flow ------------------------------
 
-    //------------------------------------------------------------------------------------------------
 
     if (!props.open) return null
 
@@ -50,7 +49,6 @@ function UserPopup(props: UserPopupProps): JSX.Element {
             {showConfirmationPopup && (
                 <ConfirmationPopup openConfirmation={openConfirmation} handleConfirmDelete={handleConfirmDelete} handleCancelDelete={handleCancelDelete} />
             )}
-
             <div className="background-user-popup" onClick={() => props.setOpen(false)}></div>
             <div className="UserPopup" >
                 <div className="user-popup-main">

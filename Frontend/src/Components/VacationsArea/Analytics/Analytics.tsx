@@ -18,14 +18,12 @@ function Analytics(): JSX.Element {
             .then(dbChartData => {
                 setRawData(dbChartData);
                 setLoading(false);
-                // console.log(dbChartData);
             })
             .catch(err => {
                 notificationService.error(err)
                 setLoading(false);
             })
     }, []);
-
 
     const arrayToCSV = (data: ChartDataModel[]) => {
         // Add header row with column titles
@@ -40,7 +38,6 @@ function Analytics(): JSX.Element {
         return `data:text/csv;charset=utf-8,${encodeURIComponent(csvContent)}`;
     };
 
-
     const downloadCSV = (data: ChartDataModel[], filename: string) => {
         const link = document.createElement('a');
         link.href = arrayToCSV(data);
@@ -50,6 +47,7 @@ function Analytics(): JSX.Element {
         document.body.removeChild(link);
     };
 
+    //Loader animation settings:
     const loaderOptions = {
         animationData: loader,
         loop: true,
@@ -67,18 +65,12 @@ function Analytics(): JSX.Element {
             {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
                 <div className="chart-container">
                     <BarChart width={800} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))} barGap={100}>
-                        {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                        <XAxis dataKey="destination" /> {/* Use 'destination' as the dataKey */}
+                        <XAxis dataKey="destination" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="count"
-                            fill="#EB6161"
-                            barSize={80}
-                            shape={(props: any) => (
-                                <rect {...props} rx={4} ry={4} />
-                            )}
-                        /> {/* Use 'count' as the dataKey */}
+                        <Bar dataKey="count" fill="#EB6161" barSize={80} radius={[4, 4, 0, 0]} />
+
                     </BarChart>
                 </div>}
         </div>

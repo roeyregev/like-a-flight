@@ -1,22 +1,25 @@
 import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 import filterIcon from "../../../Assets/Images/filter-icon.svg";
-import { Tabs } from "../VacationsList/VacationsList";
+import { Filters } from "../VacationsList/VacationsList";
 import "./FilterSelector.css";
+import VacationModel from '../../../Models/vacation-model';
 
 type FiltersBarProps = {
-    tabs: Tabs[]
-    handleClickedTab: Function
+    filters: Filters[]
+    handleSelectedFilter: Function
 }
 
 function FilterSelector(props: FiltersBarProps): JSX.Element {
 
-    const tabs = [
+    //"react-select" selection options:
+    const filters = [
         { value: 1, label: "Show all flights" },
         { value: 2, label: "Show my Liked flights" },
         { value: 3, label: "Show current flights" },
         { value: 4, label: "Show future flights" },
     ]
 
+    //"react-select" select bar styles:
     const styles: StylesConfig<{ value: number; label: string }, false, any> = {
         control: (provided: CSSObjectWithLabel, state: any) => ({
             ...provided,
@@ -45,23 +48,25 @@ function FilterSelector(props: FiltersBarProps): JSX.Element {
             ...base,
             color: '#FBAFAF',
             ':hover': {
-                color: '#EC8A8A', // Change this to the desired hover color
+                color: '#EC8A8A',
             },
             ':active': {
-                color: '#EC8A8A', // Change this to the desired active (clicked) color
+                color: '#EC8A8A',
             },
         }),
     };
 
-    function handleChange2(selectedOption: any): void {
-        props.handleClickedTab(selectedOption.value);
+    //Handle filter selection:
+    function handleChange(selectedOption: any): void {
+        console.log(selectedOption.value);
+        props.handleSelectedFilter(selectedOption.value);
     }
 
     return (
         <div className="FilterSelector">
             <div className="filter-flex">
                 <img src={filterIcon} alt="filter-icon" />
-                <Select options={tabs} onChange={handleChange2} defaultValue={tabs[0]} styles={styles} isSearchable={false} className="select-bar" />
+                <Select options={filters} onChange={handleChange} defaultValue={filters[0]} styles={styles} isSearchable={false} className="select-bar" />
             </div>
         </div >
     );

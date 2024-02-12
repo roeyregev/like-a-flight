@@ -13,7 +13,6 @@ import appConfig from "../../../Utils/AppConfig";
 import useImagePreview from "../../../Utils/UseImagePreview";
 import "./Register.css";
 
-
 type RegisterProps = {
     open: boolean
     onClose: any
@@ -65,10 +64,8 @@ function Register(props: RegisterProps): JSX.Element {
         <>
             <div className="background-black"></div>
             <form className="Register" onSubmit={handleSubmit(send, onError)}>
-
                 <h2>Register</h2>
                 <button className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
-
                 <div className="input-flex">
                     <div className="image-upload">
                         <div className="image-thumbnail">
@@ -86,7 +83,6 @@ function Register(props: RegisterProps): JSX.Element {
                             }
                         </div>
                     </div>
-
                     <div className="input-div">
                         <input type="text"
                             placeholder="First Name"
@@ -105,7 +101,6 @@ function Register(props: RegisterProps): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
                     <div className="input-div">
                         <input type="text"
                             placeholder="Last Name"
@@ -124,7 +119,6 @@ function Register(props: RegisterProps): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
                     <div className="input-div">
                         <input type="text"
                             placeholder="Email"
@@ -139,10 +133,8 @@ function Register(props: RegisterProps): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
                     <div className="input-div">
                         <input type="password"
-
                             placeholder="Password"
                             {...register("password", {
                                 required: "Password is required",
@@ -159,21 +151,15 @@ function Register(props: RegisterProps): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
                 </div>
-
                 <button className="main-btn">Enter</button>
-
                 <div className="login-footer">
                     <p>Already a Member?</p>
                     <button className="footer-btn" onClick={props.switchToLogin}>Login</button>
                 </div>
-
             </form>
         </>,
-
         document.getElementById("portal")
-
     );
 }
 

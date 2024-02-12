@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import StatusCode from "../3-models/status-codes";
 
 // Catch-all Middleware:

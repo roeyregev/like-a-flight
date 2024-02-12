@@ -132,18 +132,6 @@
     }
 }
 
-@keyframes popupFadeOut {
-    0% {
-        opacity: 1;
-        transform: translate(0, 10px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(0, 0);
-    }
-}
-
 @keyframes bgFadeIn {
     0% {
         opacity: 0;

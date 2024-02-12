@@ -16,7 +16,6 @@ function NotLoggedInPopup(props: popupProps): JSX.Element {
                 <h2>You have be logged-in</h2>
                 <div className="btns-flex">
                     <button onClick={() => props.closePopup()}>Got it</button>
-                    {/* <button>Register</button> */}
                 </div>
             </div>
         </>,

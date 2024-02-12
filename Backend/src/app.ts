@@ -1,15 +1,13 @@
 import cors from "cors";
 import express from "express";
 import expressFileUpload from "express-fileupload";
+import path from "path";
+import { fileSaver } from "uploaded-file-saver";
 import appConfig from "./2-utils/app-config";
 import catchAll from "./4-middleware/catch-all";
 import routeNotFound from "./4-middleware/route-not-found";
-import vacationController from "./6-controllers/vacations-controller";
-import { fileSaver } from "uploaded-file-saver";
-import path from "path";
 import authController from "./6-controllers/auth-controller";
-
-// Alt+Shift+O
+import vacationController from "./6-controllers/vacations-controller";
 
 // Creating the server: 
 const server = express();
@@ -38,7 +36,3 @@ server.use(catchAll);
 
 // Running the server: 
 server.listen(appConfig.port, () => console.log("Listening on http://localhost:" + appConfig.port));
-// function expressFileUpload(): any {
-//     throw new Error("Function not implemented.");
-// }
-

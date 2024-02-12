@@ -12,16 +12,12 @@ import "./Menu.css";
 function Menu(): JSX.Element {
     const [user, setUser] = useState<UserModel>()
     const location = useLocation();
-    console.log(location.pathname);
 
     useEffect(() => {
         setUser(authStore.getState().user);
-
         const unsubscribe = authStore.subscribe(() => {
             setUser(authStore.getState().user);
-            console.log(user);
         });
-
         return unsubscribe;
     }, [])
 
@@ -29,7 +25,7 @@ function Menu(): JSX.Element {
     if (user && user.roleId === 1 && (location.pathname == "/home/" || location.pathname == "/home"))
         return (
             <div className="Menu right-flex">
-                 <NavLink to={appConfig.vacationsRoute}>
+                <NavLink to={appConfig.vacationsRoute}>
                     <div className="menu-icon">
                         <img src={flightIcon} alt="flights-icon" />
                         <img src={smallArrow} alt="small-arrow" className="right" />
@@ -62,7 +58,6 @@ function Menu(): JSX.Element {
             </div>
         );
 
-
     if (user && user.roleId === 1 && location.pathname == "/vacations/analytics/")
         return (
             <div className="Menu left-flex">
@@ -81,7 +76,7 @@ function Menu(): JSX.Element {
             </div>
         );
 
-    if (user && user.roleId === 1 && (location.pathname == "/vacations/add/" ||location.pathname == "/vacations/edit/" ))
+    if (user && user.roleId === 1 && (location.pathname == "/vacations/add/" || location.pathname == "/vacations/edit/"))
         return (
             <div className="Menu left-flex">
                 <NavLink to={appConfig.vacationsRoute}>
@@ -92,7 +87,6 @@ function Menu(): JSX.Element {
                 </NavLink>
             </div>
         );
-
 
     if (user && user.roleId === 2 && location.pathname == "/vacations/")
         return (
@@ -105,7 +99,6 @@ function Menu(): JSX.Element {
                 </NavLink>
             </div>
         );
-
 
     if (location.pathname == "/home" || location.pathname == "/home/")
         return (

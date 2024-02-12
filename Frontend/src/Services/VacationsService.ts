@@ -1,7 +1,7 @@
 import axios from "axios";
+import ChartDataModel from "../Models/chart-data-model";
 import VacationModel from "../Models/vacation-model";
 import appConfig from "../Utils/AppConfig";
-import ChartDataModel from "../Models/chart-data-model";
 
 interface VacationData {
     count: number;
@@ -15,11 +15,11 @@ class VacationsService {
         return vacations;
     }
 
-    public async getNineVacations(pageNumber: number = 1, userId: number): Promise<VacationModel[]> {
-        const response = await axios.get(appConfig.vacationsUrl + "pages/" + pageNumber + "/" + userId);
-        const vacations = response.data;
-        return vacations;
-    }
+    // public async getNineVacations(pageNumber: number = 1, userId: number): Promise<VacationModel[]> {
+    //     const response = await axios.get(appConfig.vacationsUrl + "pages/" + pageNumber + "/" + userId);
+    //     const vacations = response.data;
+    //     return vacations;
+    // }
 
     public async getOneVacation(vacationId: number): Promise<VacationModel> {
         const response = await axios.get(appConfig.vacationsUrl + vacationId);
@@ -28,11 +28,11 @@ class VacationsService {
     }
 
 
-    public async getVacationsData(): Promise<VacationData> {
-        const response = await axios.get(appConfig.vacationsUrl + "data");
-        const vacationsData = response.data;
-        return vacationsData;
-    }
+    // public async getVacationsData(): Promise<VacationData> {
+    //     const response = await axios.get(appConfig.vacationsUrl + "data");
+    //     const vacationsData = response.data;
+    //     return vacationsData;
+    // }
 
 
     public async likeVacation(vacationId: number, userId: number): Promise<void> {
@@ -51,7 +51,6 @@ class VacationsService {
         }
         const response = await axios.post<VacationModel>(appConfig.vacationsUrl, vacation, options);
         const addedVacation = response.data;
-        console.log(addedVacation);
     }
 
 
@@ -61,7 +60,6 @@ class VacationsService {
         }
         const response = await axios.put<VacationModel>(appConfig.vacationsUrl + vacation.vacationId, vacation, options);
         const updatedVacation = response.data;
-        console.log(updatedVacation);
         return updatedVacation;
     }
 

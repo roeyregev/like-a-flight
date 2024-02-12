@@ -12,7 +12,6 @@
     margin-top: 80px;
 }
 
-
 .PageNotFound h1 {
     color: #FD8A8B;
     text-align: center;
@@ -59,5 +58,4 @@
     align-items: center;
     justify-content: center;
     align-items: end;
-    /* padding: 20px; */
 }

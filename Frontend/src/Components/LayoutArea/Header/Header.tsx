@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import adminLogo from "../../../Assets/Images/admin-logo.png";
-import logo from "../../../Assets/Images/logo.png";
 import placeholderImage from "../../../Assets/Images/default-user-pic.png";
+import logo from "../../../Assets/Images/logo.png";
 import UserModel from "../../../Models/user-model";
 import { authStore } from "../../../Redux/AuthState";
 import authService from "../../../Services/AuthService";
@@ -42,7 +42,6 @@ function Header(): JSX.Element {
 
     function deleteUser(userId: number) {
         authService.deleteAccount(userId);
-        console.log("userId: " + userId);
         setUserPopupOpen(false)
         notificationService.success("Your account was deleted");
     }

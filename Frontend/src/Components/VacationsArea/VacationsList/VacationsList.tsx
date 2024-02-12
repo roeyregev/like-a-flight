@@ -16,16 +16,17 @@ import PagesNavbar from "../PagesNavbar/PagesNavbar";
 import VacationCard from "../VacationCard/VacationCard";
 import "./VacationsList.css";
 
-export type Tabs = {
+export type Filters = {
     id: number;
     name: string;
     isSelected: boolean
 }
 
 function VacationsList(): JSX.Element {
-    const [user, setUser] = useState<UserModel>()
-    const [vacations, setVacations] = useState<VacationModel[]>([])
+    const [user, setUser] = useState<UserModel>();
+    const [vacations, setVacations] = useState<VacationModel[]>([]);
     const [loading, setLoading] = useState(true);
+    const [cardsCount, setCardsCount] = useState<number>(0);
 
     //Get user state
     useEffect(() => {
@@ -37,17 +38,17 @@ function VacationsList(): JSX.Element {
         return unsubscribe;
     }, []);
 
-    const [tabs, setTabs] = useState<Tabs[]>([
+    const [filters, setFilters] = useState<Filters[]>([
         { id: 1, name: "All", isSelected: true },
         { id: 2, name: "My Likes", isSelected: false },
         { id: 3, name: "Ongoing", isSelected: false },
         { id: 4, name: "Future", isSelected: false },
     ]);
 
-    const handleClickedTab = (id: number) => {
-        setTabs(tabs => tabs.map(t => {
-            t.id === id ? t.isSelected = true : t.isSelected = false;
-            return t
+    const handleSelectedFilter = (filterId: number) => {
+        setFilters(filters => filters.map(f => {
+            f.id === filterId ? f.isSelected = true : f.isSelected = false;
+            return f
         }))
     }
 
@@ -72,11 +73,11 @@ function VacationsList(): JSX.Element {
     }
 
     const filteredVacations = () => {
-        const selectedTabId = tabs.find(t => t.isSelected).id;
+        const selectedFilterId = filters.find(t => t.isSelected).id;
         const now = new Date;
         const formattedNow = now.toISOString();
 
-        switch (selectedTabId) {
+        switch (selectedFilterId) {
             case 1:
                 return vacations
             case 2:
@@ -88,12 +89,11 @@ function VacationsList(): JSX.Element {
         }
     }
 
-    const { activePage, nextPage, previousPage, totalPages, totalItems, items } = usePagination(filteredVacations());
+    const { activePage, nextPage, previousPage, totalPages, items } = usePagination(filteredVacations());
 
     // Get all vacations:
     useEffect(() => {
         if (!user) return;
-        console.log(user);
 
         vacationsService.getAllVacations(user.userId)
             .then(dbVacations => {
@@ -121,6 +121,7 @@ function VacationsList(): JSX.Element {
             vacationsService.likeVacation(vacId, user.userId);
     }
 
+    //loader animation settings:
     const loaderOptions = {
         animationData: loader,
         loop: true,
@@ -152,13 +153,14 @@ function VacationsList(): JSX.Element {
         return (
             <div className="VacationsList">
                 <h2> Our Flights</h2>
-                <FilterSelector tabs={tabs} handleClickedTab={handleClickedTab} />
+                <FilterSelector filters={filters} handleSelectedFilter={handleSelectedFilter} />
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
 
                 {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
                     <div className="cards-list">
                         {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />)}
-                    </div>}
+                    </div>
+                }
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />
             </div>
         );

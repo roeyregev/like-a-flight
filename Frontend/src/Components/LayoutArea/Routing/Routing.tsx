@@ -24,12 +24,10 @@ const isExpired = () => {
 }
 
 function PrivateRoute({ element }: any): JSX.Element {
-    console.log('auth: ', authStore.getState().user)
     return authStore.getState().user && !isExpired() ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showPopup: true }} replace />);
 }
 
 function AdminRoute({ element }: any): JSX.Element {
-    console.log('auth: ', authStore.getState().user)
     return authStore.getState().user && !isExpired() && authStore.getState().user.roleId === 1 ? (element) : (<Navigate to={appConfig.homeRoute} state={{ showAdminPopup: true }} replace />);
 }
 

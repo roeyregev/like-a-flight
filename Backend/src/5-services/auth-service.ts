@@ -1,13 +1,12 @@
-// import { getDefaultHighWaterMark } from "stream";
-import UserModel from "../3-models/user-model";
-import RoleModel from "../3-models/role-model";
 import { OkPacket } from "mysql";
-import dal from "../2-utils/dal";
-import cyber from "../2-utils/cyber";
-import CredentialsModel from "../3-models/credentials-model";
-import { ResourceNotFound, Unauthorized, Validation } from "../3-models/error-models";
 import { fileSaver } from "uploaded-file-saver";
 import appConfig from "../2-utils/app-config";
+import cyber from "../2-utils/cyber";
+import dal from "../2-utils/dal";
+import CredentialsModel from "../3-models/credentials-model";
+import { ResourceNotFound, Unauthorized, Validation } from "../3-models/error-models";
+import RoleModel from "../3-models/role-model";
+import UserModel from "../3-models/user-model";
 
 class AuthService {
 
@@ -18,7 +17,7 @@ class AuthService {
         if (error) throw new Validation(error);
 
         //is email taken:
-        if (await this.isEmailTaken(user.email)) throw new Validation(`Email ${user.email} already taken`);
+        if (await this.isEmailTaken(user.email)) throw new Validation(`Email ${user.email} is already taken`);
 
         // Hash password: 
         user.password = cyber.hashPassword(user.password);
@@ -33,12 +32,11 @@ class AuthService {
             user.userImageUrl = appConfig.appHost + "/api/register/images/" + imageName;
         }
 
-        //Declare user as regular user
+        //Declare user as regular user:
         user.roleId = RoleModel.User
 
         //sql query:
         const sql = `INSERT INTO users VALUES(DEFAULT,?,?,?,?,?,?)`;
-        //(firstName, lastName, email, password, roleId, userImageUrl)
 
         //save user:
         const info: OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.email, user.password, user.roleId, `${user.userImageUrl}`]);
@@ -52,8 +50,6 @@ class AuthService {
         //Generate token:
         const token = cyber.getNewToken(user);
 
-        //return token
-        console.log("token:");
         return token;
     }
 
@@ -101,7 +97,6 @@ class AuthService {
 
         //Get existing image name
         const existingImageName = await this.getExistingImageName(userId);
-        console.log(existingImageName);
 
         // Create sql:
         const sql = `DELETE FROM users WHERE userId = ?`
@@ -124,7 +119,6 @@ class AuthService {
         const imageName = user.userImageUrl.slice(user.userImageUrl.indexOf("images/") + "images/".length);
         return imageName;
     }
-
 }
 
 const authService = new AuthService();

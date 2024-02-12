@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import mediumCloseIcon from "../../../Assets/Images/close-icon-medium.svg";
+import redChupchik from "../../../Assets/Images/redChupchick.svg";
+import CredentialsModel from "../../../Models/credentials-model";
 import UserModel from "../../../Models/user-model";
+import authService from "../../../Services/AuthService";
 import notificationService from "../../../Services/NotificationService";
 import appConfig from "../../../Utils/AppConfig";
 import "./Login.css";
-import redChupchik from "../../../Assets/Images/redChupchick.svg"
-import CredentialsModel from "../../../Models/credentials-model";
-import authService from "../../../Services/AuthService";
 
 type LoginProps = {
     open: boolean
@@ -46,12 +46,9 @@ function Login(props: LoginProps): JSX.Element {
         <>
             <div className="background-black"></div>
             <form className="Register" onSubmit={handleSubmit(send, onError)}>
-
                 <h2>Log In</h2>
                 <button className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
-
                 <div className="input-flex">
-
                     <div className="input-div">
                         <input type="email"
                             placeholder="Email"
@@ -66,8 +63,6 @@ function Login(props: LoginProps): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
-
                     <div className="input-div">
                         <input type="password"
                             placeholder="password"
@@ -82,10 +77,8 @@ function Login(props: LoginProps): JSX.Element {
                             <div className="red-chupchik"><img src={redChupchik} alt="red-chupchik" /></div>
                         </div>}
                     </div>
-
                 </div>
                 <button className="main-btn">Enter</button>
-
                 <div className="login-footer">
                     <p>Not a Member?</p>
                     <button className="footer-btn" onClick={props.switchToRegister}>Register now</button>
@@ -93,9 +86,7 @@ function Login(props: LoginProps): JSX.Element {
 
             </form>
         </>,
-
         document.getElementById("portal")
-
     );
 }
 

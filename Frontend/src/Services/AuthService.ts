@@ -27,7 +27,6 @@ class AuthService {
 
     public logout(): void {
         const action: AuthAction = { type: AuthActionTypes.Logout };
-        
         authStore.dispatch(action);
     }
 
@@ -38,5 +37,4 @@ class AuthService {
 }
 
 const authService = new AuthService();
-
 export default authService;

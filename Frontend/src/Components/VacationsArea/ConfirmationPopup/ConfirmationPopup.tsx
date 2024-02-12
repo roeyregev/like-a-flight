@@ -1,16 +1,13 @@
 import ReactDOM from "react-dom";
 import "./ConfirmationPopup.css";
 
-
 type DeleteProps = {
     openConfirmation: Function
     handleConfirmDelete: Function
     handleCancelDelete: Function
 }
 
-
 function ConfirmationPopup(props: DeleteProps): JSX.Element {
-
     return ReactDOM.createPortal(
         <>
             <div className="background"></div>

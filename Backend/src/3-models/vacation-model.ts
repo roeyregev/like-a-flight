@@ -69,4 +69,3 @@ class VacationModel {
 }
 
 export default VacationModel
-

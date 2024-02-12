@@ -10,16 +10,16 @@ import ChartDataModel from "../3-models/chart-data-model";
 class VacationsService {
 
     //meta data
-    public async getVacationsData(): Promise<object> {
-        const vacationsData = { count: 0 };
+    // public async getVacationsData(): Promise<object> {
+    //     const vacationsData = { count: 0 };
 
-        const sql = `SELECT COUNT(vacationId) FROM vacations`;
-        const responseObject = await dal.execute(sql);
+    //     const sql = `SELECT COUNT(vacationId) FROM vacations`;
+    //     const responseObject = await dal.execute(sql);
 
-        const { 'COUNT(vacationId)': countValue } = responseObject[0];
-        vacationsData.count = countValue
-        return vacationsData;
-    }
+    //     const { 'COUNT(vacationId)': countValue } = responseObject[0];
+    //     vacationsData.count = countValue
+    //     return vacationsData;
+    // }
 
 
     public async getAllVacations(userId: number): Promise<VacationModel[]> {
@@ -38,29 +38,29 @@ class VacationsService {
     }
 
 
-    public async getNineVacations(pageNumber: number, userId: number): Promise<VacationModel[]> {
+    // public async getNineVacations(pageNumber: number, userId: number): Promise<VacationModel[]> {
 
-        if (pageNumber > 0) {
-            const limit = 4;
-            const offset = (pageNumber - 1) * limit;
+    //     if (pageNumber > 0) {
+    //         const limit = 4;
+    //         const offset = (pageNumber - 1) * limit;
 
-            // const sql = `SELECT vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl FROM vacations LIMIT ?,?`;
+    //         // const sql = `SELECT vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl FROM vacations LIMIT ?,?`;
 
-            const sql = `
-                SELECT DISTINCT
-                V.vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl,
-                EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
-                COUNT(F.userId) AS likes
-                FROM vacations as V LEFT JOIN followers as F
-                ON V.vacationId = F.vacationId
-                GROUP BY vacationId
-                ORDER BY startDate
-                LIMIT ?,?
-                `
-            const vacations = await dal.execute(sql, [userId, offset, limit]);
-            return vacations;
-        }
-    }
+    //         const sql = `
+    //             SELECT DISTINCT
+    //             V.vacationId, destination, description, startDate, endDate, price, CONCAT('${appConfig.appHost}', '/api/vacations/images/', ImageName) AS imageUrl,
+    //             EXISTS(SELECT * FROM followers WHERE vacationId = F.vacationId AND userId = ?) AS isFollowing,
+    //             COUNT(F.userId) AS likes
+    //             FROM vacations as V LEFT JOIN followers as F
+    //             ON V.vacationId = F.vacationId
+    //             GROUP BY vacationId
+    //             ORDER BY startDate
+    //             LIMIT ?,?
+    //             `
+    //         const vacations = await dal.execute(sql, [userId, offset, limit]);
+    //         return vacations;
+    //     }
+    // }
 
 
     //GET one vacation
@@ -80,7 +80,7 @@ class VacationsService {
     public async addVacation(vacation: VacationModel): Promise<VacationModel> {
 
         // Validate: 
-         vacation.postValidate();
+        vacation.postValidate();
 
         // save image to disk:
         const imageName = await fileSaver.add(vacation.image);
@@ -107,7 +107,6 @@ class VacationsService {
         vacation.putValidate();
 
         //Get existing imageName
-        console.log("vacationId: " + vacation.vacationId);
         const existingImageName = await this.getExistingImageName(vacation.vacationId);
 
         //update image name if exists and GET new or existing image name:
@@ -168,21 +167,11 @@ class VacationsService {
     }
 
 
-
     public async getChartData(): Promise<ChartDataModel[]> {
         const sql = `SELECT COUNT(followers.vacationId) AS count, vacations.destination, vacations.vacationId FROM followers  JOIN vacations ON followers.vacationId = vacations.vacationId GROUP BY followers.vacationId`;
         const chartData = await dal.execute(sql);
         return chartData;
     }
-
-    // ANALYTICS SQL:
-
-    //WINNER:
-    //SELECT COUNT(followers.vacationId), vacations.destination FROM followers  JOIN vacations ON followers.vacationId = vacations.vacationId GROUP BY followers.vacationId
-
-    // WINNER with vacationId:
-    // SELECT COUNT(followers.vacationId), vacations.destination, vacations.vacationId FROM followers  JOIN vacations ON followers.vacationId = vacations.vacationId GROUP BY followers.vacationId
-
 }
 
 const vacationsService = new VacationsService();

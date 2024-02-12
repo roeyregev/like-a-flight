@@ -39,7 +39,6 @@ class UserModel {
         const result = UserModel.postValidationSchema.validate(this);
         return result.error?.message;
     }
-
 }
 
 export default UserModel

@@ -27,6 +27,8 @@ function VacationsList(): JSX.Element {
     const [vacations, setVacations] = useState<VacationModel[]>([]);
     const [loading, setLoading] = useState(true);
     const [cardsCount, setCardsCount] = useState<number>(0);
+    const [noVacations, setNoVacations] = useState(false);
+
 
     //Get user state
     useEffect(() => {
@@ -101,6 +103,7 @@ function VacationsList(): JSX.Element {
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
                 setLoading(false);
+
             })
             .catch(err => {
                 notificationService.error(err);
@@ -127,6 +130,15 @@ function VacationsList(): JSX.Element {
         loop: true,
         autoplay: true,
     }
+
+    //check if a filter's list is empty:
+    useEffect(() => {
+        if (items.length === 0 && !loading) {
+            setNoVacations(true);
+        } else {
+            setNoVacations(false);
+        }
+    }, [items, loading]);
 
 
     if ((user && vacations.length === 0 || !vacations) && !loading) return (<NoVacations />);
@@ -158,7 +170,9 @@ function VacationsList(): JSX.Element {
 
                 {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
                     <div className="cards-list">
-                        {items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />)}
+                        {!noVacations ?
+                        items.map(v => <VacationCard key={v.vacationId} vacation={v} userId={user.userId} vacations={vacations} setVacations={setVacations} likeToggle={likeToggle} />) :
+                    <p className="empty-filter">Sorry. No flights in this list :(</p>}
                     </div>
                 }
                 <PagesNavbar pages={numOfPages} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} totalPages={totalPages} previousPage={previousPage} activePage={activePage} />

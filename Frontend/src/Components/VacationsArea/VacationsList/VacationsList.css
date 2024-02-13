@@ -52,3 +52,13 @@
     margin-inline: auto;
     margin-top: 50px;
 }
+
+.VacationsList .empty-filter {
+    color: #FBAFAF;
+    text-align: center;
+    font-family: Shrikhand;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+}

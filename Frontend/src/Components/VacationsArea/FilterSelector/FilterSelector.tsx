@@ -2,6 +2,7 @@ import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 import filterIcon from "../../../Assets/Images/filter-icon.svg";
 import { Filters } from "../VacationsList/VacationsList";
 import "./FilterSelector.css";
+import { useEffect, useState } from 'react';
 
 type FiltersBarProps = {
     filters: Filters[]
@@ -10,13 +11,12 @@ type FiltersBarProps = {
 
 function FilterSelector(props: FiltersBarProps): JSX.Element {
 
-    //"react-select" selection options:
-    const filters = [
-        { value: props.filters[0].id, label: props.filters[0].name },
-        { value: props.filters[1].id, label: props.filters[1].name },
-        { value: props.filters[2].id, label: props.filters[2].name },
-        { value: props.filters[3].id, label: props.filters[3].name },
-    ]
+    const [filters, setFilters] = useState([{ value: props.filters[0].id, label: props.filters[0].name }])
+
+    //"react-select" select-bar options array:
+    useEffect(() => {
+        setFilters(props.filters.map(f => ({ value: f.id, label: f.name })))
+    }, [])
 
     //"react-select" select bar styles:
     const styles: StylesConfig<{ value: number; label: string }, false, any> = {

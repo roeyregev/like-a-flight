@@ -131,7 +131,7 @@ function AddVacation(): JSX.Element {
                                 message: "Description must be at least 2 characters long",
                             },
                             maxLength: {
-                                value: 250,
+                                value: 500,
                                 message: "Description can't be over 250 characters long",
                             },
                         })}

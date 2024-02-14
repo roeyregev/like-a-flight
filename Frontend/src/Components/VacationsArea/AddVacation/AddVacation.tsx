@@ -12,7 +12,7 @@ import useImagePreview from "../../../Utils/UseImagePreview";
 import "./AddVacation.css";
 
 function AddVacation(): JSX.Element {
-    const { register, handleSubmit, formState: { errors }, getValues, setValue, control } = useForm<VacationModel>()
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<VacationModel>()
     const navigate = useNavigate();
     const [imageFile, setImageFile] = useState<File | null>();
     const imageSrc = useImagePreview(imageFile);

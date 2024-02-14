@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 import filterIcon from "../../../Assets/Images/filter-icon.svg";
 import { Filters } from "../VacationsList/VacationsList";
 import "./FilterSelector.css";
-import { useEffect, useState } from 'react';
 
 type FiltersBarProps = {
     filters: Filters[]

@@ -1,24 +1,12 @@
-import express, { Request, Response, NextFunction, query } from "express";
-import vacationsService from "../5-services/vacations-service";
-import VacationModel from "../3-models/vacation-model";
-import StatusCode from "../3-models/status-codes";
+import express, { NextFunction, Request, Response } from "express";
 import { fileSaver } from "uploaded-file-saver";
-import verifyToken from "../4-middleware/verify-token";
+import StatusCode from "../3-models/status-codes";
+import VacationModel from "../3-models/vacation-model";
 import verifyAdmin from "../4-middleware/verify-admin";
+import verifyToken from "../4-middleware/verify-token";
+import vacationsService from "../5-services/vacations-service";
 
 const router = express.Router();
-
-//GET vacations meta-data:
-// router.get("/vacations/data", async (request: Request, response: Response, next: NextFunction) => {
-//     try {
-//         const vacationsData = await vacationsService.getVacationsData();
-//         response.json(vacationsData);
-//     }
-//     catch (err: any) {
-//         next(err);
-//     }
-// });
-
 
 //GET all vacations
 router.get("/vacations/user/:userId", verifyToken, async (request: Request, response: Response, next: NextFunction) => {
@@ -31,22 +19,6 @@ router.get("/vacations/user/:userId", verifyToken, async (request: Request, resp
         next(err);
     }
 });
-
-
-//GET nine vacations
-// router.get("/vacations/pages/:pageNumber/:userId", async (request: Request, response: Response, next: NextFunction) => {
-//     try {
-//         const pageNumber = +request.params.pageNumber;
-//         const userId = +request.params.userId;
-//         const vacations = await vacationsService.getNineVacations(pageNumber, userId);
-//         response.json(vacations);
-//     }
-//     catch (err: any) {
-//         next(err);
-//     }
-// });
-
-
 
 //POST like a vacations
 router.post("/vacations/:vacationId/:userId", async (request: Request, response: Response, next: NextFunction) => {
@@ -74,7 +46,6 @@ router.delete("/vacations/:vacationId/:userId", async (request: Request, respons
     }
 });
 
-
 //GET one vacation
 router.get("/vacations/:vacationId", async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -86,7 +57,6 @@ router.get("/vacations/:vacationId", async (request: Request, response: Response
         next(err);
     }
 });
-
 
 //POST vacation
 router.post("/vacations", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
@@ -152,6 +122,5 @@ router.get("/analytics", verifyAdmin, async (request: Request, response: Respons
         next(err);
     }
 });
-
 
 export default router;

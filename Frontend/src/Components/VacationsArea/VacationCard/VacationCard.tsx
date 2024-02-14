@@ -50,17 +50,17 @@ function VacationCard(props: VacationProps): JSX.Element {
         props.likeToggle(props.vacation.vacationId);
     }
 
-    function formatRawDate(rawDate: string): string {
-        const dateObject = new Date(rawDate);
-
+    // original:
+    function formatRawDate(date: Date): string {
         const options: Intl.DateTimeFormatOptions = {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
             timeZone: 'UTC'
         };
-        return dateObject.toLocaleString('en-GB', options);
+        return date.toLocaleDateString('en-GB', options);
     }
+
 
     return (
         <div className="VacationCard">
@@ -77,9 +77,9 @@ function VacationCard(props: VacationProps): JSX.Element {
             <div className="card-bottom-div">
                 <h2>{props.vacation.destination}</h2>
                 <div className="date-div">
-                    <span>{formatRawDate(new Date(props.vacation.startDate).toISOString())}</span>
+                    <span>{formatRawDate(new Date(props.vacation.startDate))}</span>
                     <span> - </span>
-                    <span>{formatRawDate(new Date(props.vacation.endDate).toISOString())}</span>
+                    <span>{formatRawDate(new Date(props.vacation.endDate))}</span>
                 </div>
                 <p>{props.vacation.description}</p>
             </div>

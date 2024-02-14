@@ -55,8 +55,8 @@ function UpdateVacation(): JSX.Element {
             //extract and assign image file to vacation object:
             vacation.image = (vacation.image as unknown as FileList)[0];
 
-            //add vacation:
-            const updatedVacation = await vacationsService.updateVacation(vacation);
+            //update vacation:
+            await vacationsService.updateVacation(vacation);
             notificationService.success("Flight was updated!");
             navigate("/vacations");
         }
@@ -171,9 +171,7 @@ function UpdateVacation(): JSX.Element {
                     <div className="image-thumbnail">
                         <input type="file"
                             accept="image/*"
-                            {...register("image", {
-                                required: "Image is required",
-                            })}
+                            {...register("image")}
                             className={classNames("upload-input", { 'invalid-input': errors?.description })}
                             onChange={handleFileChange}
                         />

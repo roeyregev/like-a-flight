@@ -33,7 +33,7 @@ router.post("/vacations/:vacationId/:userId", async (request: Request, response:
     }
 });
 
-//DELETE-  unlike a vacations
+//DELETE - unlike a vacations
 router.delete("/vacations/:vacationId/:userId", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const vacationId = +request.params.vacationId;

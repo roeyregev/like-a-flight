@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 29, 2024 at 09:44 PM
+-- Generation Time: Feb 14, 2024 at 07:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -129,7 +129,14 @@ INSERT INTO `followers` (`userId`, `vacationId`) VALUES
 (39, 36),
 (39, 39),
 (39, 38),
-(39, 42);
+(39, 42),
+(30, 28),
+(31, 30),
+(37, 28),
+(37, 35),
+(37, 36),
+(40, 26),
+(31, 28);
 
 -- --------------------------------------------------------
 
@@ -183,7 +190,8 @@ INSERT INTO `users` (`userId`, `firstName`, `lastName`, `email`, `password`, `ro
 (38, 'Dolores', 'Madrigal', 'dolores@gmail.com', '6107fecf248b4f315b12d4158c87874c725a95be4906290f7c5eb365451e1d86bcb9ca89fdc2838afd61802b9687efb7e341420e3416e29ccf5c2f24cad2f535', 2, 'http://localhost:4000/api/register/images/15bd7fd4-ece8-4d92-9773-945d958f9c42.png'),
 (39, 'Bruno', 'Madrigal', 'bruno@gmail.com', '6107fecf248b4f315b12d4158c87874c725a95be4906290f7c5eb365451e1d86bcb9ca89fdc2838afd61802b9687efb7e341420e3416e29ccf5c2f24cad2f535', 2, 'http://localhost:4000/api/register/images/fe323ed7-dd77-49b1-9211-462bfc88f3d8.png'),
 (40, 'Agustín', 'Madrigal', 'agustin@gmail.com', '6107fecf248b4f315b12d4158c87874c725a95be4906290f7c5eb365451e1d86bcb9ca89fdc2838afd61802b9687efb7e341420e3416e29ccf5c2f24cad2f535', 2, 'http://localhost:4000/api/register/images/f41fb092-db41-4a18-a081-9715f8f9c5fd.png'),
-(41, 'Félix', 'Madrigal', 'felix@gmail.com', '6107fecf248b4f315b12d4158c87874c725a95be4906290f7c5eb365451e1d86bcb9ca89fdc2838afd61802b9687efb7e341420e3416e29ccf5c2f24cad2f535', 2, 'http://localhost:4000/api/register/images/778a2c0c-4a3a-4f29-a4de-b6d06e88fbd9.png');
+(41, 'Félix', 'Madrigal', 'felix@gmail.com', '6107fecf248b4f315b12d4158c87874c725a95be4906290f7c5eb365451e1d86bcb9ca89fdc2838afd61802b9687efb7e341420e3416e29ccf5c2f24cad2f535', 2, 'http://localhost:4000/api/register/images/778a2c0c-4a3a-4f29-a4de-b6d06e88fbd9.png'),
+(42, 'anonymous', 'anonymous', 'anon@gmail.com', '6107fecf248b4f315b12d4158c87874c725a95be4906290f7c5eb365451e1d86bcb9ca89fdc2838afd61802b9687efb7e341420e3416e29ccf5c2f24cad2f535', 2, 'undefined');
 
 -- --------------------------------------------------------
 
@@ -208,14 +216,14 @@ CREATE TABLE `vacations` (
 INSERT INTO `vacations` (`vacationId`, `destination`, `description`, `startDate`, `endDate`, `price`, `imageName`) VALUES
 (25, 'Rome', 'Wander through the Vatican City, home to the Sistine Chapel and Michelangelo\'s breathtaking masterpiece, the ceiling. Experience breathtaking views from the top of St. Peter\'s Basilica and lose yourself in the art treasures of the Borghese Gallery.', '2024-01-01', '2024-01-08', 449.00, '5cc8e549-2132-4714-b398-6b3741e22a88.png'),
 (26, 'Paris', 'Paris, the City of Lights, beckons you with its timeless elegance and irresistible charm. Picture yourself strolling along the romantic Seine River, watching the sun paint the Eiffel Tower in golden hues and feeling the magic of the city come alive.', '2024-03-04', '2024-03-10', 529.00, 'cc7d5814-4061-49d0-80cd-240627a67fe5.png'),
-(27, 'Amsterdam', 'Amsterdam, the City of Canals and Freedom, awaits you with open arms. Imagine yourself gliding down the picturesque canals, admiring the colorful gabled houses and vibrant street life. Picture yourself cycling through charming neighborhoods, past hidden courtyards and blooming flower markets.', '2023-11-11', '2023-11-16', 429.00, '152d1983-0a6f-408b-b91e-72dd1c23fdcb.png'),
-(28, 'Prague', 'Beyond the established tourist destinations, discover the hidden gems of Prague. Explore the Kampa Island, a tranquil oasis with charming canals and art galleries. Visit the Lennon Wall, a vibrant symbol of peace and love.', '2023-11-24', '2023-12-01', 199.00, '487a9b8e-bfb7-4371-893c-3037a6a2dbd2.png'),
+(27, 'Amsterdam', 'Amsterdam, the City of Canals and Freedom, awaits you with open arms. Imagine yourself gliding down the picturesque canals, admiring the colorful gabled houses and vibrant street life. Picture yourself cycling through charming neighborhoods, past hidden courtyards and blooming flower markets.', '2024-02-01', '2024-02-25', 529.00, '152d1983-0a6f-408b-b91e-72dd1c23fdcb.png'),
+(28, 'Prague', 'Beyond the established tourist destinations, discover the hidden gems of Prague. Explore the Kampa Island, a tranquil oasis with charming canals and art galleries. Visit the Lennon Wall, a vibrant symbol of peace and love.', '2023-11-25', '2023-11-30', 199.00, '487a9b8e-bfb7-4371-893c-3037a6a2dbd2.png'),
 (29, 'New York City', 'Experience the nightlife: From rooftop bars and vibrant clubs to intimate jazz bars and hidden speakeasies, New York\'s nightlife scene is buzzing with energy. Explore the unique neighborhoods of Brooklyn, like Williamsburg and Greenpoint, or venture to Governors Island for a tranquil escape with stunning views of the city skyline. ', '2023-12-24', '2024-01-07', 1149.00, '4d86ef91-ce86-41e6-9794-89efe410f758.png'),
 (30, 'Los Angeles', 'Explore world-class art at the Getty Center, LACMA, and MOCA, showcasing diverse collections from around the world. Discover culinary delights, from fresh seafood to authentic Mexican cuisine, or explore the diverse food trucks offering flavors from all over the world.', '2024-03-24', '2024-04-01', 1499.00, '8b714349-d570-4a55-a354-938a84700ce1.png'),
 (31, 'London', 'London\'s allure awaits! Explore iconic landmarks, from Buckingham Palace to the Tower of London. Wander through museums brimming with treasures, savor classic fare, and experience world-class theatre. Escape the city bustle in Hyde Park or Regent\'s Park, and let London\'s vibrant history and culture captivate you. Pack your bags and book your flight!', '2024-04-12', '2024-04-19', 609.00, 'bab9fcc7-77af-495f-809b-385546b22668.png'),
 (32, 'Cairo', 'Unravel Cairo\'s ancient mysteries! Explore the iconic pyramids of Giza, marvel at the Sphinx, and wander through the Egyptian Museum, filled with treasures. Sail the Nile, soak up the Khan el-Khalili bazaar\'s vibrant atmosphere, and be mesmerized by the call to prayer. Experience Egypt\'s rich history, captivating culture, and warm hospitality in Cairo. Book your adventure today!', '2024-04-23', '2024-05-01', 149.00, 'd8ba27fa-0519-4a1c-adcc-abf9fb1f6695.png'),
 (33, 'Bangkok', 'Let Bangkok\'s magic captivate you!** Explore the Grand Palace, wander through vibrant temples, and savor legendary street food. Cruise the Chao Phraya River, marveling at stunning contrasts. Discover hidden gems in bustling markets, lose yourself in vibrant nightlife, and find peace in green spaces. Bangkok\'s energy and cultural richness await. Book your adventure!', '2024-05-16', '2024-05-30', 849.00, 'b05c990c-1483-4888-83e5-7018f071f44e.png'),
-(34, 'Budapest', 'Budapest awaits! Relax in thermal baths, admire Buda Castle, wander Pest\'s streets. Explore markets, savor Hungarian food, marvel at Parliament. Cruise the Danube at dusk, embrace classical music, lose yourself in nightlife. Discover Budapest\'s unique charm. Book your escape today!', '2024-05-08', '2024-05-13', 289.00, 'b20dc0b4-e060-4750-950d-f2abc82f8671.png'),
+(34, 'Budapest', 'Budapest awaits! Relax in thermal baths, admire Buda Castle, wander Pest\'s streets. Explore markets, savor Hungarian food, marvel at Parliament. Cruise the Danube at dusk, embrace classical music, lose yourself in nightlife. Discover Budapest\'s unique charm. Book your escape today!', '2024-02-10', '2024-02-26', 289.00, 'b20dc0b4-e060-4750-950d-f2abc82f8671.png'),
 (35, 'Madrid', 'Madrid\'s fiery spirit awaits! Immerse yourself in vibrant flamenco, stroll through the Prado Museum\'s masterpieces, and savor tapas at hidden bodegas. Explore the Royal Palace\'s grandeur, wander through El Rastro flea market, and relax in Retiro Park. Soak up the sun at Plaza Mayor, join the lively nightlife, and be captivated by Madrid\'s infectious energy.', '2024-06-10', '2024-06-17', 559.00, 'f656233e-d3e5-403a-a72d-dea3547ccde0.png'),
 (36, 'Barcelona', 'Discover Barcelona\'s vibrant soul! Wander through Sagrada Familia\'s architectural marvel, explore Gaudi\'s whimsical creations, and lose yourself in the vibrant La Boqueria market. Soak up the sun on Barceloneta Beach, cruise along the waterfront, and savor tapas in charming cafes. Experience the city\'s infectious energy, from flamenco shows to buzzing nightlife. Barcelona\'s unique charm awaits you.', '2024-06-10', '2024-06-17', 549.00, 'e1967ed3-af28-45e0-b7df-898d11421bdd.png'),
 (37, 'Ibiza', 'Unleash your inner party animal in Ibiza! Dance the night away in world-renowned nightclubs, sunbathe on pristine beaches, and soak in the bohemian vibes. \r\nFrom sunset cruises to adrenaline-pumping water sports, Ibiza offers an unforgettable escape. Book your adventure and let the rhythm of the island take over!', '2024-08-12', '2024-08-19', 629.00, 'f2add38a-4219-4cf9-8a23-e3cec1a25766.png'),
@@ -224,7 +232,7 @@ INSERT INTO `vacations` (`vacationId`, `destination`, `description`, `startDate`
 (40, 'Berlin', 'Berlin\'s vibrant pulse awaits! Explore iconic landmarks like the Brandenburg Gate and Reichstag, stroll along the Spree River, and soak up the city\'s contemporary art scene. Savor diverse cuisine, from traditional Biergartens to trendy restaurants, and lose yourself in buzzing nightlife. Discover historical depths and embrace Berlin\'s unique blend of history and modern energy. ', '2024-08-20', '2024-08-27', 649.00, 'e432ac37-e1ee-4ee3-aee4-53ee4c9f185d.png'),
 (41, 'Munich', 'Unwind in Munich\'s vibrant embrace! Savor a Bavarian beer at the iconic Hofbräuhaus, explore Marienplatz\'s enchanting charm, and marvel at the Glockenspiel\'s lively performance. Indulge in delicious pastries at Viktualienmarkt, wander through Hofgarten\'s serene beauty, and experience the festive spirit of Oktoberfest. Discover hidden courtyards and be captivated by Munich\'s rich history and cheerful spirit.', '2024-08-22', '2024-08-29', 619.00, 'fc7bab7b-db3f-4938-b234-b000ae8783cb.png'),
 (42, 'Hadera', 'Immerse yourself in Hadera\'s coastal charm! Explore the scenic Shvil HaTapuzim, discover the fascinating Salt & Pepper Museum, and marvel at the vibrant Hadera River Park. \r\nUnwind on the stunning beaches, delve into history at the Khan Museum, and experience the tranquility of HaSharon Park. Savor fresh seafood, embrace the vibrant nightlife, and be captivated by Hadera\'s unique blend of nature, culture, and history.', '2024-08-27', '2024-08-31', 9.00, '48ff473e-5583-424e-b62d-ecb65edce3b2.png'),
-(43, 'testtttttt', 'df', '2222-02-02', '2223-02-02', 56.00, '033b12f1-9138-4478-bdf9-f6fcb9aad5dc.png');
+(44, 'Dubai', 'Escape to the dazzling cityscape of Dubai, where modern luxury meets ancient charm. Discover a world of opulent skyscrapers, pristine beaches, and vibrant souks. Indulge in adrenaline-pumping desert safaris, awe-inspiring architectural marvels like the Burj Khalifa, and world-class shopping experiences in glamorous malls. Embark on a journey of wonder and delight.', '2023-07-11', '2023-07-30', 209.00, 'e82ec04e-1b66-4b74-9309-c0cc9d201a83.webp');
 
 --
 -- Indexes for dumped tables
@@ -270,13 +278,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `vacations`
 --
 ALTER TABLE `vacations`
-  MODIFY `vacationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `vacationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Constraints for dumped tables

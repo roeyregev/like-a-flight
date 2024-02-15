@@ -96,7 +96,7 @@ function VacationsList(): JSX.Element {
             case 2:
                 return vacations.filter(v => v.isFollowing);
             case 3:
-                return vacations.filter((v) => v.startDate >= formattedNow && v.endDate <= formattedNow);
+                return vacations.filter((v) => v.startDate <= formattedNow && v.endDate >= formattedNow);
             case 4:
                 return vacations.filter((v) => v.startDate >= formattedNow);
         }

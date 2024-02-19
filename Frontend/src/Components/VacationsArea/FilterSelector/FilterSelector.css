@@ -1,8 +1,7 @@
 .FilterSelector .filter-flex {
     display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    background-color: #FEEDD9;
+    justify-content: center;
+    gap: 10px;
     margin-inline: auto;
     padding: 0 6px;
     border-radius: 4px;

@@ -27,13 +27,11 @@ function FilterSelector(props: FiltersBarProps): JSX.Element {
             backgroundColor: '#FEEDD9',
             color: '#9D3B3B',
             padding: 0
-
         }),
         option: (provided: CSSObjectWithLabel, state: any) => ({
             ...provided,
             backgroundColor: state.isFocused ? '#FAE5CD' : '#FEEDD9',
             color: state.isSelected ? '#9D3B3B' : '#9D3B3B',
-
         }),
         singleValue: (base: CSSObjectWithLabel, state: any) => ({
             ...base,

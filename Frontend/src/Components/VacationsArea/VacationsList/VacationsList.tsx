@@ -59,7 +59,6 @@ function VacationsList(): JSX.Element {
                 setNumOfPages(Math.ceil(dbVacations.length / vacationsPerPage));
                 setCurrentPage(1);
                 setLoading(false);
-
             })
             .catch(err => {
                 notificationService.error(err);
@@ -140,6 +139,7 @@ function VacationsList(): JSX.Element {
         loop: true,
         autoplay: true,
     }
+    
 
     //Render options:
     if ((user && vacations.length === 0 || !vacations) && !loading) return (<NoVacations />);

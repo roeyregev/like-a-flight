@@ -56,7 +56,7 @@ function VacationCard(props: VacationProps): JSX.Element {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
-            timeZone: 'UTC'
+            timeZone: 'Asia/Jerusalem'
         };
         return date.toLocaleDateString('en-GB', options);
     }

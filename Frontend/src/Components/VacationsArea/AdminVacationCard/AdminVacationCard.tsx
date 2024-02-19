@@ -29,7 +29,7 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
-            timeZone: 'UTC'
+            timeZone: 'Asia/Jerusalem'
         };
         return dateObject.toLocaleString('en-GB', options);
     }
@@ -78,6 +78,8 @@ function AdminVacationCard(props: VacationProps): JSX.Element {
             <div className="card-bottom-div">
                 <h2>{props.vacation.destination}</h2>
                 <div className="date-div">
+
+
                     <span>{formatRawDate(new Date(props.vacation.startDate).toISOString())}</span>
                     <span> - </span>
                     <span>{formatRawDate(new Date(props.vacation.endDate).toISOString())}</span>

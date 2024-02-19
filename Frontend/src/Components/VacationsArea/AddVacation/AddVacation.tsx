@@ -23,12 +23,17 @@ function AddVacation(): JSX.Element {
         setImageFile(files.item(0));
     }
 
+
     async function send(vacation: VacationModel) {
         try {
+
             //validate dates logic:
             if (vacation.endDate < vacation.startDate) {
                 throw new Error("End date can't be earlier than Start date");
             }
+
+            const localeDate = new Date(vacation.startDate);
+            console.log(localeDate);
 
             //extract and assign image file to vacation object:
             vacation.image = (vacation.image as unknown as FileList)[0];

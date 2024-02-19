@@ -51,6 +51,7 @@ class VacationsService {
         }
         const response = await axios.post<VacationModel>(appConfig.vacationsUrl, vacation, options);
         const addedVacation = response.data;
+        console.log(addedVacation);
     }
 
 

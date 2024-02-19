@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
-import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts';
 import loader from "../../../Assets/Animations/loader.json";
 import downloadIcon from "../../../Assets/Images/download-icon.svg";
 import ChartDataModel from "../../../Models/chart-data-model";
@@ -61,16 +61,13 @@ function Analytics(): JSX.Element {
                 <img src={downloadIcon} alt="download-button" />
                 <span>Download CSV</span>
             </div>
-
             {loading ? <div className="loader"> <Lottie options={loaderOptions} /></div> :
                 <div className="chart-container">
                     <BarChart width={800} height={600} data={rawData.map(({ count, destination }) => ({ count, destination }))} barGap={100}>
                         <XAxis dataKey="destination" />
                         <YAxis />
                         <Tooltip />
-                        <Legend />
                         <Bar dataKey="count" fill="#EB6161" barSize={80} radius={[4, 4, 0, 0]} />
-
                     </BarChart>
                 </div>}
         </div>

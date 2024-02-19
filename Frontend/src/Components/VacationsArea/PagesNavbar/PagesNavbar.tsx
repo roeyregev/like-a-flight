@@ -11,14 +11,20 @@ type PagesNavbarProps = {
     activePage: number
 }
 
+const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0 });
+};
+
 function PagesNavbar(props: PagesNavbarProps): JSX.Element {
 
     function nextPage() {
         props.nextPage()
+        scrollToTop()
     }
 
     function previousPage() {
         props.previousPage()
+        scrollToTop()
     }
 
     const pagesArray = [];

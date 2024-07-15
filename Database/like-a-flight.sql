@@ -25,7 +25,7 @@ USE `like-a-flight`;
 
 -- Creating the database user (not the default root user) and granting privileges on 
 -- all database objects
-CREATE USER 'roey'@'%' IDENTIFIED BY '123456';
+CREATE USER 'roey'@'%' IDENTIFIED BY 'Farout1982';
 
 GRANT ALL PRIVILEGES ON *.* TO 'roey'@'%' WITH GRANT OPTION;
 -- --------------------------------------------------------

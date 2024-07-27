@@ -13,8 +13,16 @@ import vacationController from "./6-controllers/vacations-controller";
 const server = express();
 
 // Allow CORS access: 
-// server.use(cors());
-server.options('*', cors());
+server.use(cors());
+
+function setCorsHeaders(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+}
+
+server.use(setCorsHeaders)
 
 //set the images folder for the file-saver library
 fileSaver.config(path.join(__dirname, "1-assets", "images"));

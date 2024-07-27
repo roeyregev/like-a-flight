@@ -26,7 +26,7 @@ class DevelopmentConfig extends AppConfig {
 
 class ProductionConfig extends AppConfig {
     public constructor() {
-        super("process.env.BACKEND_URL"); // The real website.
+        super("process.env.BACKEND_URL:8080"); // The real website.
     }
 }
 

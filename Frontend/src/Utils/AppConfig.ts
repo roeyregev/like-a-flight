@@ -34,9 +34,5 @@ class ProductionConfig extends AppConfig {
     }
 }
 
-console.log(process.env.NODE_ENV)
-console.log(process.env.BACKEND_URL)
-console.log(process.env.NODE_ENV === "production")
-console.log(process.env.NODE_ENV == "production")
-const appConfig = process.env.NODE_ENV === "production" ? new ProductionConfig() : new DevelopmentConfig();
+const appConfig = new ProductionConfig() //process.env.NODE_ENV === "production" ? new ProductionConfig() : new DevelopmentConfig();
 export default appConfig;

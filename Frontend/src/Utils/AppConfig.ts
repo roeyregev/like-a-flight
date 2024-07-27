@@ -26,7 +26,7 @@ class DevelopmentConfig extends AppConfig {
 
 class ProductionConfig extends AppConfig {
     public constructor() {
-        super("http://backend-production-fd14.up.railway.app:8080"); // The real website.
+        super("https://backend-production-fd14.up.railway.app:8080"); // The real website.
     }
 }
 

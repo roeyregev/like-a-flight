@@ -26,7 +26,7 @@ class DevelopmentConfig extends AppConfig {
 
 class ProductionConfig extends AppConfig {
     public constructor() {
-        super("https://like-a-flight.com"); // The real website.
+        super("process.env.BACKEND_URL"); // The real website.
     }
 }
 

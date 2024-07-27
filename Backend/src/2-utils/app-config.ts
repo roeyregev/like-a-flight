@@ -8,6 +8,7 @@ class AppConfig {
     public readonly mysqlUser = process.env.MYSQL_USER;
     public readonly mysqlPassword = process.env.MYSQL_PASSWORD;
     public readonly mysqlDatabase = process.env.MYSQL_DATABASE;
+    public readonly mysqlPort = process.env.MYSQL_PORT;
     public readonly appHost = "http://" + this.mysqlHost + ":" + this.port;
 }
 

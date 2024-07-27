@@ -2,9 +2,11 @@ import mysql, { MysqlError } from "mysql";
 import appConfig from "./app-config";
 
 // Creating a connection object:
-const connection = mysql.createPool({
+const connection = mysql.createPool(    
+    {
     host: appConfig.mysqlHost, 
     user: appConfig.mysqlUser, 
+    port: appConfig.mysqlPort,
     password: appConfig.mysqlPassword, 
     database: appConfig.mysqlDatabase
 });

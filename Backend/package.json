@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start": "nodemon --exec ts-node src/app.ts --quiet --ignore src/1-assets"
+        "start": "nodemon --exec ts-node src/app.ts --quiet --ignore src/1-assets",
+        "build": "CI=false ts-node src/app.ts build"
     },
     "keywords": [],
     "author": "",

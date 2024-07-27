@@ -2,7 +2,7 @@
 FROM mysql:8
 
 # Environment variable to set the root password
-ENV MYSQL_ROOT_PASSWORD="testtest"
+ENV MYSQL_ROOT_PASSWORD="Farout1982"
 
 # it's better to just run the command in the terminal: 
 # docker run -d --name like-a-flight-db -e MYSQL_ROOT_PASSWORD=? mysql:8

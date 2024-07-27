@@ -1,7 +1,3 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
 class AppConfig {
 
     //Backend urls:
@@ -30,9 +26,9 @@ class DevelopmentConfig extends AppConfig {
 
 class ProductionConfig extends AppConfig {
     public constructor() {
-        super("process.env.BACKEND_URL:8080"); // The real website.
+        super("backend-production-fd14.up.railway.app:8080"); // The real website.
     }
 }
 
-const appConfig = new ProductionConfig() //process.env.NODE_ENV === "production" ? new ProductionConfig() : new DevelopmentConfig();
+const appConfig = new ProductionConfig()//process.env.NODE_ENV === "production" ? new ProductionConfig() : new DevelopmentConfig();
 export default appConfig;

@@ -19,6 +19,8 @@ RUN npm i
 # Copy entire backend:
 COPY . /app
 
+EXPOSE 8080
+
 # Execute command for the container: 
 ENTRYPOINT npm start
 

@@ -1,4 +1,5 @@
-import { OkPacket } from "mysql";
+// import { OkPacket } from "mysql";
+import { ResultSetHeader } from "mysql2/promise";
 import { fileSaver } from "uploaded-file-saver";
 import appConfig from "../2-utils/app-config";
 import dal from "../2-utils/dal";
@@ -46,8 +47,15 @@ class VacationsService {
 
         //execute sql query & adding ID
         const sql = "INSERT INTO vacations VALUES(DEFAULT,?,?,?,?,?,?)";
-        const info: OkPacket = await dal.execute(sql, [vacation.destination, vacation.description, vacation.startDate, vacation.endDate, vacation.price, `${imageName}`]);
+         
+        //mysql2
+        const info: ResultSetHeader = await dal.execute(sql, [vacation.destination, vacation.description, vacation.startDate, vacation.endDate, vacation.price, `${imageName}`]);
+        
+        //mysql (old)
+        // const info: OkPacket = await dal.execute(sql, [vacation.destination, vacation.description, vacation.startDate, vacation.endDate, vacation.price, `${imageName}`]);
+        
         vacation.vacationId = info.insertId
+
 
         //delete image from model:
         delete vacation.image;
@@ -69,7 +77,12 @@ class VacationsService {
 
         //sql update query & execution
         const sql = "UPDATE vacations SET destination = ?, description = ?, startDate = ?, endDate = ?, price = ?, imageName = ? WHERE vacationId = ?";
-        const info: OkPacket = await dal.execute(sql, [vacation.destination, vacation.description, vacation.startDate, vacation.endDate, vacation.price, imageName, vacation.vacationId]);
+
+        //mysql2
+        const info: ResultSetHeader = await dal.execute(sql, [vacation.destination, vacation.description, vacation.startDate, vacation.endDate, vacation.price, imageName, vacation.vacationId]);
+
+        //mysql (old)
+        // const info: OkPacket = await dal.execute(sql, [vacation.destination, vacation.description, vacation.startDate, vacation.endDate, vacation.price, imageName, vacation.vacationId]);
 
         //if no such vacationId:
         if (info.affectedRows === 0) throw new ResourceNotFound(vacation.vacationId);
@@ -90,7 +103,12 @@ class VacationsService {
 
         //sql delete query & execution
         const sql = `DELETE FROM vacations WHERE vacationId ='${vacationId}'`;
-        const info: OkPacket = await dal.execute(sql);
+        
+        //mysql2
+        const info: ResultSetHeader = await dal.execute(sql, [vacationId]);
+        
+        //mysql (old)
+        // const info: OkPacket = await dal.execute(sql);
 
         //delete image from disk
         await fileSaver.delete(existingImageName);

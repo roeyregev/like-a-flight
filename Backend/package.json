@@ -15,7 +15,7 @@
         "@types/express-fileupload": "^1.4.4",
         "@types/jsonwebtoken": "^9.0.5",
         "@types/mysql": "^2.15.24",
-        "@types/node": "^20.9.2"
+        "@types/node": "^20.14.13"
     },
     "dependencies": {
         "cors": "^2.8.5",
@@ -26,6 +26,7 @@
         "joi": "^17.11.0",
         "jsonwebtoken": "^9.0.2",
         "mysql": "^2.18.1",
+        "mysql2": "^3.11.0",
         "uploaded-file-saver": "^1.0.0"
     }
 }

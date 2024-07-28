@@ -13,7 +13,7 @@ function NotLoggedInPopup(props: popupProps): JSX.Element {
             <div className="background"></div>
             <div className="NotLoggedInPopup">
                 <img src={mediumCloseIcon} alt="close-icon" className="close-btn" onClick={() => props.closePopup()} />
-                <h2>You have be logged-in</h2>
+                <h2>You have to be logged in</h2>
                 <div className="btns-flex">
                     <button onClick={() => props.closePopup()}>Got it</button>
                 </div>

@@ -13,7 +13,7 @@ function NotAdminPopup(props: popupProps): JSX.Element {
             <div className="background"></div>
             <div className="NotAdminPopup">
                 <img src={mediumCloseIcon} alt="close-icon" className="close-btn" onClick={() => props.closePopup()} />
-                <h2>Only administrators can see this</h2>
+                <h2>Only admins can see this</h2>
                 <div className="btns-flex">
                     <button onClick={() => props.closePopup()}>Got it</button>
                 </div>

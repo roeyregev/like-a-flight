@@ -1,4 +1,5 @@
-import { OkPacket } from "mysql";
+// import { OkPacket } from "mysql";
+import { ResultSetHeader } from "mysql2/promise";
 import { fileSaver } from "uploaded-file-saver";
 import appConfig from "../2-utils/app-config";
 import cyber from "../2-utils/cyber";
@@ -38,8 +39,11 @@ class AuthService {
         //sql query:
         const sql = `INSERT INTO users VALUES(DEFAULT,?,?,?,?,?,?)`;
 
-        //save user:
-        const info: OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.email, user.password, user.roleId, `${user.userImageUrl}`]);
+        //save user old mysql:
+        // const info: OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.email, user.password, user.roleId, `${user.userImageUrl}`]);
+
+        // Save user - mysql2:
+        const info: ResultSetHeader = await dal.execute(sql, [user.firstName, user.lastName, user.email, user.password, user.roleId, `${user.userImageUrl}`]);
 
         //set user id:
         user.userId = info.insertId;
@@ -101,8 +105,11 @@ class AuthService {
         // Create sql:
         const sql = `DELETE FROM users WHERE userId = ?`
 
-        // Execute - delete that product in the database:
-        const info: OkPacket = await dal.execute(sql, [userId]);
+        // Execute - delete that product in the database - old mysql:
+        // const info: OkPacket = await dal.execute(sql, [userId]);
+
+        // Execute - delete that product in the database - mysql2:
+        const info: ResultSetHeader = await dal.execute(sql, [userId]);
 
         //delete image from disk:
         await fileSaver.delete(existingImageName);

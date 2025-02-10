@@ -26,9 +26,9 @@ class DevelopmentConfig extends AppConfig {
 
 class ProductionConfig extends AppConfig {
     public constructor() {
-        super("https://backend-production-fd14.up.railway.app:8080"); // The real website.
+        super("https://like-a-flight-292c9f7fae81.herokuapp.com"); // The real website.
     }
 }
 
-const appConfig = new ProductionConfig()//process.env.NODE_ENV === "production" ? new ProductionConfig() : new DevelopmentConfig();
+const appConfig = process.env.NODE_ENV === "production" ? new ProductionConfig() : new DevelopmentConfig();
 export default appConfig;

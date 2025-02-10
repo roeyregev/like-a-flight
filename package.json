@@ -1,9 +1,8 @@
 {
   "scripts": {
     "start": "node Backend/dist/app.js",
-    "build": "cd Frontend && npm install && npm run build && mv ./build ../Backend/src/7-frontend",
     "install": "cd Backend && npm install",
-    "heroku-postbuild": "cd Frontend && npm install && npm run build && rm -rf ../Backend/src/7-frontend && mv ./build ../Backend/src/7-frontend && cd ../Backend && npm install && npm run build"
+    "build": "cd Frontend && npm install && npm run build && rm -rf ../Backend/src/7-frontend && mv ./build ../Backend/src/7-frontend && cd ../Backend && npm install && npm run build"
   },
   "engines": {
     "node": "18.x",

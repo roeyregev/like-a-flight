@@ -21,12 +21,25 @@ fileSaver.config(path.join(__dirname, "1-assets", "images"));
 // Creating a request.body object containing the request body data:
 server.use(express.json());
 
+
+//FOR HEROKU: server index.html:
+server.use(express.static(path.join(__dirname, "./7-frontend")));
+//---------------------------------------------------------------------
+
+
 //create request.files object containing the files sent by frontend:
 server.use(expressFileUpload());
 
 // Connect our controllers: 
 server.use("/api", vacationController);
 server.use("/api", authController);
+
+
+//HEROKU: Any other route - return index.html as we are SPA:
+server.use("*", (request, response) => {
+    response.sendFile(path.join(__dirname, "./7-frontend/index.html"))
+})
+//---------------------------------------------------------------------
 
 // Route not found: 
 server.use(routeNotFound);
@@ -35,4 +48,5 @@ server.use(routeNotFound);
 server.use(catchAll);
 
 // Running the server: 
-server.listen(appConfig.port, () => console.log("Listening on http://localhost:" + appConfig.port));
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

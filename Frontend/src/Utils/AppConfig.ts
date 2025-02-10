@@ -26,7 +26,7 @@ class DevelopmentConfig extends AppConfig {
 
 class ProductionConfig extends AppConfig {
     public constructor() {
-        super("https://like-a-flight.com"); // The real website.
+        super("https://like-a-flight-292c9f7fae81.herokuapp.com"); // The real website.
     }
 }
 

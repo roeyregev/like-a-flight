@@ -9,7 +9,7 @@ class AppConfig {
     public readonly mysqlPassword = process.env.MYSQL_PASSWORD;
     public readonly mysqlDatabase = process.env.MYSQL_DATABASE;
     public readonly mysqlPort = Number(process.env.MYSQL_PORT);
-    public readonly appHost = "http://" + this.mysqlHost + ":" + this.port;
+    public readonly appHost = "";
 }
 
 class DevelopmentConfig extends AppConfig {

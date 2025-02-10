@@ -7,6 +7,8 @@ import ChartDataModel from "../3-models/chart-data-model";
 import { ResourceNotFound } from "../3-models/error-models";
 import VacationModel from "../3-models/vacation-model";
 
+
+//nothing
 class VacationsService {
 
     public async getAllVacations(userId: number): Promise<VacationModel[]> {

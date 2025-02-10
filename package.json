@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node Backend/dist/app.js",
     "install": "cd Backend && npm install",
-    "build": "cd Frontend && npm install && npm run build && rm -rf ../Backend/src/7-frontend && mv ./build ../Backend/src/7-frontend && cd ../Backend && npm install && npm run build"
+    "build": "cd Frontend && npm install && npm run build && cd ../Backend && npm install && npm run build && rm -rf ./dist/7-frontend && mv ../Frontend/build ./dist/7-frontend"
   },
   "engines": {
     "node": "18.x",

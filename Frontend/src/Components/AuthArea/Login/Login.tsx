@@ -47,7 +47,7 @@ function Login(props: LoginProps): JSX.Element {
             <div className="background-black"></div>
             <form className="Register" onSubmit={handleSubmit(send, onError)}>
                 <h2>Log In</h2>
-                <button className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
+                <button type="button" className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
                 <div className="input-flex">
                     <div className="input-div">
                         <input type="email"
@@ -57,6 +57,13 @@ function Login(props: LoginProps): JSX.Element {
                             })}
                             className={classNames({ 'invalid-input': errors?.email })}
                             onChange={(e) => setValue("email", e.target.value)}
+                            // testing enter key as submit
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    e.preventDefault(); // Prevent accidental form submission if inputs trigger it
+                                    handleSubmit(send, onError)();
+                                }
+                            }}
                         />
                         {errors?.email && <div className="error-message">
                             <span >{errors.email?.message}</span>
@@ -78,10 +85,10 @@ function Login(props: LoginProps): JSX.Element {
                         </div>}
                     </div>
                 </div>
-                <button className="main-btn">Enter</button>
+                <button className="main-btn" type="submit">Enter</button>
                 <div className="login-footer">
                     <p>Not a Member?</p>
-                    <button className="footer-btn" onClick={props.switchToRegister}>Register now</button>
+                    <button type="button" className="footer-btn" onClick={props.switchToRegister}>Register now</button>
                 </div>
 
             </form>

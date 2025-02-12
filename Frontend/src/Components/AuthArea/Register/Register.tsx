@@ -63,9 +63,17 @@ function Register(props: RegisterProps): JSX.Element {
     return ReactDOM.createPortal(
         <>
             <div className="background-black"></div>
-            <form className="Register" onSubmit={handleSubmit(send, onError)}>
+            <form className="Register"
+                onSubmit={handleSubmit(send, onError)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault(); // Prevent accidental form submission if inputs trigger it
+                        handleSubmit(send, onError)();
+                    }
+                }}
+            >
                 <h2>Register</h2>
-                <button className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
+                <button type="button" className="close-btn" onClick={props.onClose}><img src={mediumCloseIcon} alt="close-btn" /></button>
                 <div className="input-flex">
                     <div className="image-upload">
                         <div className="image-thumbnail">
@@ -74,11 +82,11 @@ function Register(props: RegisterProps): JSX.Element {
                                 className="upload-input" />
                             {!imageSrc ?
                                 <div className="tn-preview">
-                                    <button>Add your photo</button>
+                                    <button type="button">Add your photo</button>
                                 </div> :
                                 <div className="tn-preview">
                                     <img src={imageSrc} alt="" className="img-preview" />
-                                    <button className="change-btn"><img src={buttonPlusIconWhite} alt="button-plus-icon" />Change</button>
+                                    <button type="button" className="change-btn"><img src={buttonPlusIconWhite} alt="button-plus-icon" />Change</button>
                                 </div>
                             }
                         </div>
@@ -152,10 +160,10 @@ function Register(props: RegisterProps): JSX.Element {
                         </div>}
                     </div>
                 </div>
-                <button className="main-btn">Enter</button>
+                <button type="submit" className="main-btn">Enter</button>
                 <div className="login-footer">
                     <p>Already a Member?</p>
-                    <button className="footer-btn" onClick={props.switchToLogin}>Login</button>
+                    <button type="button" className="footer-btn" onClick={props.switchToLogin}>Login</button>
                 </div>
             </form>
         </>,

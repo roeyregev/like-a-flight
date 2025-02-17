@@ -129,7 +129,7 @@ function Register(props: RegisterProps): JSX.Element {
                     </div>
                     <div className="input-div">
                         <input type="text"
-                            placeholder="Email"
+                            placeholder="Email (it can be fake)"
                             {...register("email", {
                                 required: "Email is required",
                             })}
